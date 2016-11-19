@@ -1,5 +1,5 @@
 from django.conf.urls import url
-from member.views import index, all_members
+from member.views import index, member_info, all_members  
 from member.views import _sort_members_by_alphabet
 
 urlpatterns = [
@@ -8,9 +8,14 @@ urlpatterns = [
     view = index, name = 'index'
   ),
 
-    url(
+  url(
     regex=r'^all/$',
     view = all_members, name = 'all_members'
+  ),
+
+  url(
+    regex=r'^(?P<name>[^\`]+)/$',
+    view = member_info, name = 'member_info'
   ),
 
 

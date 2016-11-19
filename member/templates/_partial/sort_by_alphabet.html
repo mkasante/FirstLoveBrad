@@ -1,6 +1,6 @@
 {% for member in members %}
 <tr>
-	<td>{{ member }}</td>
+	<td><a href="{% url 'member:member_info' member %}">{{ member }}</a></td>
 	<td>{{ member.mobile_no }}</td>
 	<td>{{ member.email }}</td>
 </tr>

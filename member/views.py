@@ -23,7 +23,17 @@ def all_members(request):
 
 	return render (request, 'all_members.html', context)
 
+@login_required
+def member_info(request, name):
+	member = Member.objects.get(name__iexact= name)
 
+	context = {
+		'member': member
+	}
+
+	return render (request, 'member_info.html', context)
+
+# Partial
 @login_required
 def _sort_members_by_alphabet(request, alphabet):
 	pattern = re.compile(r"^([a-zA-Z])$")
