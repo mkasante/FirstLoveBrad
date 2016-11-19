@@ -1,0 +1,77 @@
+{% load staticfiles %}
+
+{% include '_partial/header.html' %}
+
+{% if not user.is_authenticated %}
+<section class="mbr-section" id="form1-4" style="background-color: rgb(255, 255, 255); padding-top: 120px; padding-bottom: 120px;">
+    
+    <div class="mbr-section mbr-section__container mbr-section__container--middle">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 text-xs-center">
+                    <h3 class="mbr-section-title display-2">LOG IN</h3>
+                    <small class="mbr-section-subtitle">Enter username and password to view data.</small>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mbr-section mbr-section-nopadding">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-lg-10 col-lg-offset-1" data-form-type="formoid">
+
+
+                    <div data-form-alert="true">
+                        <div hidden="" data-form-alert-success="true" class="alert alert-form alert-success text-xs-center">Thanks for logging in</div>
+                    </div>
+
+
+                    <form method="post" action="{% url 'django.contrib.auth.views.login' %}" data-form-title="LOG IN">
+										{% csrf_token %}
+
+                        <div class="row row-sm-offset">
+
+                            <div class="col-xs-12 col-md-6">
+                                <div class="form-group">
+                                    <div class="form-control-label">
+                                    	{{ form.username.label_tag }}
+                                    </div>
+
+                                    {{ form.username }}
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 col-md-6">
+                                <div class="form-group">
+                                    <div class="form-control-label">
+                                    	{{ form.password.label_tag }}
+                                    </div>
+
+
+                                    {{ form.password }}
+                                </div>
+                            </div>
+
+                            
+
+                        </div>
+
+                        <div><button type="submit" class="btn btn-primary" value="login">LOG IN</button></div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% else %}
+
+{% include '_partial/welcome.html' %}
+
+
+{% endif %}
+
+
+{% include '_partial/footer.html' %}
+
