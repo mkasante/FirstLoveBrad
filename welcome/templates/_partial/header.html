@@ -50,9 +50,9 @@
                     </button>
 
                     {% if user.is_authenticated %}
-                    <ul class="nav-dropdown collapse pull-xs-right nav navbar-nav navbar-toggleable-sm" id="exCollapsingNavbar"><li class="nav-item"><a class="nav-link link" href="{% url 'member:index' %}">ALL MEMBERS</a></li><li class="nav-item nav-btn"><a class="nav-link btn btn-white btn-white-outline" href="{% url 'member:index' %}">FIRST TIMERS</a></li><li class="nav-item nav-btn"><a class="nav-link btn btn-white btn-white-outline" href="{% url 'member:index' %}">EVANGELISM LIST</a></li><li class="nav-item nav-btn">
+                    <ul class="nav-dropdown collapse pull-xs-right nav navbar-nav navbar-toggleable-sm" id="exCollapsingNavbar"><li class="nav-item"><a class="nav-link link" href="{% url 'member:all_members' %}">ALL MEMBERS</a></li><li class="nav-item nav-btn"><a class="nav-link btn btn-white btn-white-outline" href="{% url 'member:index' %}">FIRST TIMERS</a></li><li class="nav-item nav-btn"><a class="nav-link btn btn-white btn-white-outline" href="{% url 'member:index' %}">EVANGELISM LIST</a></li><li class="nav-item nav-btn">
 
-                    
+                     
                       <a class="nav-link btn btn-primary" href="{% url 'logout' %}">LOG OUT</a>
                     {% endif %}
 

@@ -18,7 +18,7 @@
                     <p class="w3-large w3-text-black"><strong>Date of Birth: </strong>{{ member.date_of_birth }}</p>
                     <p class="w3-large w3-text-black"><strong>Address: </strong>{{ member.address }}</p>
                     <p class="w3-large w3-text-black"><strong>Post Code: </strong>{{ member.post_code }}</p>
-                    <p class="w3-large w3-text-black"><strong>Academic Institution: </strong>{{ member.study_place }}</p>
+                    <p class="w3-large w3-text-black"><strong>Academic Institution: </strong>{{ member.academic_institution.name }}</p>
                     <p class="w3-large w3-text-black"><strong>Course Studying: </strong>{{ member.course }}</p>
                     <p class="w3-large w3-text-black"><strong>First Attended On: </strong>{{ member.first_attended }}</p>                    
                     <p class="w3-large w3-text-black"><strong>Attendance Status: </strong>{{ member.attendance_status }}</p>
@@ -29,6 +29,16 @@
         </div>
     </div>
 
+</section>
+
+<section class="mbr-section mbr-section__container article" id="header3-d" style="background-color: rgb(255, 255, 255); padding-top: 5px; padding-bottom: 20px;">
+    <div class="container">
+        <div class="row">
+           <div class="col-xs-12">
+              <h6 class="mbr-section-title display-6">Record last updated by <strong>{{ user }}</strong> on <strong>{{ member.last_modified }}</strong></h6>
+          </div>
+        </div>
+    </div>
 </section>
 
 {% include '_partial/footer.html' %}
