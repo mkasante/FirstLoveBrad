@@ -9,7 +9,7 @@ BASE_DIR = os.path.dirname((__file__))
 
 admin.site.site_header = 'First Love Leeds'
 admin.site.site_title = 'First Love Leeds'
-# admin.site.index_css = os.path.join(BASE_DIR, "static/admin", "css/dashboard.css")
+admin.site.index_css = os.path.join(BASE_DIR, "static/admin", "css/dashboard.css")
 
 
 
@@ -26,7 +26,7 @@ urlpatterns = [
 
 
 
-# if not settings.DEBUG:
-#     urlpatterns += patterns('',
-#         (r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT}),
-#     )
+if not settings.DEBUG:
+    urlpatterns += patterns('',
+        (r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT}),
+    )
