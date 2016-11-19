@@ -1,1 +1,1 @@
-web: gunicorn bible.wsgi --log-file -
+web: gunicorn firstlove.wsgi --log-file -
