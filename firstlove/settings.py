@@ -19,8 +19,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Login/Logout url
 LOGIN_URL = reverse_lazy('login')
 LOGIN_REDIRECT_URL = reverse_lazy('welcome:index')
-LOGOUT_URL = reverse_lazy('logout')
-LOGOUT_REDIRECT_URL = reverse_lazy('login')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
@@ -30,7 +28,7 @@ SECRET_KEY = '*q3979tq^dql6txf1y$y^dy5q9h-t6sxii+j*8#gr^k1yfxl(g'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-DEBUG = False
+# DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -44,8 +42,17 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'member', 'welcome', 'event'
+    'rest_framework', 
+    'api',
+    'member', 
+    'welcome', 
+    'event'
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAdminUser',),
+    'PAGE_SIZE': 10
+}
 
 MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',

@@ -1,6 +1,5 @@
 <section class="mbr-section mbr-section-hero mbr-section-full" id="header5-6" style="background-color: rgb(253, 253, 253);">
 
-    
 
     <div class="mbr-table-cell">
 
@@ -10,12 +9,19 @@
 
                     <h1 class="mbr-section-title display-1" style="color:black;">First Love Leeds</h1>
                     <p class="mbr-section-lead lead" style="color:grey;">Loving God, Loving others</p>
-                    <div class="mbr-section-btn"><a class="btn btn-lg btn-primary" href="{% url 'logout' %}">LOGOUT</a></div>
+                    <div class="mbr-section-btn">
+
+                    {% if user.is_authenticated %}
+                        <a class="btn btn-lg btn-primary" href="{% url 'logout' %}">LOGOUT</a>
+                    {% else %}
+                        <a class="btn btn-lg btn-primary" href="{% url 'login' %}">LOGIN</a>
+                    {% endif %}
+                    </div>               
+
                 </div>
             </div>
         </div>
     </div>
 
     
-
 </section>

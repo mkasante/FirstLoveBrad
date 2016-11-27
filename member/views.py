@@ -1,7 +1,9 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
-from member.models import Member
+from member.models import Member, Attendance
+
 import re
+
 
 # Create your views here.
 @login_required
@@ -14,11 +16,13 @@ def index(request):
 @login_required
 def all_members(request):
 	members = Member.objects.all()
-	alphabets = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+	alphabets = sorted(set([x.name[0] for x in members]))
+	membership_status = Attendance.objects.all()
 
 	context = {
 		'members': members,
-		'alphabets': alphabets
+		'alphabets': alphabets,
+		'membership_status': membership_status
 	}
 
 	return render (request, 'all_members.html', context)
@@ -44,7 +48,24 @@ def _sort_members_by_alphabet(request, alphabet):
 		members = Member.objects.all()
 
 	context = {
-		'members': members,
+		'members': members
+	}
+
+	return render (request, '_partial/sort_by_alphabet.html', context)
+
+
+@login_required
+def _sort_members_by_status(request, status_id):
+	pattern = re.compile(r"^([\d]+)$")
+
+	if pattern.match(status_id):
+		attendance = Attendance.objects.get(pk = status_id).status
+		members = Member.objects.filter(attendance_status__status__iexact = attendance)
+	else:
+		members = Member.objects.all()
+
+	context = {
+		'members': members
 	}
 
 	return render (request, '_partial/sort_by_alphabet.html', context)

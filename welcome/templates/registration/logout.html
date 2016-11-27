@@ -1,19 +1,15 @@
+{% extends '_partial/base.html' %}
 
-{% block head %}
-<title>Logged out</title>
-{% endblock %}
-{% block body %}
-<p>You have been logged out.  You may <a href="{% url 'login' %}">log back in</a>.</p>
-{% endblock %}
+{% block title %}
+Login
+{% endblock title %}
 
-<p>d</p>
-<p>d</p>
-<p>d</p>
-<p>d</p>
-<p>d</p>
-<p>d</p>
-<p>d</p>
-<p>d</p>
-<p>d</p>
-<p>d</p>
-<p>d</p>
+
+{% block content %}
+
+
+{% include '_partial/welcome.html' %}
+
+
+{% endblock content %}
+

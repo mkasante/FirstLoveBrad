@@ -1,6 +1,9 @@
 from django.conf.urls import url
+
 from member.views import index, member_info, all_members  
-from member.views import _sort_members_by_alphabet
+from member.views import _sort_members_by_alphabet, _sort_members_by_status
+
+
 
 urlpatterns = [
   url(
@@ -24,4 +27,10 @@ urlpatterns = [
     regex=r'^_group/(?P<alphabet>[a-zA-Z]+)$',
     view = _sort_members_by_alphabet, name = '_sort_members_by_alphabet'
   ),
+
+  url(
+    regex=r'^_status/(?P<status_id>[\w\s\d]+)$',
+    view = _sort_members_by_status, name = '_sort_members_by_status'
+  )
+
 ]

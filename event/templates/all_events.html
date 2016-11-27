@@ -1,7 +1,7 @@
 {% extends '_partial/base.html' %}
 
 {% block title %}
-Members
+Events
 {% endblock title %}
 
 
@@ -17,7 +17,7 @@ Members
             <div class="row">
                 <div class="mbr-section col-md-12">
 
-                    <h1 class="mbr-section-title display-4 w3-text-black"><span id="data-count"></span> REGISTERED MEMBERS</h1>
+                    <h1 class="mbr-section-title display-4 w3-text-black"><span id="data-count"></span> ACTIVITIES RECORDED</h1>
                     <h4 class="mbr-section-title w3-text-black">DISPLAY BY</h4>
 
 
@@ -26,10 +26,10 @@ Members
                             <div class="panel-heading" role="tab" id="heading1">
                                 
                                 <div class="row w3-grey">
-                                    <div class="collapsed col-sm-3 w3-hover-text-white w3-padding" role="button" aria-expanded="false" data-toggle="collapse" data-parent="#accordion" aria-controls="collapse1" href="#collapse1">ALPHABET</div>  
+                                    <div class="collapsed col-sm-3 w3-hover-text-white w3-padding" role="button" aria-expanded="false" data-toggle="collapse" data-parent="#accordion" aria-controls="collapse1" href="#collapse1">DATE</div>  
 
 
-                                    <div class="collapsed col-sm-3 w3-hover-text-white w3-padding" role="button" aria-expanded="false" data-toggle="collapse" data-parent="#accordion" aria-controls="collapse2" href="#collapse2">MEMBERSHIP STATUS</div>
+                                    <div class="collapsed col-sm-3 w3-hover-text-white w3-padding" role="button" aria-expanded="false" data-toggle="collapse" data-parent="#accordion" aria-controls="collapse2" href="#collapse2">EVENTS</div>
                                 </div>
                             </div>
 
@@ -37,9 +37,9 @@ Members
                                 <div class="panel-body">
                                     
                                      
-                                    {% for alphabet in alphabets %}
-                                    <div class="col-sm-1">
-                                        <p class="alphabet w3-hover-text-blue w3-text-black" id="{{ alphabet }}">{{ alphabet }}</p>
+                                    {% for month in last12months %}
+                                    <div class="col-sm-3">
+                                        <p class="alphabet w3-hover-text-blue w3-text-black" id="{{ alphabet }}">{{ month.0 }} - {{ month.1 }}</p>
                                     </div>
                                     {% endfor %}
 
@@ -52,13 +52,13 @@ Members
                                 <div class="panel-body">
                                     
                                     
-                                    {% for membership in membership_status %}
+                                    {% for event_type in event_types %}
                                     <div class="col-sm-2">
-                                        <p class="membership text-uppercase w3-hover-text-blue w3-text-black" id="{{ membership.pk }}">{{ membership }}</p>
+                                        <p class="membership text-uppercase w3-hover-text-blue w3-text-black" id="{{ membership.pk }}">{{ event_type }}</p>
                                     </div>
                                     {% endfor %}
                                     
-                                        <p class="alphabet w3-hover-text-blue" id="all">ALL</p>
+                                    <p class="alphabet w3-hover-text-blue" id="all">ALL</p>
                                     
 
                                 </div>
@@ -71,9 +71,9 @@ Members
                     <table class="table table-striped" id="table-data">
                     	<thead>
 		                    <tr>
-								<th>Name</th>
-								<th>Phone number</th>
-								<th>Email Address</th>
+								<th>Event</th>
+								<th>Date</th>
+								<th>Attendance</th>
 							</tr>
 						</thead>
                     <tbody></tbody>

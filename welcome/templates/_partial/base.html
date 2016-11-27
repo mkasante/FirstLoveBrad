@@ -24,7 +24,9 @@
   <link rel="stylesheet" href="{% static 'w3-css/w3.css' %}">
   <link rel="stylesheet" href="{% static 'mobirise/css/mbr-additional.css' %}" type="text/css">
   
-  
+  <title>
+  {% block title %} {% endblock title %} - First Love Leeds 
+  </title>
   
 </head>
 <body>
@@ -50,7 +52,7 @@
                     </button>
 
                     {% if user.is_authenticated %}
-                    <ul class="nav-dropdown collapse pull-xs-right nav navbar-nav navbar-toggleable-sm" id="exCollapsingNavbar"><li class="nav-item"><a class="nav-link link" href="{% url 'member:all_members' %}">ALL MEMBERS</a></li><li class="nav-item nav-btn"><a class="nav-link btn btn-white btn-white-outline" href="{% url 'member:index' %}">FIRST TIMERS</a></li><li class="nav-item nav-btn"><a class="nav-link btn btn-white btn-white-outline" href="{% url 'member:index' %}">EVANGELISM LIST</a></li><li class="nav-item nav-btn">
+                    <ul class="nav-dropdown collapse pull-xs-right nav navbar-nav navbar-toggleable-sm" id="exCollapsingNavbar"><li class="nav-item"><a class="nav-link link" href="{% url 'member:all_members' %}">MEMBERS</a></li><li class="nav-item nav-btn"><a class="nav-link btn btn-white btn-white-outline" href="{% url 'event:index' %}">EVENTS</a></li><li class="nav-item nav-btn"><a class="nav-link btn btn-white btn-white-outline" href="{% url 'member:index' %}">EVANGELISM LIST</a></li><li class="nav-item nav-btn">
 
                      
                       <a class="nav-link btn btn-primary" href="{% url 'logout' %}">LOG OUT</a>
@@ -69,3 +71,40 @@
 
 </section>
   
+
+
+{% block content %}{% endblock content %}
+
+
+
+<section class="mbr-section article" id="msg-box3-c" style="background-color: rgb(242, 242, 242); padding-top: 40px; padding-bottom: 40px;">
+
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 text-xs-center">
+                
+                <div class="lead"><p>First Love Church Leeds &copy;</p></div>
+                
+            </div>
+        </div>
+    </div>
+
+</section>
+
+  <input name="animation" type="hidden">
+   <div id="scrollToTop" class="scrollToTop mbr-arrow-up"><a style="text-align: center;"><i class="mbr-arrow-up-icon"></i></a></div>
+   
+</body>
+
+  <script src="{% static 'web/assets/jquery/jquery.min.js' %}"></script>
+  <script src="{% static 'web/assets/jquery/script.js' %}"></script>
+  <script src="{% static 'tether/tether.min.js' %}"></script>
+  <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'smooth-scroll/SmoothScroll.js' %}"></script>
+  <script src="{% static 'viewportChecker/jquery.viewportchecker.js' %}"></script>
+  <script src="{% static 'dropdown/js/script.min.js' %}"></script>
+  <script src="{% static 'touchSwipe/jquery.touchSwipe.min.js' %}"></script>
+  <script src="{% static 'theme/js/script.js' %}"></script>
+
+</html>

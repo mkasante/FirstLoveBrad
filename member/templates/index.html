@@ -1,8 +1,11 @@
-{% load staticfiles %}
+{% extends '_partial/base.html' %}
 
-{% include '_partial/header.html' %}
+{% block title %}
+Welcome
+{% endblock title %}
+
+{% block content %}
 
 {% include '_partial/welcome.html' %}
 
-{% include '_partial/footer.html' %}
-
+{% endblock content %}

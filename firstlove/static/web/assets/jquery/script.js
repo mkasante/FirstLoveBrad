@@ -1,25 +1,32 @@
 $(document).ready(function(){
 
 	$(".alphabet").click(function(){
-		loaddata($(this).attr('id'));
+		loaddata("../_group/", $(this).attr('id'));
 	});
 
-	function tt(text, id)
+	$(".membership").click(function(){
+		loaddata("../_status/", $(this).attr('id'));
+	});
+
+	function tt(text, suburl, id)
 	{
 		 $('#table-data tbody').text("");
 		 $('#table-data tbody').append(text);
 		 $('#data-count').text($("#table-data > tbody > tr").length);
 	}
 
-	function loaddata(id){
+	function loaddata(suburl, id){
 
 		$.ajax({
 			// type: "POST",
-			url: "../_group/" + id, 
+			url: suburl + id, 
 			success: function(result){
-				tt(result, id);
+				tt(result, suburl, id);
     		}
     	});
 	}
-	loaddata("ALL")
+
+	if (window.location.pathname.endsWith("/member/all/")){
+		loaddata("../_group/", "ALL");
+	}
 });

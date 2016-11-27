@@ -10,10 +10,10 @@ class Member(models.Model):
 	mobile_no = models.CharField(max_length=50, blank=True, unique=True)
 	course = models.CharField(max_length=100, blank=True)
 	date_of_birth = models.DateField(blank=True, null=True)
-	first_attended = models.DateField(blank=True)
+	first_attended = models.DateField(blank=True, null=True)
 	last_modified = models.DateTimeField(auto_now=True)
 	extra_info = models.TextField(max_length=2000, blank=True)
-
+	last_visited = models.DateField(null=True, blank=True)
 	academic_institution = models.ForeignKey('AcademicInstitution', on_delete=models.CASCADE, related_name="academic_institution", null=True, blank=True)
 	attendance_status = models.ForeignKey('Attendance', on_delete=models.CASCADE, related_name="attendance_status")
 
@@ -33,7 +33,7 @@ class MemberAdmin(admin.ModelAdmin):
 
 
 class Attendance(models.Model):
-	status = models.CharField(max_length=200, unique=True)
+	status = models.CharField(max_length=200, unique=True, null=True)
 
 	def __str__(self):
 		return self.status
@@ -49,7 +49,7 @@ class AttendanceAdmin(admin.ModelAdmin):
 
 
 class AcademicInstitution(models.Model):
-	name = models.CharField(max_length=200, unique=True)
+	name = models.CharField(max_length=200, unique=True, null=True)
 
 	def __str__(self):
 		return self.name
