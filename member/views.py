@@ -39,7 +39,7 @@ def member_info(request, name):
 
 # Partial
 @login_required
-def _sort_members_by_alphabet(request, alphabet):
+def _list_members_by_alphabet(request, alphabet):
 	pattern = re.compile(r"^([a-zA-Z])$")
 
 	if pattern.match(alphabet):
@@ -51,11 +51,11 @@ def _sort_members_by_alphabet(request, alphabet):
 		'members': members
 	}
 
-	return render (request, '_partial/sort_by_alphabet.html', context)
+	return render (request, '_partial/member_data.html', context)
 
 
 @login_required
-def _sort_members_by_status(request, status_id):
+def _list_members_by_status(request, status_id):
 	pattern = re.compile(r"^([\d]+)$")
 
 	if pattern.match(status_id):
@@ -68,4 +68,4 @@ def _sort_members_by_status(request, status_id):
 		'members': members
 	}
 
-	return render (request, '_partial/sort_by_alphabet.html', context)
+	return render (request, '_partial/member_data.html', context)

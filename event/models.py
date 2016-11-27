@@ -15,6 +15,10 @@ class Event(models.Model):
 	def __str__(self):
 		return self.name.name
 
+	@property
+	def eventtype(self):
+		return self.name
+
 	class Meta:
 		ordering = ["-date"]
 

@@ -39,7 +39,7 @@ Events
                                      
                                     {% for month in last12months %}
                                     <div class="col-sm-3">
-                                        <p class="alphabet w3-hover-text-blue w3-text-black" id="{{ alphabet }}">{{ month.0 }} - {{ month.1 }}</p>
+                                        <p class="event_date w3-hover-text-blue w3-text-black" id="{{ month.0 }}-{{ month.1 }}">{{ month.0 }} - {{ month.1 }}</p>
                                     </div>
                                     {% endfor %}
 
