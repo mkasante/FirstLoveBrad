@@ -1,5 +1,5 @@
 from rest_framework import viewsets
-from member.serializers import MemberSerializer
+from api.serializers import MemberSerializer
 from member.models import Member
 # Serialisers REST Framework
 class MemberViewSet(viewsets.ModelViewSet):

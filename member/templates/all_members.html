@@ -15,7 +15,7 @@ Members
 
         <div class="container">
             <div class="row">
-                <div class="mbr-section col-md-12">
+                <div class="mbr-section col-sm-12">
 
                     <h1 class="mbr-section-title display-4 w3-text-black"><span id="data-count"></span> REGISTERED MEMBERS</h1>
                     <h4 class="mbr-section-title w3-text-black">DISPLAY BY</h4>
@@ -26,40 +26,39 @@ Members
                             <div class="panel-heading" role="tab" id="heading1">
                                 
                                 <div class="row w3-grey">
-                                    <div class="collapsed col-sm-3 w3-hover-text-white w3-padding" role="button" aria-expanded="false" data-toggle="collapse" data-parent="#accordion" aria-controls="collapse1" href="#collapse1">ALPHABET</div>  
+                                    <div class="collapsed col-sm-6 w3-hover-text-white w3-padding" role="button" aria-expanded="false" data-toggle="collapse" data-parent="#accordion" aria-controls="collapse1" href="#collapse1">ALPHABET</div>  
 
 
-                                    <div class="collapsed col-sm-3 w3-hover-text-white w3-padding" role="button" aria-expanded="false" data-toggle="collapse" data-parent="#accordion" aria-controls="collapse2" href="#collapse2">MEMBERSHIP STATUS</div>
+                                    <div class="collapsed col-sm-6 w3-hover-text-white w3-padding" role="button" aria-expanded="false" data-toggle="collapse" data-parent="#accordion" aria-controls="collapse2" href="#collapse2">MEMBERSHIP STATUS</div>
                                 </div>
                             </div>
 
                             <div class="panel-collapse collapse w3-padding w3-light-grey" role="tabpanel" aria-expanded="false" style="height: 0px;" id="collapse1" aria-labelledby="heading1">
-                                <div class="panel-body">
+                                <div class="panel-body" class="form-group">
                                     
-                                     
-                                    {% for alphabet in alphabets %}
-                                    <div class="col-sm-1">
-                                        <p class="alphabet w3-hover-text-blue w3-text-black" id="{{ alphabet }}">{{ alphabet }}</p>
-                                    </div>
-                                    {% endfor %}
+                                    <label for="select"><strong>Choose from list: </strong></label>
+                                    <select id="select" class="form-control alphabet">
+                                        <option value="ALL" id="all">ALL</option>
 
-                                    <p class="alphabet w3-hover-text-blue" id="all">ALL</p>
+                                        {% for alphabet in alphabets %}
+                                          <option value="{{ alphabet }}" id="{{ alphabet }}">{{ alphabet }}</option>
+                                        {% endfor %}
+                                    </select>
 
                                 </div>
                             </div>
 
                             <div class="panel-collapse collapse w3-padding w3-light-grey" role="tabpanel" aria-expanded="false" style="height: 0px;" id="collapse2" aria-labelledby="heading2">
-                                <div class="panel-body">
+                                <div class="panel-body" class="form-group">
                                     
-                                    
-                                    {% for membership in membership_status %}
-                                    <div class="col-sm-2">
-                                        <p class="membership text-uppercase w3-hover-text-blue w3-text-black" id="{{ membership.pk }}">{{ membership }}</p>
-                                    </div>
-                                    {% endfor %}
-                                    
-                                        <p class="alphabet w3-hover-text-blue" id="all">ALL</p>
-                                    
+                                    <label for="select"><strong>Choose from list: </strong></label>
+                                    <select id="select" class="form-control membership">
+                                        <option value="ALL" id="all">ALL</option>
+
+                                        {% for membership in membership_status %}
+                                          <option value="{{ membership }}" id="{{ membership }}">{{ membership }}</option>
+                                        {% endfor %}
+                                    </select>
 
                                 </div>
                             </div>

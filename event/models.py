@@ -10,7 +10,7 @@ class Event(models.Model):
 	born_again_count = models.IntegerField()
 	venue = models.CharField(max_length=100)
 	room = models.CharField(max_length=100, default="")
-
+	last_modified = models.DateTimeField(auto_now=True)
 
 	def __str__(self):
 		return self.name.name

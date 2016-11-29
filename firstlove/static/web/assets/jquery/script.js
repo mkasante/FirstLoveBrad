@@ -1,15 +1,22 @@
 $(document).ready(function(){
 
-	$(".alphabet").click(function(){
-		loaddata("../_group/", $(this).attr('id'));
+	$(".alphabet").on('change', function(){
+		loaddata("../_group/", $(this).val());
 	});
 
-	$(".membership").click(function(){
-		loaddata("../_status/", $(this).attr('id'));
+	$(".membership").on('change', function(){
+		loaddata("../_status/", $(this).val());
 	});
 
-	$(".event_date").click(function(){
-		loaddata("../event/_daterange/", $(this).attr('id'));
+	$(".event_date#btn-date").click(function(){
+		var start_date = document.getElementById("form1-g-start_date").value;
+		var end_date = document.getElementById("form1-g-end_date").value;
+
+		loaddata("../event/_daterange/", start_date + "--" + end_date);
+	});
+
+	$(".event_types").on('change', function(){
+		loaddata("../event/_eventtype/", $(this).val());
 	});
 
 	function tt(text, suburl, id)
@@ -35,12 +42,9 @@ $(document).ready(function(){
 	}
 
 	if (window.location.pathname.endsWith("/event/")){
-		var today = new Date().toDateString().split(" ")
-		var dd = today[2]
-		var mm = today[1]
-		var yyyy = today[3]
-		today = dd + " " + mm + " " + yyyy
+		var start_date = document.getElementById("form1-g-start_date").value;
+		var end_date = document.getElementById("form1-g-end_date").value;
 
-		loaddata("../event/_daterange/", "01 Jan 2015-" + today);
+		loaddata("../event/_daterange/", start_date + "--" + end_date);
 	}
 });

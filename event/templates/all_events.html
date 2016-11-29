@@ -26,40 +26,55 @@ Events
                             <div class="panel-heading" role="tab" id="heading1">
                                 
                                 <div class="row w3-grey">
-                                    <div class="collapsed col-sm-3 w3-hover-text-white w3-padding" role="button" aria-expanded="false" data-toggle="collapse" data-parent="#accordion" aria-controls="collapse1" href="#collapse1">DATE</div>  
+                                    <div class="collapsed col-sm-6 w3-hover-text-white w3-padding" role="button" aria-expanded="false" data-toggle="collapse" data-parent="#accordion" aria-controls="collapse1" href="#collapse1">DATE</div>  
 
 
-                                    <div class="collapsed col-sm-3 w3-hover-text-white w3-padding" role="button" aria-expanded="false" data-toggle="collapse" data-parent="#accordion" aria-controls="collapse2" href="#collapse2">EVENTS</div>
+                                    <div class="collapsed col-sm-6 w3-hover-text-white w3-padding" role="button" aria-expanded="false" data-toggle="collapse" data-parent="#accordion" aria-controls="collapse2" href="#collapse2">EVENT</div>
                                 </div>
                             </div>
 
                             <div class="panel-collapse collapse w3-padding w3-light-grey" role="tabpanel" aria-expanded="false" style="height: 0px;" id="collapse1" aria-labelledby="heading1">
-                                <div class="panel-body">
-                                    
-                                     
-                                    {% for month in last12months %}
-                                    <div class="col-sm-3">
-                                        <p class="event_date w3-hover-text-blue w3-text-black" id="{{ month.0 }}-{{ month.1 }}">{{ month.0 }} - {{ month.1 }}</p>
-                                    </div>
-                                    {% endfor %}
 
-                                    <p class="alphabet w3-hover-text-blue" id="all">ALL</p>
+
+                                <div class="row row-sm-offset">
+
+                                    <div class="col-xs-12 col-md-4">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="form1-g-date">Start Date<span class="form-asterisk">*</span></label>
+                                            <input type="date" class="form-control" name="date" required="" data-form-field="date" id="form1-g-start_date" value="2016-01-01">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-12 col-md-4">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="form1-g-end_date">End Date<span class="form-asterisk">*</span></label>
+                                            <input type="date" class="form-control" name="end_date" required="" data-form-field="date" id="form1-g-end_date" value="{% now 'Y-m-d' %}">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-12 col-md-4">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="form1-g-submit">Submit</label>
+                                            <button type="submit" class="form-control w3-btn event_date" name="filter_date" id="btn-date">Filter</button>
+                                        </div>
+                                    </div>
 
                                 </div>
-                            </div>
+
+
+                                </div>
 
                             <div class="panel-collapse collapse w3-padding w3-light-grey" role="tabpanel" aria-expanded="false" style="height: 0px;" id="collapse2" aria-labelledby="heading2">
-                                <div class="panel-body">
+                                <div class="panel-body" class="form-group">
                                     
-                                    
-                                    {% for event_type in event_types %}
-                                    <div class="col-sm-2">
-                                        <p class="membership text-uppercase w3-hover-text-blue w3-text-black" id="{{ membership.pk }}">{{ event_type }}</p>
-                                    </div>
-                                    {% endfor %}
-                                    
-                                    <p class="alphabet w3-hover-text-blue" id="all">ALL</p>
-                                    
+                                    <label for="select"><strong>Choose from list: </strong></label>
+                                    <select id="select" class="form-control event_types">
+                                        <option value="ALL" id="all">ALL</option>
+
+                                        {% for event in event_types %}
+                                          <option value="{{ event }}" id="{{ event }}">{{ event }}</option>
+                                        {% endfor %}
+                                    </select>
 
                                 </div>
                             </div>

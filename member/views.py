@@ -55,11 +55,11 @@ def _list_members_by_alphabet(request, alphabet):
 
 
 @login_required
-def _list_members_by_status(request, status_id):
-	pattern = re.compile(r"^([\d]+)$")
+def _list_members_by_status(request, status):
+	pattern = re.compile(r"^([\w\s\d\.-_]+)$")
 
-	if pattern.match(status_id):
-		attendance = Attendance.objects.get(pk = status_id).status
+	if pattern.match(status) and status != "ALL":
+		attendance = Attendance.objects.get(status__iexact = status).status
 		members = Member.objects.filter(attendance_status__status__iexact = attendance)
 	else:
 		members = Member.objects.all()

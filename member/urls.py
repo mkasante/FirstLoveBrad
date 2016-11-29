@@ -29,8 +29,7 @@ urlpatterns = [
   ),
 
   url(
-    regex=r'^_status/(?P<status_id>[\w\s\d]+)$',
+    regex=r'^_status/(?P<status>[\w\s\d\.-_]+)$',
     view = _list_members_by_status, name = '_list_members_by_status'
   )
-
 ]
