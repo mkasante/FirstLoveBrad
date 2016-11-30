@@ -10,7 +10,7 @@ import re
 def index(request):
 	context = {}
 
-	return render (request, 'index.html', context)
+	return render (request, 'member/index.html', context)
 
 
 @login_required
@@ -25,7 +25,7 @@ def all_members(request):
 		'membership_status': membership_status
 	}
 
-	return render (request, 'all_members.html', context)
+	return render (request, 'member/all_members.html', context)
 
 @login_required
 def member_info(request, name):
@@ -35,7 +35,7 @@ def member_info(request, name):
 		'member': member
 	}
 
-	return render (request, 'member_info.html', context)
+	return render (request, 'member/member_info.html', context)
 
 # Partial
 @login_required

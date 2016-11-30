@@ -3,32 +3,28 @@ from django.contrib import admin
 
 # Create your models here.
 class Event(models.Model):
-	name = models.ForeignKey('EventType', on_delete=models.CASCADE, related_name="event_type")
+	event = models.ForeignKey('EventType', on_delete=models.CASCADE)
 	date = models.DateTimeField()
 	attendance_count = models.IntegerField()
 	first_timers_count = models.IntegerField()
 	born_again_count = models.IntegerField()
-	venue = models.CharField(max_length=100)
-	room = models.CharField(max_length=100, default="")
+	venue = models.CharField(max_length=100, blank=True)
+	room = models.CharField(max_length=100, blank=True)
 	last_modified = models.DateTimeField(auto_now=True)
 
 	def __str__(self):
-		return self.name.name
-
-	@property
-	def eventtype(self):
-		return self.name
+		return self.event.name
 
 	class Meta:
 		ordering = ["-date"]
 
 class EventAdmin(admin.ModelAdmin):
-	filter_by = ['name']
-	list_display = ['name', 'date', 'attendance_count', 'first_timers_count', 'born_again_count']
-	list_filter = ['name']
+	filter_by = ['event']
+	list_display = ['event', 'date', 'attendance_count', 'first_timers_count', 'born_again_count']
+	list_filter = ['event']
 	list_per_page = 50
-	order_by = ('name', 'attendance_count')
-	search_fields = ('name', 'venue')
+	order_by = ('event', 'attendance_count')
+	search_fields = ('event', 'venue')
 
 
 class EventType(models.Model):

@@ -1,36 +1,42 @@
-# from django.contrib.auth.models import User, Group
-# from rest_framework import serializers
-
-
-# # class UserSerializer(serializers.HyperlinkedModelSerializer):
-# #     class Meta:
-# #         model = User
-# #         fields = ('url', 'username', 'email', 'groups')
-
-
-# # class GroupSerializer(serializers.HyperlinkedModelSerializer):
-# #     class Meta:
-# #         model = Group
-# #         fields = ('url', 'name')
-
-
-from member.models import Member
+from member.models import Member, Attendance, AcademicInstitution
+from event.models import Event, EventType
 from rest_framework import serializers
 
+# Member models
+class AttendanceSerializer(serializers.ModelSerializer):
+	class Meta:
+		model = Attendance
+		# fields = "__all__"
+		exclude = ('id',)
+
+class AcademicInstitutionSerializer(serializers.ModelSerializer):
+	class Meta:
+		model = AcademicInstitution
+		exclude = ('id',)
+
+
 class MemberSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = Member
-        fields = (
-        	"name",
-			# "address",
-			# "post_code",
-			# "email",
-			# "mobile_no",
-			# "course",
-			# "date_of_birth",
-			# "first_attended",
-			# "last_modified",
-			# "extra_info",
-			# "academic_institution",
-			# "attendance_status"
-        )
+	attendance_status = AttendanceSerializer()
+	academic_institution = AcademicInstitutionSerializer()
+
+	class Meta:
+		model = Member
+		fields = ('name', 'address', 'post_code', 'email', 'attendance_status', 'academic_institution',
+			'mobile_no', 'course', 'date_of_birth', 'first_attended', 'last_modified', 'extra_info',
+			'last_visited',
+		)
+
+
+# Event models
+class EventTypeSerializer(serializers.ModelSerializer):
+	class Meta:
+		model = EventType
+		exclude = ('id',)
+
+class EventSerializer(serializers.HyperlinkedModelSerializer):
+	event = EventTypeSerializer()
+	class Meta:
+		model = Event
+		fields = ("event", "date", "attendance_count", "first_timers_count", "born_again_count",
+			"venue", "room", "last_modified"
+		)
