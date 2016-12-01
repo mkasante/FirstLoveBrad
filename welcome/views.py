@@ -1,8 +1,14 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse
+from django.core import serializers
 
-from member.views import Member
-import datetime
+from member.models import Member, Attendance, AcademicInstitution
+from event.models import Event, EventType
+
+import datetime, re, os, requests
+
+
 
 # Create your views here.
 @login_required
@@ -12,15 +18,6 @@ def index(request):
 	}
 
 	return render (request, 'newsfeed.html', context)
-
-# @login_required
-# def newsfeed(request):
-# 	context = {}
-
-# 	return render (request, 'newsfeed.html', context)
-
-
-
 
 
 # 
@@ -72,3 +69,57 @@ def _get_evangelismlist(request):
 	}
 
 	return render (request, '_partial/_evangelism.html', context)
+
+
+# API Generator
+def write_api(appname):
+	url = "https://firstloveleeds.herokuapp.com/api/%s/" % appname
+	try:
+		# if not os.dir.exists("api/fixtures"): os.makedirs("api/fixtures")
+		if not os.path.exists("_data/_fixtures"): os.makedirs("_data/_fixtures")
+
+		json_data = requests.get(url, auth=("firstloveleeds", "14leeds20")).text
+		with open("_data/_fixtures/%s.json" % appname, "w" ) as f:
+			f.write(json_data)
+	except: pass
+
+
+def serialize_api(appname, model):
+	path = "api/fixtures"
+	try:
+		if not os.path.exists(path): os.makedirs(path)
+		JSONSerializer = serializers.get_serializer("json")
+		json_serializer = JSONSerializer()
+		with open("%s/%s.json" % (path, appname), "w") as out:
+			json_serializer.serialize(model.objects.all(), stream=out)
+
+	except: pass
+
+# API Generator View
+
+def __member_api(request):
+	write_api("member")
+	serialize_api("member", Member)
+
+	return HttpResponse("")
+
+def __attendance_api(request):
+	write_api("attendance")
+	serialize_api("attendance", Attendance)
+
+	return HttpResponse("")
+
+def __academin_institution_api(request):
+	write_api("academic-institution")
+	serialize_api("academic-institution", AcademicInstitution)
+
+	return HttpResponse("")
+	
+def __event_api(request):
+	write_api("event")
+	serialize_api("event", Event)
+	serialize_api("event-type", EventType)
+
+	return HttpResponse("")
+
+	

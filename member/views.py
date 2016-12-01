@@ -3,18 +3,12 @@ from django.contrib.auth.decorators import login_required
 from member.models import Member, Attendance
 
 import re
-import requests
 
 
 # Create your views here.
 @login_required
 def index(request):
 	context = {}
-
-	json_data = requests.get("https://firstloveleeds.herokuapp.com/api/member/?format=json").json()
-
-	with open("member/fixtures/test.json", "w") as f:
-		f.write(json_data)
 
 	return render (request, 'member/index.html', context)
 

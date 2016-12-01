@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from event.models import Event, EventType
-import datetime, re
+import datetime, re, os, requests
 
 # Create your views here.
 @login_required
@@ -9,6 +9,8 @@ def index(request):
 	now = datetime.datetime.now()
 	events = Event.objects.all()
 	event_types = EventType.objects.all()
+
+	write_api("event")
 
 	context = {
 		'events': events,

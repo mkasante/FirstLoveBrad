@@ -40,3 +40,5 @@ class EventSerializer(serializers.HyperlinkedModelSerializer):
 		fields = ("event", "date", "attendance_count", "first_timers_count", "born_again_count",
 			"venue", "room", "last_modified"
 		)
+
+

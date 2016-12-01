@@ -64,5 +64,22 @@ $(document).ready(function(){
 		loadinfo("welcome/_newsfeed/", "birthdays");
 		loadinfo("welcome/_newsfeed/", "first-timers");
 		loadinfo("welcome/_newsfeed/", "evangelism");
+
+		loadapi("welcome/__api/member");
+		loadapi("welcome/__api/event");
+		loadapi("welcome/__api/academic-institution");
+		loadapi("welcome/__api/attendance");
+
+	}
+
+	function loadapi(url){
+
+		$.ajax({
+			// type: "POST",
+			url: url, 
+			success: function(result){
+				$('#anouncements').append(result);
+    		}
+    	});
 	}
 });
