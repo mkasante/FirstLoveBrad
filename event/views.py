@@ -10,8 +10,6 @@ def index(request):
 	events = Event.objects.all()
 	event_types = EventType.objects.all()
 
-	write_api("event")
-
 	context = {
 		'events': events,
 		'event_types': event_types,
