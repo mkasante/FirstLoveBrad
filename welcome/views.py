@@ -85,15 +85,15 @@ def write_api(appname):
 
 
 def serialize_api(appname, model):
-		path = "api/fixtures"
-	
+	path = "api/fixtures"
+	try:
 		if not os.path.exists(path): os.makedirs(path)
 		JSONSerializer = serializers.get_serializer("json")
 		json_serializer = JSONSerializer()
 		with open("%s/%s.json" % (path, appname), "w") as out:
 			json_serializer.serialize(model.objects.all(), stream=out)
 
-	# except: pass
+	except: pass
 
 # API Generator View
 
