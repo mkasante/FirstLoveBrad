@@ -53,11 +53,22 @@ def _get_birthdays(request):
 @login_required
 def _get_firsttimers(request):
 	now = datetime.datetime.now()
-	members = Member.objects.filter(attendance_status__status = "First Timer")
-	first_timers = members
+	first_timers = Member.objects.filter(attendance_status__status = "First Timer")[:10]
 
 	context = {
 		'first_timers': first_timers
 	}
 
 	return render (request, '_partial/_firsttimers.html', context)
+
+
+@login_required
+def _get_evangelismlist(request):
+	now = datetime.datetime.now()
+	evangelism = Member.objects.filter(attendance_status__status = "Evangelism").order_by('-first_attended')[:10]
+
+	context = {
+		'evangelism': evangelism
+	}
+
+	return render (request, '_partial/_evangelism.html', context)

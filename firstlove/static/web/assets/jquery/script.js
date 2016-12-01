@@ -60,9 +60,9 @@ $(document).ready(function(){
 		loaddata("../event/_daterange/", start_date + "--" + end_date);
 	}
 
-	// if (window.location.pathname ="/"){
-		
+	if (window.location.pathname === "/"){
 		loadinfo("welcome/_newsfeed/", "birthdays");
 		loadinfo("welcome/_newsfeed/", "first-timers");
-	// }
+		loadinfo("welcome/_newsfeed/", "evangelism");
+	}
 });
