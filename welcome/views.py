@@ -98,25 +98,25 @@ def serialize_api(appname, model):
 # API Generator View
 
 def __member_api(request):
-	write_api("member")
+	# write_api("member")
 	serialize_api("member", Member)
 
 	return HttpResponse("")
 
 def __attendance_api(request):
-	write_api("attendance")
+	# write_api("attendance")
 	serialize_api("attendance", Attendance)
 
 	return HttpResponse("")
 
 def __academin_institution_api(request):
-	write_api("academic-institution")
+	# write_api("academic-institution")
 	serialize_api("academic-institution", AcademicInstitution)
 
 	return HttpResponse("")
 	
 def __event_api(request):
-	write_api("event")
+	# write_api("event")
 	serialize_api("event", Event)
 	serialize_api("event-type", EventType)
 
