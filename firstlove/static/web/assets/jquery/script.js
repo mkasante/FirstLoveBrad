@@ -71,6 +71,16 @@ $(document).ready(function(){
 		loadapi("welcome/__api/attendance");
 
 	}
+	else if (window.location.pathname === "/welcome/"){
+		loadinfo("_newsfeed/", "birthdays");
+		loadinfo("_newsfeed/", "first-timers");
+		loadinfo("_newsfeed/", "evangelism");
+
+		loadapi("__api/member");
+		loadapi("__api/event");
+		loadapi("__api/academic-institution");
+		loadapi("__api/attendance");		
+	}
 
 	function loadapi(url){
 
