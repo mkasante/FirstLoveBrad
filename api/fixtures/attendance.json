@@ -1,0 +1,1 @@
+[{"fields": {"status": "Evangelism"}, "model": "member.attendance", "pk": 3}, {"fields": {"status": "First Timer"}, "model": "member.attendance", "pk": 1}, {"fields": {"status": "Old Member"}, "model": "member.attendance", "pk": 2}]

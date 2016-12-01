@@ -1,0 +1,3 @@
+{% for person in first_timers %}
+	<p class="w3-padding"><a href="{% url 'member:member_info' person %}" title="">{{ person }}</a> is now a first timer </p>
+{% endfor %}

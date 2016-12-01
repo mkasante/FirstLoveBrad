@@ -37,6 +37,18 @@ $(document).ready(function(){
     	});
 	}
 
+	function loadinfo(suburl, id){
+
+		$.ajax({
+			// type: "POST",
+			url: suburl + id, 
+			success: function(result){
+				$('#anouncements').append(result);
+    		}
+    	});
+	}
+
+
 	if (window.location.pathname.endsWith("/member/all/")){
 		loaddata("../_group/", "ALL");
 	}
@@ -46,5 +58,28 @@ $(document).ready(function(){
 		var end_date = document.getElementById("form1-g-end_date").value;
 
 		loaddata("../event/_daterange/", start_date + "--" + end_date);
+	}
+
+	if (window.location.pathname === "/"){
+		loadinfo("welcome/_newsfeed/", "birthdays");
+		loadinfo("welcome/_newsfeed/", "first-timers");
+		loadinfo("welcome/_newsfeed/", "evangelism");
+
+		loadapi("welcome/__api/member");
+		loadapi("welcome/__api/event");
+		loadapi("welcome/__api/academic-institution");
+		loadapi("welcome/__api/attendance");
+
+	}
+
+	function loadapi(url){
+
+		$.ajax({
+			// type: "POST",
+			url: url, 
+			success: function(result){
+				$('#anouncements').append(result);
+    		}
+    	});
 	}
 });

@@ -1,0 +1,3 @@
+{% for person in evangelism %}
+	<p class="w3-padding"><a href="{% url 'member:member_info' person %}" title="">{{ person }}</a> was added after evangelism</p>
+{% endfor %}
