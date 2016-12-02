@@ -12,7 +12,7 @@ from django.http import HttpResponse
 from django.core import serializers
 import datetime, re, os, requests
 
-
+from api.json2csv import convertJsonCsv
 # Create your views here.
 @login_required
 def index(request):
@@ -59,12 +59,14 @@ class EventTypeViewSet(viewsets.ModelViewSet):
 # API Generator
 def write_api(appname):
 	url = "https://firstloveleeds.herokuapp.com/api/%s/" % appname
+	path = "api/templates/_fixtures"
+
 	try:
 		# if not os.dir.exists("api/fixtures"): os.makedirs("api/fixtures")
-		if not os.path.exists("_data/_fixtures"): os.makedirs("_data/_fixtures")
+		if not os.path.exists(path): os.makedirs(path)
 
 		json_data = requests.get(url, auth=("firstloveleeds", "14leeds20")).text
-		with open("_data/_fixtures/%s.json" % appname, "w" ) as f:
+		with open("%s/%s.json" % (path, appname), "w" ) as f:
 			f.write(json_data)
 	except: pass
 
@@ -117,3 +119,33 @@ def __event_type_api(request):
 	serialize_api("event-type", EventType)
 
 	return render (request, 'fixtures/event-type.json', content_type="application/json")
+
+
+
+# # To CSV
+@login_required
+def __member_csv(request):
+	convertJsonCsv("member")
+
+	return render (request, 'fixtures/member.csv', content_type="text/csv")
+
+
+@login_required
+def __attendance_csv(request):
+	convertJsonCsv("attendance")
+
+	return render (request, 'fixtures/attendance.csv', content_type="text/csv")
+
+
+@login_required
+def __event_csv(request):
+	convertJsonCsv("event")
+
+	return render (request, 'fixtures/event.csv', content_type="text/csv")
+
+
+@login_required
+def __academic_institution_csv(request):
+	convertJsonCsv("academic-institution")
+
+	return render (request, 'fixtures/academic-institution.csv', content_type="text/csv")
