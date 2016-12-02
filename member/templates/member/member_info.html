@@ -20,7 +20,7 @@
                     <p class="w3-large w3-text-black"><strong>Mobile Number: </strong>{{ member.mobile_no }}</p>
                     <p class="w3-large w3-text-black"><strong>Email Address: </strong><span class="w3-text-blue">{{ member.email }}</span></p>
                     <p class="w3-large w3-text-black"><strong>Date of Birth: </strong>{{ member.date_of_birth }}</p>
-                    <p class="w3-large w3-text-black"><strong>Address: </strong>{{ member.address }}</p>
+                    <p class="w3-large w3-text-black"><strong>Address: </strong>{{ member.address|linebreaksbr }}</p>
                     <p class="w3-large w3-text-black"><strong>Post Code: </strong>{{ member.post_code }}</p>
                     <p class="w3-large w3-text-black"><strong>Academic Institution: </strong>{{ member.academic_institution }}</p>
                     <p class="w3-large w3-text-black"><strong>Course Studying: </strong>{{ member.course }}</p>
@@ -35,7 +35,7 @@
                     </strong>{{ member.first_attended }}</p>                                     
                     <p class="w3-large w3-text-black"><strong>Attendance Status: </strong>{{ member.attendance_status }}</p>
                     <p class="w3-large w3-text-black"><strong>Last Visited On: </strong>{{ member.last_visited }}</p>
-                    <p class="w3-large w3-text-black"><strong>Other Information: </strong>{{ member.extra_info }}</p>                    
+                    <p class="w3-large w3-text-black"><strong>Other Information: </strong>{{ member.extra_info|linebreaksbr }}</p>                    
                     
                 </div>
             </div>
