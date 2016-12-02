@@ -3,6 +3,9 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.core import serializers
 
+from django.shortcuts import render_to_response
+from django.template import RequestContext
+
 from member.models import Member, Attendance, AcademicInstitution
 from event.models import Event, EventType
 

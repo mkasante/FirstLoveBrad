@@ -1,0 +1,30 @@
+{% extends '_partial/base.html' %}
+
+{% block title %}
+Error 404
+{% endblock title %}
+
+
+{% block content %}
+
+<section class="mbr-section mbr-section-hero mbr-section-full" id="header5-6" style="background-color: rgb(253, 253, 253);">
+
+
+    <div class="mbr-table-cell">
+
+        <div class="container">
+            <div class="row">
+                <div class="mbr-section col-md-12">
+
+                    <h1 class="mbr-section-title display-1" style="color:black;">Error 404</h1>
+                    <p class="mbr-section-lead lead w3-padding" style="color:grey;">Page not found. Please go back to <a href="{% url 'welcome:index' %">homepage</a></p>                                
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+</section>
+
+{% endblock content %}

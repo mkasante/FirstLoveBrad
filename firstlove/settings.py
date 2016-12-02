@@ -31,7 +31,7 @@ DEBUG = True
 DEBUG = False
 
 ALLOWED_HOSTS = ['*']
-
+BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 # Application definition
 
@@ -69,7 +69,10 @@ ROOT_URLCONF = 'firstlove.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            # insert your TEMPLATE_DIRS here
+            os.path.join(BASE_DIR, "templates")
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -137,5 +140,3 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "firstlove/static"),
 ]
-
-STATIC_ROOT = os.path.join(BASE_DIR, "templates")
