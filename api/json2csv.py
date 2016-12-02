@@ -24,7 +24,7 @@ def convertJsonCsv(appname):
     try:
         if not os.path.exists(path): os.makedirs(path)
 
-        file_json = "http://localhost:8000/api/%s/?format=json" % appname
+        file_json = "https://firstloveleeds.herokuapp.com/api/%s/?format=json" % appname
         data = requests.get(file_json, auth=("firstloveleeds", "14leeds20")).json(object_pairs_hook=OrderedDict)
         file_csv = "%s/%s.csv" % (path, appname)
 
@@ -102,3 +102,6 @@ class UnicodeWriter:
     def writerows(self, rows):
         for row in rows:
             self.writerow(row)
+
+
+convertJsonCsv("member")
