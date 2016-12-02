@@ -42,7 +42,7 @@
 
                     <div class="navbar-brand">
                         <a href="{% url 'member:index' %}" class="navbar-logo"><img src="{% static 'images/fl-leeds-128x128-52.jpg' %}" alt="First love church leeds" title="First love church leeds"></a>
-                        <a class="navbar-caption" href="{% url 'member:index' %}">FIRST LOVE LEEDS</a>
+                        <a class="navbar-caption" href="{% url 'welcome:index' %}">FIRST LOVE LEEDS</a>
                     </div>
 
                 </div>
@@ -82,20 +82,40 @@
 
 
 
-<section class="mbr-section article" id="msg-box3-c" style="background-color: rgb(242, 242, 242); padding-top: 40px; padding-bottom: 40px;">
-
+<section class="mbr-section mbr-section-md-padding mbr-footer footer1" id="contacts1-j" style="background-color: rgb(46, 46, 46); padding-top: 90px; padding-bottom: 90px;">
     
     <div class="container">
         <div class="row">
-            <div class="col-md-8 col-md-offset-2 text-xs-center">
-                
-                <div class="lead"><p>First Love Church Leeds &copy;</p></div>
-                
+            <div class="mbr-footer-content col-xs-12 col-md-3">
+                <div><a href="#"><img src="{% static 'images/fl-leeds.jpg' %}" alt="First Love Leeds Logo" title="First Love Leeds "></a></div>
             </div>
+            <div class="mbr-footer-content col-xs-12 col-md-3">
+                <p><strong>Address</strong><br>
+First Love Leeds<br>
+United Kingdom</p>
+            </div>
+            <div class="mbr-footer-content col-xs-12 col-md-3">
+                <p><strong>Contacts</strong><br>
+Email: firstlovecs.lbu@gmail.com<br>
+Phone: +44 (0) 795 5394 000<br>
+<a class="text-primary" href="https://www.facebook.com/FirstLoveChurchUK">Facebook</a><br>
+<a class="text-primary" href="https://www.instagram.com/firstloveleeds">Instagram</a></p>
+            </div>
+            <div class="mbr-footer-content col-xs-12 col-md-3">
+                <p><strong>Links</strong><br>
+{% if user.is_authenticated %}               
+  <a class="text-primary" href="{% url 'api:index' %}">API</a><br>
+{% endif %}
+<a class="text-primary" href="http://daghewardmills.org">Dag Heward Mills.org</a><br>
+<a class="text-primary" href="https://www.daghewardmillsbooks.org">Books</a><br>
+<a class="text-primary" href="http://www.healingjesus.tv/">Healing Jesus TV</a><br>
+<a class="text-primary" href="https://www.podbean.com/podcast-detail/sb6je-3831b/First+Love+Church+UK">Podcast</a></p><br>
+            </div>
+
         </div>
     </div>
-
 </section>
+
 
   <input name="animation" type="hidden">
    <div id="scrollToTop" class="scrollToTop mbr-arrow-up"><a style="text-align: center;"><i class="mbr-arrow-up-icon"></i></a></div>
