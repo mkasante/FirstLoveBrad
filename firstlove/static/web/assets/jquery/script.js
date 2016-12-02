@@ -65,19 +65,11 @@ $(document).ready(function(){
 		loadinfo("welcome/_newsfeed/", "first-timers");
 		loadinfo("welcome/_newsfeed/", "evangelism");
 
-	}
-	else if (window.location.pathname === "/welcome/"){
-		loadinfo("_newsfeed/", "birthdays");
-		loadinfo("_newsfeed/", "first-timers");
-		loadinfo("_newsfeed/", "evangelism");		
-	}
+		loadapi("welcome/__api/member");
+		loadapi("welcome/__api/event");
+		loadapi("welcome/__api/academic-institution");
+		loadapi("welcome/__api/attendance");
 
-	if (window.location.pathname === "/api/"){
-		loadapi("model/member.json");
-		loadapi("model/event.json");
-		loadapi("model/event-type.json");
-		loadapi("model/academic-institution.json");
-		loadapi("model/attendance.json");
 	}
 
 	function loadapi(url){
