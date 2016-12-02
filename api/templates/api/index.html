@@ -13,13 +13,31 @@ API
 
         <div class="container">
             <div class="row">
-                <div class="mbr-section col-md-10">
+                <div class="mbr-section col-md-12">
 
                     <h1 class="mbr-section-title display-1" style="color:black;">First Love Leeds</h1>
                     <p class="mbr-section-lead lead w3-padding" style="color:grey;">Welcome to the API for developers only. Below are the different API links</p>
                     
-                    <p class="mbr-section-lead w3-small" style="color:grey;">- <a href="{% url 'api:member-detail' %}" title="">Members API</a></p>
-                    <p class="mbr-section-lead w3-small" style="color:grey;">- <a href="{% url 'api:event-detail' %}" title="">Events API</a></p>
+                    <hr>
+
+                    <div class="col-md-6">
+                        <p class="mbr-section-lead w3-small" style="color:grey;">- <a href="{% url 'api:member-detail' %}" title="Members API">Members</a></p>
+                        <p class="mbr-section-lead w3-small" style="color:grey;">- <a href="{% url 'api:event-detail' %}" title="Events API">Events</a></p>
+                        <p class="mbr-section-lead w3-small" style="color:grey;">- <a href="{% url 'api:academic-institution-detail' %}" title="Academic Institution API">Academic Institution</a></p>
+                        <p class="mbr-section-lead w3-small" style="color:grey;">- <a href="{% url 'api:attendance-detail' %}" title="Attendance Status API">Attendance Status</a></p>
+                    </div>
+
+
+                    <div class="col-md-6">
+                        <p class="mbr-section-lead w3-small" style="color:grey;">- <a href="{% url 'api:__member_api' %}" title="Member Models API">Member Models</a></p>
+                        <p class="mbr-section-lead w3-small" style="color:grey;">- <a href="{% url 'api:__event_api' %}" title="Event Models API">Event Models</a></p>
+                        <p class="mbr-section-lead w3-small" style="color:grey;">- <a href="{% url 'api:__event_type_api' %}" title="Event Type Models API">Event Type Models</a></p>
+                        <p class="mbr-section-lead w3-small" style="color:grey;">- <a href="{% url 'api:__attendance_api' %}" title="Attendance Status Models API">Attendance Status Models</a></p>
+                        <p class="mbr-section-lead w3-small" style="color:grey;">- <a href="{% url 'api:__academic_institution_api' %}" title="Academic Institution Models API">Academic Institution Models</a></p>
+                    </div>
+
+                    <hr>
+
                     <div class="mbr-section-btn">
 
                     {% if user.is_authenticated %}
@@ -29,6 +47,7 @@ API
                     {% endif %}
                     </div>               
 
+                    
                 </div>
             </div>
         </div>
