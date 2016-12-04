@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
-from member.models import Member, Attendance
+from member.models import Member, Attendance, Gender
 
 import re
 
@@ -18,11 +18,13 @@ def all_members(request):
 	members = Member.objects.all()
 	alphabets = sorted(set([x.name[0] for x in members]))
 	membership_status = Attendance.objects.all()
+	gender = Gender.objects.all()
 
 	context = {
 		'members': members,
 		'alphabets': alphabets,
-		'membership_status': membership_status
+		'membership_status': membership_status,
+		'gender': gender
 	}
 
 	return render (request, 'member/all_members.html', context)
@@ -61,6 +63,23 @@ def _list_members_by_status(request, status):
 	if pattern.match(status) and status != "ALL":
 		attendance = Attendance.objects.get(status__iexact = status).status
 		members = Member.objects.filter(attendance_status__status__iexact = attendance)
+	else:
+		members = Member.objects.all()
+
+	context = {
+		'members': members
+	}
+
+	return render (request, '_partial/member_data.html', context)
+
+
+@login_required
+def _list_members_by_gender(request, gender):
+	pattern = re.compile(r"^([\w]+)$")
+
+	if pattern.match(gender) and gender != "ALL":
+		gender = Gender.objects.get(gender__iexact = gender).gender
+		members = Member.objects.filter(gender__gender__iexact = gender)
 	else:
 		members = Member.objects.all()
 

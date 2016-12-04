@@ -1,4 +1,4 @@
-from member.models import Member, Attendance, AcademicInstitution
+from member.models import Member, Attendance, AcademicInstitution, Gender
 from event.models import Event, EventType
 from rest_framework import serializers
 
@@ -14,17 +14,20 @@ class AcademicInstitutionSerializer(serializers.ModelSerializer):
 		model = AcademicInstitution
 		exclude = ('id',)
 
+class GenderSerializer(serializers.ModelSerializer):
+	class Meta:
+		model = Gender
+		exclude = ('id',)
 
 class MemberSerializer(serializers.HyperlinkedModelSerializer):
 	attendance_status = AttendanceSerializer()
 	academic_institution = AcademicInstitutionSerializer()
-
+	gender = GenderSerializer()
 	class Meta:
 		model = Member
-		fields = ('name', 'address', 'post_code', 'email', 'attendance_status', 'academic_institution',
-			'mobile_no', 'course', 'date_of_birth', 'first_attended', 'last_modified', 'extra_info',
-			'last_visited',
+		fields = ('name', 'gender', 'date_of_birth', 'email', 'mobile_no', 'address', 'post_code', 'attendance_status', 'academic_institution', 'course', 'first_attended', 'extra_info', 'last_visited', 'last_modified'
 		)
+
 
 
 # Event models

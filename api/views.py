@@ -3,9 +3,9 @@ from django.contrib.auth.decorators import login_required
 
 from rest_framework import viewsets
 from api.serializers import MemberSerializer, AttendanceSerializer, AcademicInstitutionSerializer
-from api.serializers import EventSerializer, EventTypeSerializer
+from api.serializers import EventSerializer, EventTypeSerializer, GenderSerializer
 
-from member.models import Member, Attendance, AcademicInstitution
+from member.models import Member, Attendance, AcademicInstitution, Gender
 from event.models import Event, EventType
 
 from django.http import HttpResponse
@@ -192,6 +192,9 @@ class EventTypeViewSet(viewsets.ModelViewSet):
 	queryset = EventType.objects.all().order_by('name')
 	serializer_class = EventType
 
+class GenderViewSet(viewsets.ModelViewSet):
+	queryset = Gender.objects.all().order_by('gender')
+	serializer_class = Gender
 
 
 
@@ -232,6 +235,12 @@ def __event_type_api(request):
 
 	return render (request, 'fixtures/event-type.json', content_type="application/json")
 
+@login_required    
+def __gender_api(request):
+	# write_api("gender")
+	serialize_api("gender", Gender)
+
+	return render (request, 'fixtures/gender.json', content_type="application/json")
 
 
 # # To CSV
@@ -241,6 +250,11 @@ def __member_csv(request):
 
 	return render (request, 'fixtures/member.csv', content_type="text/csv")
 
+@login_required
+def __gender_csv(request):
+	convertJsonCsv("gender")
+
+	return render (request, 'fixtures/gender.csv', content_type="text/csv")
 
 @login_required
 def __attendance_csv(request):

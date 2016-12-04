@@ -1,9 +1,10 @@
 from django.conf.urls import url
 from api.views import index
-from api.views import MemberViewSet, AttendanceViewSet, AcademicInstitutionViewSet
+from api.views import MemberViewSet, AttendanceViewSet, AcademicInstitutionViewSet, GenderViewSet
 from api.views import EventViewSet, EventTypeViewSet
-from api.views import __attendance_api, __member_api, __academic_institution_api, __event_api, __event_type_api
-from api.views import __attendance_csv, __member_csv, __academic_institution_csv, __event_csv #,__event_type_csv
+
+from api.views import __attendance_api, __member_api, __academic_institution_api, __event_api, __event_type_api, __gender_api
+from api.views import __attendance_csv, __member_csv, __academic_institution_csv, __event_csv, __gender_csv #,__event_type_csv
 
 
 urlpatterns = [
@@ -28,6 +29,10 @@ urlpatterns = [
     view = AcademicInstitutionViewSet.as_view({'get': 'list'}), name = 'academic-institution-detail'
   ),
 
+  url(
+    regex=r'^[Gg]ender/$',
+    view = GenderViewSet.as_view({'get': 'list'}), name = 'gender-detail'
+  ),
   # Event module
 
   url(
@@ -68,6 +73,11 @@ urlpatterns = [
     name = '__academic_institution_api'
   ),
 
+  url(
+    regex=r'^model/gender.json$',
+    view = __gender_api,
+    name = '__gender_api'
+  ),
 
 # CSV API
   url(
@@ -100,4 +110,9 @@ urlpatterns = [
     name = '__academic_institution_csv'
   ),
 
+  url(
+    regex=r'^model/gender.csv$',
+    view = __gender_csv,
+    name = '__gender_csv'
+  ),
 ]

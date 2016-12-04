@@ -8,6 +8,10 @@ $(document).ready(function(){
 		loaddata("../_status/", $(this).val());
 	});
 
+	$(".gender").on('change', function(){
+		loaddata("../_gender/", $(this).val());
+	});
+
 	$(".event_date#btn-date").click(function(){
 		var start_date = document.getElementById("form1-g-start_date").value;
 		var end_date = document.getElementById("form1-g-end_date").value;
@@ -64,7 +68,6 @@ $(document).ready(function(){
 		loadinfo("welcome/_newsfeed/", "birthdays");
 		loadinfo("welcome/_newsfeed/", "first-timers");
 		loadinfo("welcome/_newsfeed/", "evangelism");
-
 	}
 	else if (window.location.pathname === "/welcome/"){
 		loadinfo("_newsfeed/", "birthdays");
@@ -78,6 +81,7 @@ $(document).ready(function(){
 		loadapi("model/event-type.json");
 		loadapi("model/academic-institution.json");
 		loadapi("model/attendance.json");
+		loadapi("model/gender.json");
 	}
 
 	function loadapi(url){
