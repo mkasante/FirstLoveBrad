@@ -1,3 +1,9 @@
 {% for person in evangelism %}
-	<p class="w3-padding w3-yellow"><a href="{% url 'member:member_info' person %}" title="last Updated on {{ person.last_modified }}">{{ person }}</a> was added after evangelism.</p>
+
+	<p class="w3-padding w3-yellow">
+	{% if person.first_attended != None %}
+		{{ person.first_attended }} - 
+	{% endif %}
+	
+	<a href="{% url 'member:member_info' person %}" title="last Updated on {{ person.last_modified }}">{{ person }}</a> was added after evangelism.</p>
 {% endfor %}

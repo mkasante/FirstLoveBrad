@@ -36,8 +36,8 @@ def _get_birthdays(request):
 			dob_year = x.date_of_birth.year
 
 			if ((int(dob_month) == now.month)
-				and int(dob_day) <= now.day):
-				remaining_day = now.day - int(dob_day)
+				and int(dob_day) >= now.day):
+				remaining_day = int(dob_day) - now.day 
 				age = now.year - int(dob_year)
 
 				member_dob.append((x, age, remaining_day))
@@ -52,7 +52,7 @@ def _get_birthdays(request):
 @login_required
 def _get_firsttimers(request):
 	now = datetime.datetime.now()
-	last30days = now - datetime.timedelta(days = 30)
+	last30days = now - datetime.timedelta(days = 60)
 	first_timers = Member.objects.filter(attendance_status__status = "First Timer", first_attended__gte = last30days).order_by('-first_attended')[:10]
 
 	context = {
@@ -65,8 +65,8 @@ def _get_firsttimers(request):
 @login_required
 def _get_evangelismlist(request):
 	now = datetime.datetime.now()
-	last30days = now - datetime.timedelta(days = 30)
-	evangelism = Member.objects.filter(attendance_status__status = "Evangelism", first_attended__gte = last30days).order_by('-first_attended')[:10]
+	last30days = now - datetime.timedelta(days = 60)
+	evangelism = Member.objects.filter(attendance_status__status = "Evangelism", last_modified__gte = last30days).order_by('-last_modified')[:10]
 
 	context = {
 		'evangelism': evangelism

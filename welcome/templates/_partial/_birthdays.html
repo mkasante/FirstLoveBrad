@@ -1,3 +1,3 @@
 {% for person in member_dob %}
-	<p class="w3-padding w3-light-grey"><a href="{% url 'member:member_info' person.0 %}" title="last Updated on {{ person.last_modified }}">{{ person.0 }}</a> will be {{ person.1 }} years in {{ person.2 }} days time</p>
+	<p class="w3-padding w3-light-grey">{% now 'd M Y' %} - <a href="{% url 'member:member_info' person.0 %}" title="last Updated on {{ person.last_modified }}">{{ person.0 }}</a> will be {{ person.1 }} years in {{ person.2 }} days time</p>
 {% endfor %}
