@@ -13,10 +13,10 @@ class Member(models.Model):
 	academic_institution = models.ForeignKey('AcademicInstitution', on_delete=models.CASCADE, related_name="academic_institution", null=True, blank=True)
 	course = models.CharField(max_length=100, blank=True)
 	first_attended = models.DateField(blank=True, null=True)
-	last_modified = models.DateTimeField(auto_now=True)
-	extra_info = models.TextField(max_length=2000, blank=True)
 	attendance_status = models.ForeignKey('Attendance', on_delete=models.CASCADE, related_name="attendance_status")
 	last_visited = models.DateField(null=True, blank=True)
+	extra_info = models.TextField(max_length=2000, blank=True)
+	last_modified = models.DateTimeField(auto_now=True)
 
 	def __str__(self):
 		return self.name

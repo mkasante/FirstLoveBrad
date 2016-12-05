@@ -1,1 +1,0 @@
-[{"fields": {"gender": "Female"}, "model": "member.gender", "pk": 2}, {"fields": {"gender": "Male"}, "model": "member.gender", "pk": 1}, {"fields": {"gender": "Unknown"}, "model": "member.gender", "pk": 3}]

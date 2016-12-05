@@ -1,1 +1,0 @@
-[{"fields": {"name": "Leeds Beckett University"}, "model": "member.academicinstitution", "pk": 2}, {"fields": {"name": "Leeds City College"}, "model": "member.academicinstitution", "pk": 4}, {"fields": {"name": "Leeds Trinity University"}, "model": "member.academicinstitution", "pk": 3}, {"fields": {"name": "University of Leeds"}, "model": "member.academicinstitution", "pk": 5}]

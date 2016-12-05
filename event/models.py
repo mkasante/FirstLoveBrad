@@ -3,8 +3,8 @@ from django.contrib import admin
 
 # Create your models here.
 class Event(models.Model):
-	event = models.ForeignKey('EventType', on_delete=models.CASCADE)
 	date = models.DateTimeField()
+	event = models.ForeignKey('EventType', on_delete=models.CASCADE)
 	attendance_count = models.IntegerField()
 	first_timers_count = models.IntegerField()
 	born_again_count = models.IntegerField()

@@ -6,148 +6,13 @@ from api.serializers import MemberSerializer, AttendanceSerializer, AcademicInst
 from api.serializers import EventSerializer, EventTypeSerializer, GenderSerializer
 
 from member.models import Member, Attendance, AcademicInstitution, Gender
-from event.models import Event, EventType
+from member.models import MemberAdmin, AttendanceAdmin, AcademicInstitutionAdmin, GenderAdmin
+
+from event.models import Event, EventType, EventAdmin, EventTypeAdmin 
 
 from django.http import HttpResponse
 from django.core import serializers
-import datetime, re, os, requests
-
-
-
-# API Generator
-def write_api(appname):
-	url = "https://firstloveleeds.herokuapp.com/api/%s/" % appname
-	path = "api/templates/_fixtures"
-
-	try:
-		# if not os.dir.exists("api/fixtures"): os.makedirs("api/fixtures")
-		if not os.path.exists(path): os.makedirs(path)
-
-		json_data = requests.get(url, auth=("firstloveleeds", "14leeds20")).text
-		with open("%s/%s.json" % (path, appname), "w" ) as f:
-			f.write(json_data)
-	except: pass
-
-
-def serialize_api(appname, model):
-	path = "api/templates/fixtures"
-	try:
-		if not os.path.exists(path): os.makedirs(path)
-		JSONSerializer = serializers.get_serializer("json")
-		json_serializer = JSONSerializer()
-		
-		with open("%s/%s.json" % (path, appname), "w") as out:
-			json_serializer.serialize(model.objects.all(), stream=out)
-			
-	except: pass
-
-
-
-# -*- coding: utf-8 -*-
-
-import codecs, cStringIO, csv, json
-import sys, requests, os
-from collections import OrderedDict
-
-
-def flatten(l):
-	'''
-	flattens a list, dict or tuple
-	'''
-	ret = []
-	for i in l:
-		if isinstance(i, list) or isinstance(i, tuple):
-			ret.extend(flatten(i))
-		elif isinstance(i, dict):
-			ret.extend(flatten(i.values()))
-		else:
-			ret.append(i)
-	return ret
-
-def convertJsonCsv(appname):
-	path = "api/templates/fixtures"
-	try:
-		if not os.path.exists(path): os.makedirs(path)
-
-		file_json = "https://firstloveleeds.herokuapp.com/api/%s/?format=json" % appname
-		data = requests.get(file_json, auth=("firstloveleeds", "14leeds20")).json(object_pairs_hook=OrderedDict)
-		file_csv = "%s/%s.csv" % (path, appname)
-
-		data = data['results']
-		fields = data[0].keys()
-
-		with open(file_csv, 'wb') as fo:
-			writer = csv.DictWriter(fo, fieldnames=fields)
-			o = UnicodeWriter(fo)
-			o.writerow(fields)
-
-			for record in data:
-				o.writerow(flatten(record.values()))
-	except:
-		pass
-		
-
-class UTF8Recoder:
-	"""
-	Iterator that reads an encoded stream and reencodes the input to UTF-8
-	"""
-	def __init__(self, f, encoding):
-		self.reader = codecs.getreader(encoding)(f)
-
-	def __iter__(self):
-		return self
-
-	def next(self):
-		return self.reader.next().encode("utf-8")
-
-
-class UnicodeReader:
-	"""
-	A CSV reader which will iterate over lines in the CSV file "f",
-	which is encoded in the given encoding.
-	"""
-
-	def __init__(self, f, dialect=csv.excel, encoding="utf-8", **kwds):
-		f = UTF8Recoder(f, encoding)
-		self.reader = csv.reader(f, dialect=dialect, **kwds)
-
-	def next(self):
-		row = self.reader.next()
-		return [unicode(s, "utf-8") for s in row]
-
-	def __iter__(self):
-		return self
-
-
-class UnicodeWriter:
-	"""
-	A CSV writer which will write rows to CSV file "f",
-	which is encoded in the given encoding.
-	"""
-
-	def __init__(self, f, dialect=csv.excel, encoding="utf-8", **kwds):
-		# Redirect output to a queue
-		self.queue = cStringIO.StringIO()
-		self.writer = csv.writer(self.queue, dialect=dialect, **kwds)
-		self.stream = f
-		self.encoder = codecs.getincrementalencoder(encoding)()
-
-	def writerow(self, row):
-		self.writer.writerow([unicode(s).encode("utf-8") for s in row])
-		# Fetch UTF-8 output from the queue ...
-		data = self.queue.getvalue()
-		data = data.decode("utf-8")
-		# ... and reencode it into the target encoding
-		data = self.encoder.encode(data)
-		# write to the target stream
-		self.stream.write(data)
-		# empty queue
-		self.queue.truncate(0)
-
-	def writerows(self, rows):
-		for row in rows:
-			self.writerow(row)
-
+import datetime, re, os, requests, csv
 
 
 # =======================================================
@@ -202,76 +67,114 @@ class GenderViewSet(viewsets.ModelViewSet):
 @login_required
 def __member_api(request):
 	# write_api("member")
-	serialize_api("member", Member)
-
-	return render (request, 'fixtures/member.json', content_type="application/json")
+	member = serialize_api("member", Member)
+	return HttpResponse(member, content_type="application/json")
 
 @login_required
 def __attendance_api(request):
 	# write_api("attendance")
-	serialize_api("attendance", Attendance)
+	attendance = serialize_api("attendance", Attendance)
+	return HttpResponse(attendance, content_type="application/json")
 
-	return render (request, 'fixtures/attendance.json', content_type="application/json")
+
 
 
 @login_required
 def __academic_institution_api(request):
-	# write_api("academic-institution")
-	serialize_api("academic-institution", AcademicInstitution)
-
-	return render (request, 'fixtures/academic-institution.json', content_type="application/json")
+	# write_api("attendance")
+	academic_institution = serialize_api("academic-institution", AcademicInstitution)
+	return HttpResponse(academic_institution, content_type="application/json")
 
 @login_required    
 def __event_api(request):
-	# write_api("event")
-	serialize_api("event", Event)
-
-	return render (request, 'fixtures/event.json', content_type="application/json")
+	# write_api("attendance")
+	event = serialize_api("event", Event)
+	return HttpResponse(event, content_type="application/json")
 
 @login_required    
 def __event_type_api(request):
 	# write_api("event")
-	serialize_api("event-type", EventType)
-
-	return render (request, 'fixtures/event-type.json', content_type="application/json")
+	event_type = serialize_api("event-type", EventType)
+	return HttpResponse(event_type, content_type="application/json")
 
 @login_required    
 def __gender_api(request):
 	# write_api("gender")
-	serialize_api("gender", Gender)
+	gender = serialize_api("gender", Gender)
 
-	return render (request, 'fixtures/gender.json', content_type="application/json")
+	return HttpResponse(gender, content_type="application/json")
+
+
+
+# ===================================
+def serialize_api(appname, model):
+	models = model.objects.all()
+	data = serializers.serialize('json', models)
+	return data
+
+
+def download_csv(modeladmin, request, queryset):
+	if not request.user.is_staff:
+		raise PermissionDenied
+
+	opts = queryset.model._meta
+	model = queryset.model
+	response = HttpResponse(content_type='text/csv')
+
+	# force download.
+	response['Content-Disposition'] = 'attachment;filename=export.csv'
+	# the csv writer
+	writer = csv.writer(response)
+	field_names = [field.name for field in opts.fields if field.name != "id"]
+	field_headers = [x.title().replace("_", " ") for x in field_names ]
+
+	# Write a first row with header information
+	writer.writerow(field_headers)
+
+
+	for obj in queryset:
+		writer.writerow([getattr(obj, field) for field in field_names if field != "id"])
+
+	return response
+
 
 
 # # To CSV
 @login_required
 def __member_csv(request):
-	convertJsonCsv("member")
+	members = Member.objects.order_by('name')
+	data = download_csv(MemberAdmin, request, members)
 
-	return render (request, 'fixtures/member.csv', content_type="text/csv")
+	return HttpResponse (data, content_type='text/csv')
 
 @login_required
 def __gender_csv(request):
-	convertJsonCsv("gender")
+	gender = Gender.objects.order_by('gender')
+	data = download_csv(GenderAdmin, request, gender)
 
-	return render (request, 'fixtures/gender.csv', content_type="text/csv")
+	return HttpResponse (data, content_type='text/csv')
 
 @login_required
 def __attendance_csv(request):
-	convertJsonCsv("attendance")
+	attendance = Attendance.objects.order_by('status')
+	data = download_csv(AttendanceAdmin, request, attendance)
 
-	return render (request, 'fixtures/attendance.csv', content_type="text/csv")
+	return HttpResponse (data, content_type='text/csv')
 
 
 @login_required
 def __event_csv(request):
-	convertJsonCsv("event")
+	events = Event.objects.order_by('-date')
+	data = download_csv(EventAdmin, request, events)
 
-	return render (request, 'fixtures/event.csv', content_type="text/csv")
+	return HttpResponse (data, content_type='text/csv')
 
 
 @login_required
 def __academic_institution_csv(request):
-	convertJsonCsv("academic-institution")
+	academic_institutions = AcademicInstitution.objects.order_by('name')
+	data = download_csv(AcademicInstitutionAdmin, request, academic_institutions)
 
-	return render (request, 'fixtures/academic-institution.csv', content_type="text/csv")
+	return HttpResponse (data, content_type='text/csv')
+
+

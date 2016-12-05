@@ -40,7 +40,10 @@ urlpatterns = [
     view = EventViewSet.as_view({'get': 'list'}), name = 'event-detail'
   ),
 
-
+  url(
+    regex=r'^[Ee]vent-type/$',
+    view = EventTypeViewSet.as_view({'get': 'list'}), name = 'eventtype-detail'
+  ),
 
 # API
   url(
