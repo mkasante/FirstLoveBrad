@@ -18,10 +18,28 @@
                     <h1 class="mbr-section-title display-4 w3-text-black text-uppercase w3-center">{{ event }} on {{ event.date }}</h1>
 
                     <br>
-                    <p class="w3-large w3-text-black"><strong>Venue: </strong>{{ event.venue }}</p>
-                    <p class="w3-large w3-text-black"><strong>Room: </strong>{{ event.room }}</p>
-                    <p class="w3-large w3-text-black"><strong>Attendance Count: </strong>{{ event.attendance_count }}</p>
-                    <p class="w3-large w3-text-black"><strong>First Timers Count: </strong>{{ event.first_timers_count }}</p>
+                    {% if event.event.name != 'Evangelism' %}
+                        <p class="w3-large w3-text-black"><strong>Venue: </strong>{{ event.venue }}</p>
+                        <p class="w3-large w3-text-black"><strong>Room: </strong>{{ event.room }}</p>
+                    {% endif %}
+
+                    <p class="w3-large w3-text-black"><strong>
+                        {% if event.event.name == 'Evangelism' %}
+                            Members on evangelism:
+                        {% else %}
+                            Attendance Count:  
+                        {% endif %}
+                        </strong>{{ event.attendance_count }}</p>
+
+
+                    <p class="w3-large w3-text-black"><strong>
+                        {% if event.event.name == 'Evangelism' %}
+                            Names collected:
+                        {% else %}
+                            First Timers Count: 
+                        {% endif %}
+                        </strong>{{ event.first_timers_count }}</p>
+
                     <p class="w3-large w3-text-black"><strong>Born Again Count: </strong>{{ event.born_again_count }}</p>
 
 
