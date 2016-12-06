@@ -10,7 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.10/ref/settings/
 """
 
-import os, sys
+import os
 from django.core.urlresolvers import reverse_lazy
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -28,7 +28,7 @@ SECRET_KEY = '*q3979tq^dql6txf1y$y^dy5q9h-t6sxii+j*8#gr^k1yfxl(g'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-# DEBUG = False
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
@@ -51,7 +51,7 @@ INSTALLED_APPS = [
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAdminUser',),
-    'PAGE_SIZE': 20,
+    'PAGE_SIZE': 50
 }
 
 MIDDLEWARE_CLASSES = [
@@ -91,43 +91,14 @@ WSGI_APPLICATION = 'firstlove.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'firstloveleeds.db'),
+    }
+}
 
 
-try:
-    if 'DATABASES' not in locals():
-        DATABASES = {
-            'default': {
-                # 'ENGINE': 'django.db.backends.sqlite3',
-                'ENGINE': 'django.db.backends.postgresql_psycopg2',
-                'NAME': 'firstloveleeds',
-                'USER': 'firstloveleeds',
-                'PASSWORD': '14leeds20',
-                'HOST': '',
-                'PORT': '', 
-            }
-        }
-
-    if 'DATABASE_URL' in os.environ:
-        url = urlparse.urlparse(os.environ['DATABASE_URL'])
-
-        # Ensure default database exists.
-        DATABASES['default'] = DATABASES.get('default', {})
-
-        # Update with environment configuration.
-        DATABASES['default'].update({
-            'NAME': url.path[1:],
-            'USER': url.username,
-            'PASSWORD': url.password,
-            'HOST': url.hostname,
-            'PORT': url.port,
-        })
-        if url.scheme == 'postgres':
-            DATABASES['default']['ENGINE'] = 'django.db.backends.postgresql_psycopg2'
-
-        if url.scheme == 'mysql':
-            DATABASES['default']['ENGINE'] = 'django.db.backends.mysql'
-except Exception:
-    print ('Unexpected error:', sys.exc_info() )
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
 
