@@ -93,8 +93,13 @@ WSGI_APPLICATION = 'firstlove.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'firstloveleeds.db'),
+        # 'ENGINE': 'django.db.backends.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'firstloveleeds',
+        'USER': 'firstloveleeds',
+        'PASSWORD': '14leeds20',
+        'HOST': '',
+        'PORT': '', 
     }
 }
 
