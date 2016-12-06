@@ -12,12 +12,7 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 
 import os
 from django.core.urlresolvers import reverse_lazy
-import dj_database_url
 
-
-
-# Honor the 'X-Forwarded-Proto' header for request.is_secure()
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -96,21 +91,43 @@ WSGI_APPLICATION = 'firstlove.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         # 'ENGINE': 'django.db.backends.sqlite3',
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'firstloveleeds',
-#         'USER': 'firstloveleeds',
-#         'PASSWORD': '14leeds20',
-#         'HOST': '',
-#         'PORT': '', 
-#     }
-# }
 
-POSTGRES_URL = "HEROKU_POSTGRESQL_firstloveleeds_URL"
-DATABASES = {'default': dj_database_url.config(default=os.environ[POSTGRES_URL])}
 
+try:
+    if 'DATABASES' not in locals():
+        DATABASES = {
+            'default': {
+                # 'ENGINE': 'django.db.backends.sqlite3',
+                'ENGINE': 'django.db.backends.postgresql_psycopg2',
+                'NAME': 'firstloveleeds',
+                'USER': 'firstloveleeds',
+                'PASSWORD': '14leeds20',
+                'HOST': '',
+                'PORT': '', 
+            }
+        }
+
+    if 'DATABASE_URL' in os.environ:
+        url = urlparse.urlparse(os.environ['DATABASE_URL'])
+
+        # Ensure default database exists.
+        DATABASES['default'] = DATABASES.get('default', {})
+
+        # Update with environment configuration.
+        DATABASES['default'].update({
+            'NAME': url.path[1:],
+            'USER': url.username,
+            'PASSWORD': url.password,
+            'HOST': url.hostname,
+            'PORT': url.port,
+        })
+        if url.scheme == 'postgres':
+            DATABASES['default']['ENGINE'] = 'django.db.backends.postgresql_psycopg2'
+
+        if url.scheme == 'mysql':
+            DATABASES['default']['ENGINE'] = 'django.db.backends.mysql'
+except Exception:
+    print ('Unexpected error:', sys.exc_info() )
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
 
