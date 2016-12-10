@@ -1,3 +1,15 @@
-{% for person in member_dob %}
-	<p class="w3-padding w3-light-grey">{% now 'd M Y' %} - <a href="{% url 'member:member_info' person.0 %}" title="last Updated on {{ person.last_modified }}">{{ person.0 }}</a> will be {{ person.1 }} years in {{ person.2 }} days time</p>
-{% endfor %}
+<div class="w3-padding-32">
+<ul class="w3-ul w3-border w3-card-4 w3-hoverable">
+  <li class="w3-grey"><h2>Upcoming Birthdays</h2></li>
+
+  {% for person in member_dob %}
+  	<li>
+  	{% now 'd M Y' %} - <a href="{% url 'member:member_info' person.0 %}" title="last Updated on {{ person.0.last_modified }}">{{ person.0 }}</a> will be {{ person.1 }} years in {{ person.2 }} days time
+
+	<span onclick="this.parentElement.style.display='none'"class="w3-closebtn w3-margin-right w3-medium">&times;</span>
+  	
+  	</li>
+
+  {% endfor %}
+</ul>
+</div>
