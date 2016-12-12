@@ -29,6 +29,8 @@
                     
                     {% if member.attendance_status.status == 'Evangelism' %}
                         Evangelised On: 
+                    {% elseif member.attendance_status.status == 'Outreach' %}
+                        First Invited On: 
                     {% else %}
                         First Attended On: 
                     {% endif %}
