@@ -1,5 +1,5 @@
 from django.conf.urls import url
-from welcome.views import index, _get_birthdays, _get_firsttimers, _get_evangelismlist
+from welcome.views import index, _get_birthdays, _get_firsttimers, _get_evangelismlist, _get_outreachlist
 
 urlpatterns = [
   url(
@@ -28,5 +28,9 @@ urlpatterns = [
     name = '_get_evangelismlist'
   ),
 
-
+  url(
+    regex=r'^_newsfeed/outreach/$',
+    view = _get_outreachlist,
+    name = '_get_outreachlist'
+  ),
 ]

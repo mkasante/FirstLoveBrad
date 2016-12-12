@@ -68,11 +68,13 @@ $(document).ready(function(){
 		loadinfo("welcome/_newsfeed/", "birthdays");
 		loadinfo("welcome/_newsfeed/", "first-timers");
 		loadinfo("welcome/_newsfeed/", "evangelism");
+		loadinfo("welcome/_newsfeed/", "outreach");
 	}
 	else if (window.location.pathname === "/welcome/"){
 		loadinfo("_newsfeed/", "birthdays");
 		loadinfo("_newsfeed/", "first-timers");
-		loadinfo("_newsfeed/", "evangelism");		
+		loadinfo("_newsfeed/", "evangelism");
+		loadinfo("_newsfeed/", "outreach");		
 	}
 
 	if (window.location.pathname === "/api/"){
