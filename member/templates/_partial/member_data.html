@@ -12,13 +12,13 @@
 	</span>
 	{% elif member.attendance_status.status.lower == 'outreach' or member.attendance_status.status.lower == 'evangelism' %}
 	<span class="w3-text-orange">
-		{{ member.name }}
+		{{ member.name }} *
 	</span>
 	{% elif member.attendance_status.status.lower == 'first timer' %}
 		{{ member.name }} *
 	{% else %}
 	<span class="w3-text-grey">
-		{{ member.name }} *
+		{{ member.name }}
 	</span>
 	{% endif %}
 	</a></td>
