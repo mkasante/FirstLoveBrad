@@ -3,23 +3,23 @@
 	<td><a href="{% url 'member:member_info' member %}" title="{{ member.attendance_status }}">
 
 	{% if member.attendance_status.status.lower == 'regular new member' or member.attendance_status.status.lower == 'regular old member' or member.attendance_status.status.lower == 'established' %}
-		<span class="w3-text-green">
+	<span class="w3-text-green">
 		{{ member.name }}
 	</span>
 	{% elif member.attendance_status.status.lower == 'rare new member' or member.attendance_status.status.lower == 'rare old member' %}
-		<span class="w3-text-red">
+	<span class="w3-text-red">
 		{{ member.name }}
 	</span>
 	{% elif member.attendance_status.status.lower == 'outreach' or member.attendance_status.status.lower == 'evangelism' %}
-		<span class="w3-text-orange">
+	<span class="w3-text-orange">
 		{{ member.name }}
 	</span>
 	{% elif member.attendance_status.status.lower == 'first timer' %}
-		<span class="w3-text-teal">
+		{{ member.name }} *
+	{% else %}
+	<span class="w3-text-grey">
 		{{ member.name }} *
 	</span>
-	{% else %}
-		{{ member.name }}
 	{% endif %}
 	</a></td>
 	<td>{{ member.mobile_no }}</td>
