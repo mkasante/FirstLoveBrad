@@ -4,7 +4,15 @@
 
   {% for person in member_dob %}
   	<li>
-  	{% now 'd M Y' %} - <a href="{% url 'member:member_info' person.0 %}" title="last Updated on {{ person.0.last_modified }}">{{ person.0 }}</a> will be {{ person.1 }} years in {{ person.2 }} days time
+
+  	{% now 'd M Y' %} - 
+
+  	{% if person.2 != 0 %}
+  		<a href="{% url 'member:member_info' person.0 %}" title="last Updated on {{ person.0.last_modified }}">{{ person.0 }}</a> will be {{ person.1 }} years in {{ person.2 }} days time
+  	{% else %}
+  		Today is <a href="{% url 'member:member_info' person.0 %}" title="last Updated on {{ person.0.last_modified }}">{{ person.0 }}</a>'s birthday
+  	{% endif %}
+
 
 	<span onclick="this.parentElement.style.display='none'"class="w3-closebtn w3-margin-right w3-medium">&times;</span>
   	
