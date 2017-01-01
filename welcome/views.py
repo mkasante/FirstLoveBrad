@@ -26,7 +26,7 @@ def index(request):
 @login_required
 def _get_birthdays(request):
 	now = datetime.datetime.now()
-	members = Member.objects.filter(date_of_birth__lte = now)
+	members = Member.objects.filter(date_of_birth__lte = now).order_by('date_of_birth')
 
 	member_dob = []
 	for x in members:
@@ -34,9 +34,9 @@ def _get_birthdays(request):
 		dob_day = x.date_of_birth.day
 		dob_year = x.date_of_birth.year
 
-		if ((int(dob_month) == now.month) and int(dob_day) >= now.day):
-			remaining_day = int(dob_day) - now.day 
-			age = now.year - int(dob_year)
+		if (dob_month == now.month) and (dob_day >= now.day):
+			remaining_day = dob_day - now.day 
+			age = now.year - dob_year
 
 			member_dob.append((x, age, remaining_day))
 
