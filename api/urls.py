@@ -4,7 +4,7 @@ from api.views import MemberViewSet, AttendanceViewSet, AcademicInstitutionViewS
 from api.views import EventViewSet, EventTypeViewSet
 
 from api.views import __attendance_api, __member_api, __academic_institution_api, __event_api, __event_type_api, __gender_api
-from api.views import __attendance_csv, __member_csv, __academic_institution_csv, __event_csv, __gender_csv #,__event_type_csv
+from api.views import __attendance_csv, __member_csv, __academic_institution_csv, __event_csv, __gender_csv, __download_excel
 
 
 urlpatterns = [
@@ -117,5 +117,11 @@ urlpatterns = [
     regex=r'^model/gender.csv$',
     view = __gender_csv,
     name = '__gender_csv'
+  ),
+
+  url(
+    regex=r'^model/firstlove.xlsx$',
+    view = __download_excel,
+    name = '__download_excel'
   ),
 ]

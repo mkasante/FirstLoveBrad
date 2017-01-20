@@ -1,19 +1,20 @@
-from django.shortcuts import render
-from django.contrib.auth.decorators import login_required
-
-from rest_framework import viewsets
-from api.serializers import MemberSerializer, AttendanceSerializer, AcademicInstitutionSerializer
 from api.serializers import EventSerializer, EventTypeSerializer, GenderSerializer
-
+from api.serializers import MemberSerializer, AttendanceSerializer, AcademicInstitutionSerializer
+from django.contrib.auth.decorators import login_required
+from django.core import serializers
+from django.http import HttpResponse
+from django.shortcuts import render
+from event.models import Event, EventType, EventAdmin, EventTypeAdmin 
 from member.models import Member, Attendance, AcademicInstitution, Gender
 from member.models import MemberAdmin, AttendanceAdmin, AcademicInstitutionAdmin, GenderAdmin
-
-from event.models import Event, EventType, EventAdmin, EventTypeAdmin 
-
-from django.http import HttpResponse
-from django.core import serializers
+from rest_framework import viewsets
+from xlsxwriter.workbook import Workbook
 import datetime, re, os, requests, csv
 
+try:
+	import cStringIO as StringIO
+except ImportError:
+	import StringIO
 
 # =======================================================
 
@@ -113,7 +114,7 @@ def serialize_api(appname, model):
 	return data
 
 
-def download_csv(modeladmin, request, queryset):
+def download_csv(request, queryset):
 	if not request.user.is_staff:
 		raise PermissionDenied
 
@@ -143,21 +144,21 @@ def download_csv(modeladmin, request, queryset):
 @login_required
 def __member_csv(request):
 	members = Member.objects.order_by('name')
-	data = download_csv(MemberAdmin, request, members)
+	data = download_csv(request, members)
 
 	return HttpResponse (data, content_type='text/csv')
 
 @login_required
 def __gender_csv(request):
 	gender = Gender.objects.order_by('gender')
-	data = download_csv(GenderAdmin, request, gender)
+	data = download_csv(request, gender)
 
 	return HttpResponse (data, content_type='text/csv')
 
 @login_required
 def __attendance_csv(request):
 	attendance = Attendance.objects.order_by('status')
-	data = download_csv(AttendanceAdmin, request, attendance)
+	data = download_csv(request, attendance)
 
 	return HttpResponse (data, content_type='text/csv')
 
@@ -165,7 +166,7 @@ def __attendance_csv(request):
 @login_required
 def __event_csv(request):
 	events = Event.objects.order_by('-date')
-	data = download_csv(EventAdmin, request, events)
+	data = download_csv(request, events)
 
 	return HttpResponse (data, content_type='text/csv')
 
@@ -173,8 +174,132 @@ def __event_csv(request):
 @login_required
 def __academic_institution_csv(request):
 	academic_institutions = AcademicInstitution.objects.order_by('name')
-	data = download_csv(AcademicInstitutionAdmin, request, academic_institutions)
+	data = download_csv(request, academic_institutions)
 
 	return HttpResponse (data, content_type='text/csv')
 
 
+def get_model_data(queryset):
+	opts = queryset.model._meta
+	model = queryset.model
+
+	field_names = [field.name for field in opts.fields if field.name != "id"]
+	field_headers = [x.title().replace("_", " ") for x in field_names ]
+
+	data = []
+	for obj in queryset:
+		data.append([getattr(obj, field) for field in field_names if field != "id"])
+
+	return field_headers, data
+
+
+
+
+def __download_excel(request):
+
+	# create a workbook in memory
+	output = StringIO.StringIO()
+
+	book = Workbook(output)
+	sheet = book.add_worksheet('Member')       
+	
+	format_ = book.add_format({
+		'bold': True, 
+		'font_size': 14
+	})
+	format2 = book.add_format()
+	format2.set_align('vjustify')
+
+	members = Member.objects.order_by('name')
+	header, data = get_model_data(members)
+
+	for x in header:
+		sheet.set_column(0, len(header), 30)
+		sheet.write(0, header.index(x), x, format_)
+	
+	for x in data:
+		for y in x:
+			sheet.write(data.index(x) + 1, x.index(y), str(y), format2)
+
+
+	# ========================
+	sheet2 = book.add_worksheet('Event')       
+	
+	events = Event.objects.order_by('-date')
+	header, data = get_model_data(events)
+
+	for x in header:
+		sheet2.set_column(0, len(header), 30)
+		sheet2.write(0, header.index(x), x, format_)
+	
+	for x in data:
+		for y in x:
+			sheet2.write(data.index(x) + 1, x.index(y), str(y), format2)
+
+	# =============================
+	sheet3 = book.add_worksheet('Gender')       
+	
+	gender = Gender.objects.order_by('gender')
+	header, data = get_model_data(gender)
+
+	for x in header:
+		sheet3.set_column(0, len(header), 30)
+		sheet3.write(0, header.index(x), x, format_)
+	
+	for x in data:
+		for y in x:
+			sheet3.write(data.index(x) + 1, x.index(y), str(y), format2)
+
+	# ===================================
+	sheet4 = book.add_worksheet('Attendance')       
+	
+	attendance = Attendance.objects.order_by('status')
+	header, data = get_model_data(attendance)
+
+	for x in header:
+		sheet4.set_column(0, len(header), 30)
+		sheet4.write(0, header.index(x), x, format_)
+	
+	for x in data:
+		for y in x:
+			sheet4.write(data.index(x) + 1, x.index(y), str(y), format2)
+
+
+	# ===================================
+	sheet5 = book.add_worksheet('Event Type')       
+	
+	event_type = EventType.objects.order_by('name')
+	header, data = get_model_data(event_type)
+
+	for x in header:
+		sheet5.set_column(0, len(header), 30)
+		sheet5.write(0, header.index(x), x, format_)
+	
+	for x in data:
+		for y in x:
+			sheet5.write(data.index(x) + 1, x.index(y), str(y), format2)
+
+
+	# ===================================
+	sheet6 = book.add_worksheet('Academic Institution')       
+	
+	academic_institutions = AcademicInstitution.objects.order_by('name')
+	header, data = get_model_data(academic_institutions)
+
+	for x in header:
+		sheet6.set_column(0, len(header), 30)
+		sheet6.write(0, header.index(x), x, format_)
+	
+	for x in data:
+		for y in x:
+			sheet6.write(data.index(x) + 1, x.index(y), str(y), format2)
+
+	book.close()
+
+
+	# construct response
+	output.seek(0)
+	response = HttpResponse(output.read(), content_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+	response['Content-Disposition'] = "attachment; filename=firstlove.xlsx"
+
+	return HttpResponse (response, content_type='attachment; filename=firstlove.xlsx')
