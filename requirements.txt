@@ -7,3 +7,4 @@ djangorestframework
 django-filter
 markdown
 dj_database_url
+xlsxwriter
