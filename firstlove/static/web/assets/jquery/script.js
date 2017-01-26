@@ -64,17 +64,12 @@ $(document).ready(function(){
 		loaddata("../event/_daterange/", start_date + "--" + end_date);
 	}
 
-	if (window.location.pathname === "/"){
-		loadinfo("welcome/_newsfeed/", "birthdays");
-		loadinfo("welcome/_newsfeed/", "first-timers");
-		loadinfo("welcome/_newsfeed/", "evangelism");
-		loadinfo("welcome/_newsfeed/", "outreach");
-	}
-	else if (window.location.pathname === "/welcome/"){
-		loadinfo("_newsfeed/", "birthdays");
-		loadinfo("_newsfeed/", "first-timers");
-		loadinfo("_newsfeed/", "evangelism");
-		loadinfo("_newsfeed/", "outreach");		
+	if (window.location.pathname === "/" || window.location.pathname === "/welcome/"){
+		events = ["birthdays", "first-timers", "evangelism", "outreach"]
+		
+		events.prototype.forEach(function(event){
+			loadinfo("welcome/_newsfeed/", event);
+		});
 	}
 
 	if (window.location.pathname === "/api/"){
@@ -117,4 +112,4 @@ $(document).ready(function(){
 		}
 	});
 
-}); 
+});
