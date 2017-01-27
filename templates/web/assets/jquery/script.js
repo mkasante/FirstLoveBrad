@@ -67,9 +67,9 @@ $(document).ready(function(){
 	if (window.location.pathname === "/" || window.location.pathname === "/welcome/"){
 		events = ["birthdays", "first-timers", "evangelism", "outreach"]
 		
-		events.prototype.forEach(function(event){
-			loadinfo("welcome/_newsfeed/", event);
-		});
+		for(var i = 0; i < events.length; i++){
+			loadinfo("welcome/_newsfeed/", events[i]);
+		};
 	}
 
 	if (window.location.pathname === "/api/"){
