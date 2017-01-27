@@ -53,7 +53,7 @@ def _get_birthdays(request):
 def _get_firsttimers(request):
 	now = datetime.datetime.now()
 	last30days = now - datetime.timedelta(days = 60)
-	first_timers = Member.objects.filter(attendance_status__status = "First Timer", first_attended__gte = last30days).order_by('-first_attended')[:12]
+	first_timers = Member.objects.filter(attendance_status__status = "First Timer", first_attended__gte = last30days).order_by('-first_attended')[:15]
 
 	context = {
 		'first_timers': first_timers
@@ -66,7 +66,7 @@ def _get_firsttimers(request):
 def _get_evangelismlist(request):
 	now = datetime.datetime.now()
 	last30days = now - datetime.timedelta(days = 60)
-	evangelism = Member.objects.filter(attendance_status__status = "Evangelism", last_modified__gte = last30days).order_by('-last_modified')[:12]
+	evangelism = Member.objects.filter(attendance_status__status = "Evangelism", last_modified__gte = last30days).order_by('-last_modified')[:15]
 
 	context = {
 		'evangelism': evangelism
@@ -79,7 +79,7 @@ def _get_evangelismlist(request):
 def _get_outreachlist(request):
 	now = datetime.datetime.now()
 	last30days = now - datetime.timedelta(days = 60)
-	outreach = Member.objects.filter(attendance_status__status = "Outreach", last_modified__gte = last30days).order_by('-last_modified')[:12]
+	outreach = Member.objects.filter(attendance_status__status = "Outreach", last_modified__gte = last30days).order_by('-last_modified')[:15]
 
 	context = {
 		'outreach': outreach

@@ -42,7 +42,7 @@ def _list_event_by_date(request, start_date, end_date):
 		events = Event.objects.all()
 
 	context = {
-		'events': events[:20]
+		'events': events
 	}
 
 	return render (request, '_partial/event_data.html', context)
@@ -57,7 +57,7 @@ def _list_event_by_type(request, event_type):
 		events = Event.objects.all()
 
 	context = {
-		'events': events[:20]
+		'events': events
 	}
 
 	return render (request, '_partial/event_data.html', context)
