@@ -64,7 +64,14 @@ $(document).ready(function(){
 		loaddata("../event/_daterange/", start_date + "--" + end_date);
 	}
 
-	if (window.location.pathname === "/" || window.location.pathname === "/welcome/"){
+	if (window.location.pathname === "/"){
+		events = ["birthdays", "first-timers", "evangelism", "outreach"]
+		
+		for(var i = 0; i < events.length; i++){
+			loadinfo("welcome/_newsfeed/", events[i]);
+		};
+	}
+	else if (window.location.pathname === "/welcome/"){
 		events = ["birthdays", "first-timers", "evangelism", "outreach"]
 		
 		for(var i = 0; i < events.length; i++){
