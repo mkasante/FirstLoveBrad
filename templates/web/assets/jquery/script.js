@@ -75,7 +75,7 @@ $(document).ready(function(){
 		events = ["birthdays", "first-timers", "evangelism", "outreach"]
 		
 		for(var i = 0; i < events.length; i++){
-			loadinfo("welcome/_newsfeed/", events[i]);
+			loadinfo("_newsfeed/", events[i]);
 		};
 	}
 
