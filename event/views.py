@@ -6,7 +6,6 @@ import datetime, re, os, requests
 # Create your views here.
 @login_required
 def index(request):
-	now = datetime.datetime.now()
 	events = Event.objects.all()
 	event_types = EventType.objects.all()
 
