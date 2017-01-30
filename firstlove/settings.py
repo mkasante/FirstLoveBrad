@@ -91,13 +91,23 @@ WSGI_APPLICATION = 'firstlove.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'firstloveleeds.db'),
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'firstloveleeds.db'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'firstloveleeds',                     
+        'USER': 'firstloveleeds',
+        'PASSWORD': '14leeds20',
+        'HOST': '',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
+        'PORT': '',                      # Set to empty string for default.
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
