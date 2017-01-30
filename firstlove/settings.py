@@ -106,7 +106,7 @@ DATABASES = {
         'USER': 'firstloveleeds',
         'PASSWORD': '14leeds20',
         'HOST': 'localhost',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
-        'PORT': '', 
+        'PORT': '5432', 
         'CONN_MAX_AGE': 500                     # Set to empty string for default.
     }
 }
