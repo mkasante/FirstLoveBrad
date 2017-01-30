@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 
 import os
 from django.core.urlresolvers import reverse_lazy
+import dj_database_url
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -100,16 +101,18 @@ WSGI_APPLICATION = 'firstlove.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'firstloveleeds',                     
-        'USER': 'firstloveleeds',
-        'PASSWORD': '14leeds20',
-        'HOST': '',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
-        'PORT': '', 
-        'CONN_MAX_AGE': 500                     # Set to empty string for default.
+        # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        # 'NAME': 'firstloveleeds',                     
+        # 'USER': 'firstloveleeds',
+        # 'PASSWORD': '14leeds20',
+        # 'HOST': '',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
+        # 'PORT': '', 
+        # 'CONN_MAX_AGE': 500                     # Set to empty string for default.
     }
 }
 
+DATABASES['default'] = dj_database_url.config(default='postgres://...')
+DATABASES['default'] = dj_database_url.parse('postgres://qlstfeeakxvtzv:tqy3FW8WQki0VXm2awRJjmyNSD@ec2-54-243-204-195.compute-1.amazonaws.com:5432/d2o1hbb87kgq8k', conn_max_age=600)
 # DATABASES['default'] = dj_database_url.config()
 # DATABASES['default']['CONN_MAX_AGE'] = 500
 # Password validation
