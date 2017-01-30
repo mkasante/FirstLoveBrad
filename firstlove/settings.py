@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 """
 
 import os
-import dj_database_url
 from django.core.urlresolvers import reverse_lazy
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -105,8 +104,8 @@ DATABASES = {
         'NAME': 'firstloveleeds',                     
         'USER': 'firstloveleeds',
         'PASSWORD': '14leeds20',
-        'HOST': 'localhost',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
-        'PORT': '5432', 
+        'HOST': '',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
+        'PORT': '', 
         'CONN_MAX_AGE': 500                     # Set to empty string for default.
     }
 }
@@ -156,5 +155,3 @@ STATICFILES_DIRS = [
 ]
 
 STATIC_ROOT = os.path.join(BASE_DIR, "templates")
-
-STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
