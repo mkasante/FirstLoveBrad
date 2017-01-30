@@ -29,7 +29,7 @@ SECRET_KEY = '*q3979tq^dql6txf1y$y^dy5q9h-t6sxii+j*8#gr^k1yfxl(g'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-# DEBUG = False
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
@@ -111,7 +111,6 @@ DATABASES = {
     }
 }
 
-DATABASES['default'] = dj_database_url.config(default='postgres://...')
 DATABASES['default'] = dj_database_url.parse('postgres://qlstfeeakxvtzv:tqy3FW8WQki0VXm2awRJjmyNSD@ec2-54-243-204-195.compute-1.amazonaws.com:5432/d2o1hbb87kgq8k', conn_max_age=600)
 # DATABASES['default'] = dj_database_url.config()
 # DATABASES['default']['CONN_MAX_AGE'] = 500
@@ -158,3 +157,4 @@ STATICFILES_DIRS = [
 ]
 
 STATIC_ROOT = os.path.join(BASE_DIR, "templates")
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
