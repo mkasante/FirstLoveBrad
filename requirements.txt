@@ -10,3 +10,4 @@ dj_database_url
 xlsxwriter
 psycopg2
 dj_database_url
+whitenoise
