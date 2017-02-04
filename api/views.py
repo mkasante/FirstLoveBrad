@@ -208,7 +208,6 @@ def __download_excel(request):
 		'font_size': 14
 	})
 	format2 = book.add_format()
-	format2.set_align('vjustify')
 
 	members = Member.objects.order_by('name')
 	header, data = get_model_data(members)
