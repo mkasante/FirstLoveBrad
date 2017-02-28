@@ -42,7 +42,7 @@ def member_info(request, name):
 
 @login_required
 def shepherd_list(request):
-	shepherds = User.objects.all()
+	shepherds = User.objects.order_by('-last_login')
 
 	context = {
 		'shepherds': shepherds
@@ -53,9 +53,11 @@ def shepherd_list(request):
 @login_required
 def shepherd_info(request, name):
 	shepherd = User.objects.get(username__iexact = name)
+	members = Member.objects.filter(shepherd__username__iexact = name)
 
 	context = {
-		'shepherd': shepherd
+		'shepherd': shepherd,
+		'members': members
 	}
 
 	return render (request, 'member/shepherd_info.html', context)

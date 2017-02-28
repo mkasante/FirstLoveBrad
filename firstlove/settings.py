@@ -30,11 +30,11 @@ SECRET_KEY = '*q3979tq^dql6txf1y$y^dy5q9h-t6sxii+j*8#gr^k1yfxl(g'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-# DEBUG = False
+DEBUG = False
 
-ENVIRONMENT = "DEV"
+# ENVIRONMENT = "DEV"
 # ENVIRONMENT = "TEST"
-# ENVIRONMENT = "LIVE"
+ENVIRONMENT = "LIVE"
 
 ALLOWED_HOSTS = ['*']
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))

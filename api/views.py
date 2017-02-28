@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.core import serializers
 from django.http import HttpResponse
 from django.shortcuts import render
-from event.models import Event, EventType, EventAdmin, EventTypeAdmin 
+from event.models import Event, EventType, EventAdmin, EventTypeAdmin
 from member.models import Member, Attendance, AcademicInstitution, Gender
 from member.models import MemberAdmin, AttendanceAdmin, AcademicInstitutionAdmin, GenderAdmin
 from rest_framework import viewsets
@@ -86,19 +86,19 @@ def __academic_institution_api(request):
 	academic_institution = serialize_api("academic-institution", AcademicInstitution)
 	return HttpResponse(academic_institution, content_type="application/json")
 
-@login_required    
+@login_required
 def __event_api(request):
 	# write_api("attendance")
 	event = serialize_api("event", Event)
 	return HttpResponse(event, content_type="application/json")
 
-@login_required    
+@login_required
 def __event_type_api(request):
 	# write_api("event")
 	event_type = serialize_api("event-type", EventType)
 	return HttpResponse(event_type, content_type="application/json")
 
-@login_required    
+@login_required
 def __gender_api(request):
 	# write_api("gender")
 	gender = serialize_api("gender", Gender)
@@ -201,10 +201,10 @@ def __download_excel(request):
 	output = StringIO.StringIO()
 
 	book = Workbook(output)
-	sheet = book.add_worksheet('Member')       
-	
+	sheet = book.add_worksheet('Member')
+
 	format_ = book.add_format({
-		'bold': True, 
+		'bold': True,
 		'font_size': 14
 	})
 	format2 = book.add_format()
@@ -215,80 +215,80 @@ def __download_excel(request):
 	for x in header:
 		sheet.set_column(0, len(header), 30)
 		sheet.write(0, header.index(x), x, format_)
-	
+
 	for x in data:
 		for y in x:
 			sheet.write(data.index(x) + 1, x.index(y), str(y), format2)
 
 
 	# ========================
-	sheet2 = book.add_worksheet('Event')       
-	
+	sheet2 = book.add_worksheet('Event')
+
 	events = Event.objects.order_by('-date')
 	header, data = get_model_data(events)
 
 	for x in header:
 		sheet2.set_column(0, len(header), 30)
 		sheet2.write(0, header.index(x), x, format_)
-	
+
 	for x in data:
 		for y in x:
 			sheet2.write(data.index(x) + 1, x.index(y), str(y), format2)
 
 	# =============================
-	sheet3 = book.add_worksheet('Gender')       
-	
+	sheet3 = book.add_worksheet('Gender')
+
 	gender = Gender.objects.order_by('gender')
 	header, data = get_model_data(gender)
 
 	for x in header:
 		sheet3.set_column(0, len(header), 30)
 		sheet3.write(0, header.index(x), x, format_)
-	
+
 	for x in data:
 		for y in x:
 			sheet3.write(data.index(x) + 1, x.index(y), str(y), format2)
 
 	# ===================================
-	sheet4 = book.add_worksheet('Attendance')       
-	
+	sheet4 = book.add_worksheet('Attendance')
+
 	attendance = Attendance.objects.order_by('status')
 	header, data = get_model_data(attendance)
 
 	for x in header:
 		sheet4.set_column(0, len(header), 30)
 		sheet4.write(0, header.index(x), x, format_)
-	
+
 	for x in data:
 		for y in x:
 			sheet4.write(data.index(x) + 1, x.index(y), str(y), format2)
 
 
 	# ===================================
-	sheet5 = book.add_worksheet('Event Type')       
-	
+	sheet5 = book.add_worksheet('Event Type')
+
 	event_type = EventType.objects.order_by('name')
 	header, data = get_model_data(event_type)
 
 	for x in header:
 		sheet5.set_column(0, len(header), 30)
 		sheet5.write(0, header.index(x), x, format_)
-	
+
 	for x in data:
 		for y in x:
 			sheet5.write(data.index(x) + 1, x.index(y), str(y), format2)
 
 
 	# ===================================
-	sheet6 = book.add_worksheet('Academic Institution')       
-	
+	sheet6 = book.add_worksheet('Academic Institution')
+
 	academic_institutions = AcademicInstitution.objects.order_by('name')
 	header, data = get_model_data(academic_institutions)
 
 	for x in header:
 		sheet6.set_column(0, len(header), 30)
 		sheet6.write(0, header.index(x), x, format_)
-	
+
 	for x in data:
 		for y in x:
 			sheet6.write(data.index(x) + 1, x.index(y), str(y), format2)

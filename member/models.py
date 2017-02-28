@@ -29,7 +29,7 @@ class Member(models.Model):
 class MemberAdmin(admin.ModelAdmin):
 	filter_by = ('name', 'mobile_no', 'email')
 	list_display = ('name', 'mobile_no', 'email')
-	list_filter = ['attendance_status', 'gender']
+	list_filter = ['attendance_status', 'gender', 'shepherd']
 	list_per_page = 50
 	order_by = ('name', 'mobile_no')
 	search_fields = ('name', 'mobile_no', 'email')

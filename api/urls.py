@@ -1,10 +1,19 @@
-from django.conf.urls import url
 from api.views import index
 from api.views import MemberViewSet, AttendanceViewSet, AcademicInstitutionViewSet, GenderViewSet
 from api.views import EventViewSet, EventTypeViewSet
+from rest_framework import routers
+from django.conf.urls import url, include
 
 from api.views import __attendance_api, __member_api, __academic_institution_api, __event_api, __event_type_api, __gender_api
 from api.views import __attendance_csv, __member_csv, __academic_institution_csv, __event_csv, __gender_csv, __download_excel
+
+router = routers.SimpleRouter()
+router.register(r'member', MemberViewSet, 'member')
+router.register(r'attendance', AttendanceViewSet, 'attendance')
+router.register(r'academic-institution', AcademicInstitutionViewSet, 'academic-institution')
+router.register(r'gender', GenderViewSet, 'gender')
+router.register(r'event', EventViewSet, 'event')
+router.register(r'event-type', EventTypeViewSet, 'event-type')
 
 
 urlpatterns = [
@@ -13,37 +22,38 @@ urlpatterns = [
     view = index, name = 'index'
   ),
 
-  # Member module
-  url(
-    regex=r'^[mM]ember/$',
-    view = MemberViewSet.as_view({'get': 'list'}), name = 'member-detail'
-  ),
-
-  url(
-    regex=r'^[Aa]ttendance/$',
-    view = AttendanceViewSet.as_view({'get': 'list'}), name = 'attendance-detail'
-  ),
-
-  url(
-    regex=r'^[Aa]cademic-[Ii]nstitution/$',
-    view = AcademicInstitutionViewSet.as_view({'get': 'list'}), name = 'academic-institution-detail'
-  ),
-
-  url(
-    regex=r'^[Gg]ender/$',
-    view = GenderViewSet.as_view({'get': 'list'}), name = 'gender-detail'
-  ),
-  # Event module
-
-  url(
-    regex=r'^[Ee]vent/$',
-    view = EventViewSet.as_view({'get': 'list'}), name = 'event-detail'
-  ),
-
-  url(
-    regex=r'^[Ee]vent-type/$',
-    view = EventTypeViewSet.as_view({'get': 'list'}), name = 'eventtype-detail'
-  ),
+ # Member module
+ url(r'', include(router.urls)),
+  # url(
+  #   regex=r'^[mM]ember/$',
+  #   view = MemberViewSet.as_view({'get': 'list'}), name = 'member-detail'
+  # ),
+  #
+  # url(
+  #   regex=r'^[Aa]ttendance/$',
+  #   view = AttendanceViewSet.as_view({'get': 'list'}), name = 'attendance-detail'
+  # ),
+  #
+  # url(
+  #   regex=r'^[Aa]cademic-[Ii]nstitution/$',
+  #   view = AcademicInstitutionViewSet.as_view({'get': 'list'}), name = 'academic-institution-detail'
+  # ),
+  #
+  # url(
+  #   regex=r'^[Gg]ender/$',
+  #   view = GenderViewSet.as_view({'get': 'list'}), name = 'gender-detail'
+  # ),
+  # # Event module
+  #
+  # url(
+  #   regex=r'^[Ee]vent/$',
+  #   view = EventViewSet.as_view({'get': 'list'}), name = 'event-detail'
+  # ),
+  #
+  # url(
+  #   regex=r'^[Ee]vent-type/$',
+  #   view = EventTypeViewSet.as_view({'get': 'list'}), name = 'eventtype-detail'
+  # ),
 
 # API
   url(
