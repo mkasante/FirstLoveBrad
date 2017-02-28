@@ -30,11 +30,11 @@ SECRET_KEY = '*q3979tq^dql6txf1y$y^dy5q9h-t6sxii+j*8#gr^k1yfxl(g'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-DEBUG = False
+# DEBUG = False
 
-# ENVIRONMENT = "DEV"
+ENVIRONMENT = "DEV"
 # ENVIRONMENT = "TEST"
-ENVIRONMENT = "LIVE"
+# ENVIRONMENT = "LIVE"
 
 ALLOWED_HOSTS = ['*']
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
@@ -48,10 +48,10 @@ INSTALLED_APPS = [
 	'django.contrib.sessions',
 	'django.contrib.messages',
 	'django.contrib.staticfiles',
-	'rest_framework', 
+	'rest_framework',
 	'api',
-	'member', 
-	'welcome', 
+	'member',
+	'welcome',
 	'event'
 ]
 
@@ -102,7 +102,7 @@ DATABASES = {
 # Set production environment
 if ENVIRONMENT == "TEST":
 	DATABASES['default']['ENGINE'] = 'django.db.backends.postgresql_psycopg2'
-	DATABASES['default']['NAME'] = 'firstloveleeds'                   
+	DATABASES['default']['NAME'] = 'firstloveleeds'
 	DATABASES['default']['USER'] = 'firstloveleeds'
 	DATABASES['default']['PASSWORD'] = '14leeds20'
 	DATABASES['default']['CONN_MAX_AGE'] = 1000
@@ -110,7 +110,7 @@ if ENVIRONMENT == "TEST":
 
 elif ENVIRONMENT == "LIVE":
 	DATABASES['default'] = dj_database_url.parse(
-		'postgres://qlstfeeakxvtzv:tqy3FW8WQki0VXm2awRJjmyNSD@ec2-54-243-204-195.compute-1.amazonaws.com:5432/d2o1hbb87kgq8k', 
+		'postgres://qlstfeeakxvtzv:tqy3FW8WQki0VXm2awRJjmyNSD@ec2-54-243-204-195.compute-1.amazonaws.com:5432/d2o1hbb87kgq8k',
 		conn_max_age=600)
 
 else:

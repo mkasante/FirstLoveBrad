@@ -1,0 +1,54 @@
+{% extends '_partial/base.html' %}
+
+{% block title %}
+{{ member.name }}
+{% endblock title %}
+
+{% block content %}
+
+<section class="engine"><a rel="external" href="{% url 'welcome:index' %}">First Love Leeds</a></section><section class="mbr-section mbr-section-hero mbr-section-full mbr-after-navbar" id="header1-b" style="background-color: rgb(255, 255, 255);">
+
+
+       <div class="mbr-table-cell">
+
+        <div class="container">
+            <div class="row">
+                <div class="mbr-section col-md-12">
+
+                    <h1 class="mbr-section-title display-4 w3-text-black text-uppercase w3-center">{{ member.name }}</h1>
+                    {% if member.shepherd.username.lower != "firstloveleeds" %}
+                        <p class="mbr-section-subtitle display-4 w3-text-black w3-center w3-text-grey"><strong>Shepherd:</strong> <a href="{% url 'member:shepherd_info' member.shepherd.username.lower %}"><span class="w3-text-grey"> {{ member.shepherd.get_full_name.title }}</span></a></p><br>
+                    {% endif %}
+
+                    <p class="w3-large w3-text-black"><strong>Gender: </strong>{{ member.gender }}</p>
+                    <p class="w3-large w3-text-black"><strong>Mobile Number: </strong>{{ member.mobile_no }}</p>
+                    <p class="w3-large w3-text-black"><strong>Email Address: </strong><span class="w3-text-blue">{{ member.email }}</span></p>
+                    <p class="w3-large w3-text-black"><strong>Date of Birth: </strong>{{ member.date_of_birth }}</p>
+                    <p class="w3-large w3-text-black"><strong>Address: </strong>{{ member.address|linebreaksbr }}</p>
+                    <p class="w3-large w3-text-black"><strong>Post Code: </strong>{{ member.post_code }}</p>
+                    <p class="w3-large w3-text-black"><strong>Academic Institution: </strong>{{ member.academic_institution }}</p>
+                    <p class="w3-large w3-text-black"><strong>Course Studying: </strong>{{ member.course }}</p>
+                    <p class="w3-large w3-text-black"><strong>
+
+                    {% if member.attendance_status.status == 'Evangelism' %}
+                        Evangelised On:
+                    {% elif member.attendance_status.status == 'Outreach' %}
+                        First Invited On:
+                    {% else %}
+                        First Attended On:
+                    {% endif %}
+
+                    </strong>{{ member.first_attended }}</p>
+                    <p class="w3-large w3-text-black"><strong>Attendance Status: </strong>{{ member.attendance_status }}</p>
+                    <p class="w3-large w3-text-black"><strong>Last Visited On: </strong>{{ member.last_visited }}</p>
+                    <p class="w3-large w3-text-black"><strong>Other Information: </strong>{{ member.extra_info|linebreaksbr }}</p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+
+{% endblock content %}

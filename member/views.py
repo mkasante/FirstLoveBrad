@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from member.models import Member, Attendance, Gender
+from django.contrib.auth.models import User
 
 import re
 
@@ -38,6 +39,26 @@ def member_info(request, name):
 	}
 
 	return render (request, 'member/member_info.html', context)
+
+@login_required
+def shepherd_list(request):
+	shepherds = User.objects.all()
+
+	context = {
+		'shepherds': shepherds
+	}
+
+	return render (request, 'member/shepherd_list.html', context)
+
+@login_required
+def shepherd_info(request, name):
+	shepherd = User.objects.get(username__iexact = name)
+
+	context = {
+		'shepherd': shepherd
+	}
+
+	return render (request, 'member/shepherd_info.html', context)
 
 # Partial
 @login_required

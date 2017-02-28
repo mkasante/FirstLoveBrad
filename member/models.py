@@ -1,19 +1,21 @@
 from django.db import models
-from django.contrib import admin 
+from django.contrib import admin
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Member(models.Model):
 	name = models.CharField(max_length=50, unique=True)
-	gender = models.ForeignKey('Gender', on_delete=models.CASCADE, related_name="sex")
+	gender = models.ForeignKey('Gender', on_delete=models.CASCADE, related_name="sex", null=True)
 	mobile_no = models.CharField(max_length=50, blank=True, null=True, unique=False, verbose_name="Mobile number")
 	email = models.EmailField(max_length=50, blank=True, null=True, verbose_name="Email Address")
 	date_of_birth = models.DateField(blank=True, null=True)
 	address = models.TextField(max_length=200, blank=True, null=True)
 	post_code = models.CharField(max_length=10, blank=True, null=True)
-	academic_institution = models.ForeignKey('AcademicInstitution', on_delete=models.CASCADE, related_name="academic_institution", null=True, blank=True)
+	academic_institution = models.ForeignKey('AcademicInstitution', on_delete=models.CASCADE, 						related_name="academic_institution", null=True, blank=True, )
 	course = models.CharField(max_length=100, blank=True)
 	first_attended = models.DateField(blank=True, null=True)
 	attendance_status = models.ForeignKey('Attendance', on_delete=models.CASCADE, related_name="attendance_status")
+	shepherd = models.ForeignKey(User, on_delete=models.CASCADE)
 	last_visited = models.DateField(null=True, blank=True)
 	extra_info = models.TextField(max_length=2000, blank=True)
 	last_modified = models.DateTimeField(auto_now=True)

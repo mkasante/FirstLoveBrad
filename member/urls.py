@@ -1,6 +1,6 @@
 from django.conf.urls import url
 
-from member.views import index, member_info, all_members  
+from member.views import index, member_info, all_members, shepherd_list, shepherd_info
 from member.views import _list_members_by_alphabet, _list_members_by_status, _list_members_by_gender
 
 
@@ -14,6 +14,16 @@ urlpatterns = [
   url(
     regex=r'^all/$',
     view = all_members, name = 'all_members'
+  ),
+
+  url(
+    regex=r'^shepherds/$',
+    view = shepherd_list, name = 'shepherd_list'
+  ),
+
+  url(
+    regex=r'^shepherd/(?P<name>[\w\d\s_\-\.]+)/$',
+    view = shepherd_info, name = 'shepherd_info'
   ),
 
   url(
@@ -37,5 +47,5 @@ urlpatterns = [
     regex=r'^_gender/(?P<gender>[\w]+)$',
     view = _list_members_by_gender, name = '_list_members_by_gender'
   ),
-  
+
 ]
