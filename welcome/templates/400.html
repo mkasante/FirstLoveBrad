@@ -5,7 +5,19 @@ Error 400
 {% endblock title %}
 
 
+{% block navbar %}
+      <li class="nav-item nav-btn"><a class="nav-link btn btn-white btn-white-outline" href="{% url 'member:all_members' %}">MEMBERS</a></li>
+      <li class="nav-item nav-btn"><a class="nav-link btn btn-white btn-white-outline" href="{% url 'event:index' %}">EVENTS</a></li>
+    <li class="nav-item nav-btn"><a class="nav-link btn btn-white btn-white-outline" href="{% url 'member:shepherd_list' %}">SHEPHERDS</a></li>
+
+  <li class="nav-item nav-btn">
+    <a class="nav-link btn btn-primary" href="{% url 'logout' %}">LOG OUT</a>
+  </li>
+{% endblock navbar %}
+
+
 {% block content %}
+
 
 <section class="mbr-section mbr-section-hero mbr-section-full" id="header5-6" style="background-color: rgb(253, 253, 253);">
 
@@ -17,14 +29,14 @@ Error 400
                 <div class="mbr-section col-md-12">
 
                     <h1 class="mbr-section-title display-1" style="color:black;">Error 400</h1>
-                    <p class="mbr-section-lead lead w3-padding" style="color:grey;">Bad Request. Please go back to <a href="{% url 'welcome:index' %}">homepage</a></p>                                
+                    <p class="mbr-section-lead lead w3-padding" style="color:grey;">Bad Request. Please go back to <a href="{% url 'welcome:index' %}">homepage</a></p>
 
                 </div>
             </div>
         </div>
     </div>
 
-    
+
 </section>
 
 {% endblock content %}
