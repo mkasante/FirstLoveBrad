@@ -4,6 +4,16 @@
 Members
 {% endblock title %}
 
+{% block navbar %}
+      <li class="nav-item"><a class="nav-link link" href="#">MEMBERS</a></li>
+      <li class="nav-item nav-btn"><a class="nav-link btn btn-white btn-white-outline" href="{% url 'event:index' %}">EVENTS</a></li>
+    <li class="nav-item nav-btn"><a class="nav-link btn btn-white btn-white-outline" href="{% url 'member:shepherd_list' %}">SHEPHERDS</a></li>
+
+  <li class="nav-item nav-btn">
+    <a class="nav-link btn btn-primary" href="{% url 'logout' %}">LOG OUT</a>
+  </li>
+{% endblock navbar %}
+
 
 {% block content %}
 
@@ -25,11 +35,11 @@ Members
                     <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
                         <div class="panel panel-default w3-padding-left">
                             <div class="panel-heading" role="tab" id="heading1">
-                                
-                                <div class="row w3-grey">
-                                    <div class="collapsed col-sm-4 col-md-4 w3-hover-text-white w3-padding" role="button" aria-expanded="false" data-toggle="collapse" data-parent="#accordion" aria-controls="collapse1" href="#collapse1">ALPHABET</div>  
 
-                                    <div class="collapsed col-sm-4 col-md-4 w3-hover-text-white w3-padding" role="button" aria-expanded="false" data-toggle="collapse" data-parent="#accordion" aria-controls="collapse2" href="#collapse2">GENDER</div> 
+                                <div class="row w3-grey">
+                                    <div class="collapsed col-sm-4 col-md-4 w3-hover-text-white w3-padding" role="button" aria-expanded="false" data-toggle="collapse" data-parent="#accordion" aria-controls="collapse1" href="#collapse1">ALPHABET</div>
+
+                                    <div class="collapsed col-sm-4 col-md-4 w3-hover-text-white w3-padding" role="button" aria-expanded="false" data-toggle="collapse" data-parent="#accordion" aria-controls="collapse2" href="#collapse2">GENDER</div>
 
                                     <div class="collapsed col-sm-4 col-md-4 w3-hover-text-white w3-padding" role="button" aria-expanded="false" data-toggle="collapse" data-parent="#accordion" aria-controls="collapse3" href="#collapse3">MEMBERSHIP STATUS</div>
                                 </div>
@@ -37,7 +47,7 @@ Members
 
                             <div class="panel-collapse collapse w3-padding w3-light-grey" role="tabpanel" aria-expanded="false" style="height: 0px;" id="collapse1" aria-labelledby="heading1">
                                 <div class="panel-body" class="form-group">
-                                    
+
                                     <label for="select"><strong>Choose from list: </strong></label>
                                     <select id="select" class="form-control alphabet">
                                         <option value="ALL" id="all">ALL</option>
@@ -52,7 +62,7 @@ Members
 
                             <div class="panel-collapse collapse w3-padding w3-light-grey" role="tabpanel" aria-expanded="false" style="height: 0px;" id="collapse2" aria-labelledby="heading2">
                                 <div class="panel-body" class="form-group">
-                                    
+
                                     <label for="select"><strong>Choose from list: </strong></label>
                                     <select id="select" class="form-control gender">
                                         <option value="ALL" id="all">ALL</option>
@@ -67,7 +77,7 @@ Members
 
                             <div class="panel-collapse collapse w3-padding w3-light-grey" role="tabpanel" aria-expanded="false" style="height: 0px;" id="collapse3" aria-labelledby="heading3">
                                 <div class="panel-body" class="form-group">
-                                    
+
                                     <label for="select"><strong>Choose from list: </strong></label>
                                     <select id="select" class="form-control membership">
                                         <option value="ALL" id="all">ALL</option>
@@ -83,7 +93,7 @@ Members
                     </div>
 
                     <br/>
-                    
+
 
                     <div class="w3-card-4">
                         <input class="w3-input w3-border w3-padding" type="text" placeholder="Search for members by name" id="myInput">
@@ -93,18 +103,16 @@ Members
 
                     <p class="mbr-section-lead w3-small" style="color:grey;">* Click on names to see more information</p>
 
-                    <table class="table table-striped" id="table-data">
-                    	<thead>
-		                    <tr>
-								<th>Name</th>
-								<th>Phone number</th>
-								<th>Email Address</th>
-							</tr>
-						</thead>
-                    <tbody></tbody>
+                    <section class="mbr-section mbr-background mbr-after-navbar" id="testimonials4-10" style="padding-top: 5px; padding-bottom: 5px;">
 
-                    </table>
-                    
+                        <!-- Posts -->
+                        <div class="w3-card-2 w3-margin">
+                          <ul class="w3-ul w3-hoverable w3-white" id="list-data">
+                            <!-- Members info goes here -->
+                          </ul>
+                        </div>
+                    </section>
+
                 </div>
             </div>
         </div>

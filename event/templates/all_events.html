@@ -4,13 +4,23 @@
 Events
 {% endblock title %}
 
+{% block navbar %}
+      <li class="nav-item"><a class="nav-link link" href="#">EVENTS</a></li>
+      <li class="nav-item nav-btn"><a class="nav-link btn btn-white btn-white-outline" href="{% url 'member:all_members' %}">MEMBERS</a></li>
+      <li class="nav-item nav-btn"><a class="nav-link btn btn-white btn-white-outline" href="{% url 'member:shepherd_list' %}">SHEPHERDS</a></li>
+
+  <li class="nav-item nav-btn">
+    <a class="nav-link btn btn-primary" href="{% url 'logout' %}">LOG OUT</a>
+  </li>
+{% endblock navbar %}
+
 
 {% block content %}
 
 
 <section class="engine"><a rel="external" href="{% url 'member:index' %}">First Love Leeds</a></section><section class="mbr-section mbr-section-hero mbr-section-full mbr-after-navbar" id="header1-b" style="background-color: rgb(255, 255, 255);">
 
-    
+
        <div class="mbr-table-cell">
 
         <div class="container">
@@ -24,9 +34,9 @@ Events
                     <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
                         <div class="panel panel-default w3-padding-left">
                             <div class="panel-heading" role="tab" id="heading1">
-                                
+
                                 <div class="row w3-grey">
-                                    <div class="collapsed col-sm-6 w3-hover-text-white w3-padding" role="button" aria-expanded="false" data-toggle="collapse" data-parent="#accordion" aria-controls="collapse1" href="#collapse1">DATE</div>  
+                                    <div class="collapsed col-sm-6 w3-hover-text-white w3-padding" role="button" aria-expanded="false" data-toggle="collapse" data-parent="#accordion" aria-controls="collapse1" href="#collapse1">DATE</div>
 
 
                                     <div class="collapsed col-sm-6 w3-hover-text-white w3-padding" role="button" aria-expanded="false" data-toggle="collapse" data-parent="#accordion" aria-controls="collapse2" href="#collapse2">EVENT</div>
@@ -65,7 +75,7 @@ Events
 
                             <div class="panel-collapse collapse w3-padding w3-light-grey" role="tabpanel" aria-expanded="false" style="height: 0px;" id="collapse2" aria-labelledby="heading2">
                                 <div class="panel-body" class="form-group">
-                                    
+
                                     <label for="select"><strong>Choose from list: </strong></label>
                                     <select id="select" class="form-control event_types">
                                         <option value="ALL" id="all">ALL</option>
@@ -91,18 +101,18 @@ Events
 
                     <p class="mbr-section-lead w3-small" style="color:grey;">* Click on event names to see more information</p>
 
-                    <table class="table table-striped" id="table-data">
-                    	<thead>
-		                    <tr>
-								<th>Event</th>
-								<th>Date</th>
-								<th>Attendance</th>
-							</tr>
-						</thead>
-                    <tbody></tbody>
+                    <section class="mbr-section mbr-background mbr-after-navbar" id="testimonials4-10" style="padding-top: 5px; padding-bottom: 5px;">
 
-                    </table>
-                    
+                        <!-- Events -->
+                        <div class="w3-card-2 w3-margin">
+
+                          <ul class="w3-ul w3-hoverable w3-white" id="list-data">
+                              <!-- Event info goes here -->
+
+                          </ul>
+                        </div>
+                    </section>
+
                 </div>
             </div>
         </div>

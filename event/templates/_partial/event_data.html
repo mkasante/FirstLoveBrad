@@ -1,7 +1,16 @@
+
+
 {% for event in events %}
-<tr>
-	<td><a href="{% url 'event:event_info' event.pk %}">{{ event }}</a></td>
-	<td>{{ event.date }}</td>
-	<td>{{ event.attendance_count }}</td>
-</tr>
+  <li class="w3-padding-16 datalist">
+
+	<i class="fa fa-calendar
+	{% if event.event.name.lower in "sunday service, thursday service" %} w3-text-green
+	{% elif event.event.name.lower in "outreach, evangelism" %} w3-text-purple
+	{% else %}w3-text-teal{% endif %}" aria-hidden="true"></i>&nbsp;&nbsp;
+	<span class="w3-large"> <a href="{% url 'event:event_info' event.pk %}">{{ event }}</a></span><br>
+	<i class="fa fa fa-clock-o" aria-hidden="true"></i>&nbsp;&nbsp;
+	<span class="w3-text-grey">{{ event.date }} </span><br>
+	<i class="fa fa fa-group" aria-hidden="true"></i>&nbsp;&nbsp;
+	<span class="w3-text-grey">Attendance count: {{ event.attendance_count }} </span><br>
 {% endfor %}
+</li>

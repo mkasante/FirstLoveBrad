@@ -34,7 +34,7 @@ $(document).ready(function(){
 
 		$.ajax({
 			// type: "POST",
-			url: suburl + id, 
+			url: suburl + id,
 			success: function(result){
 				tt(result, suburl, id);
     		}
@@ -45,7 +45,7 @@ $(document).ready(function(){
 
 		$.ajax({
 			// type: "POST",
-			url: suburl + id, 
+			url: suburl + id,
 			success: function(result){
 				$('#anouncements').append(result);
     		}
@@ -66,14 +66,14 @@ $(document).ready(function(){
 
 	if (window.location.pathname === "/"){
 		events = ["birthdays", "first-timers", "evangelism", "outreach"]
-		
+
 		for(var i = 0; i < events.length; i++){
 			loadinfo("welcome/_newsfeed/", events[i]);
 		};
 	}
 	else if (window.location.pathname === "/welcome/"){
 		events = ["birthdays", "first-timers", "evangelism", "outreach"]
-		
+
 		for(var i = 0; i < events.length; i++){
 			loadinfo("_newsfeed/", events[i]);
 		};
@@ -92,7 +92,7 @@ $(document).ready(function(){
 
 		$.ajax({
 			// type: "POST",
-			url: url, 
+			url: url,
 			success: function(result){
 				$('#anouncements').append(result);
     		}
@@ -100,23 +100,28 @@ $(document).ready(function(){
 	}
 
 	$('#myInput').keyup(function() {
-		var input, filter, table, tr, td, i;
-		input = document.getElementById("myInput");
-		filter = input.value.toUpperCase();
-		table = document.getElementById("table-data");
-		tr = table.getElementsByTagName("tr");
-
-		for (i = 0; i < tr.length; i++) {
-			td = tr[i].getElementsByTagName("td")[0];
-			if (td) {
-				if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
-					tr[i].style.display = "";
-				} 
-				else {
-					tr[i].style.display = "none";
-				}
-			}
-		}
+		console.console.log("asd");
 	});
+	// $('#myInput').keyup(function() {
+	// 	var input, filter, table, tr, td, i;
+	// 	input = document.getElementById("myInput");
+	// 	filter = input.value.toUpperCase();
+	// 	table = document.getElementById("table-data");
+	// 	tr = table.getElementsByTagName("tr");
+	//
+	// 	for (i = 0; i < tr.length; i++) {
+	// 		td = tr[i].getElementsByTagName("td")[0];
+	// 		if (td) {
+	// 			if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+	// 				tr[i].style.display = "";
+	// 			}
+	// 			else {
+	// 				tr[i].style.display = "none";
+	// 			}
+	// 		}
+	// 	}
+	// });
+
+
 
 });

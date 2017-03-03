@@ -1,28 +1,24 @@
 {% for member in members %}
-<tr>
-	<td><a href="{% url 'member:member_info' member %}" title="{{ member.attendance_status }}">
+  <li class="w3-padding-16 datalist">
 
-	{% if member.attendance_status.status.lower == 'regular new member' or member.attendance_status.status.lower == 'regular old member' or member.attendance_status.status.lower == 'established' %}
-	<span class="w3-text-green">
-		{{ member.name }}
-	</span>
-	{% elif member.attendance_status.status.lower == 'rare new member' or member.attendance_status.status.lower == 'rare old member' %}
-	<span class="w3-text-red">
-		{{ member.name }}
-	</span>
-	{% elif member.attendance_status.status.lower == 'outreach' or member.attendance_status.status.lower == 'evangelism' %}
-	<span class="w3-text-orange">
-		{{ member.name }} *
-	</span>
-	{% elif member.attendance_status.status.lower == 'first timer' %}
-		{{ member.name }} *
-	{% else %}
-	<span class="w3-text-grey">
-		{{ member.name }}
-	</span>
+	<span class="w3-large">
+		<i class="fa fa-user
+		{% if member.attendance_status.status.lower in "outreach, evangelism" %} w3-text-red
+		{% elif member.attendance_status.status.lower in "rare new member, rare old member" %} w3-text-yellow
+		{% elif member.attendance_status.status.lower in "first timer" %} w3-text-orange
+		{% elif member.attendance_status.status.lower in "relocated" %} w3-text-grey
+		{% else %} w3-text-green
+		{% endif %}" aria-hidden="true"  title="{{ member.attendance_status.status }}"></i>&nbsp;&nbsp;
+
+	  <a href="{% url 'member:member_info' member.name.lower %}">{{ member.name.title }}</a></span>
+	{% if member.mobile_no|slugify != "" %}
+		<br><i class="fa fa-phone" aria-hidden="true"></i>&nbsp;&nbsp;
+		<span class="w3-text-grey">{{ member.mobile_no }} </span>
 	{% endif %}
-	</a></td>
-	<td>{{ member.mobile_no }}</td>
-	<td>{{ member.email }}</td>
-</tr>
+	{% if member.email|slugify != "" %}
+		<br><i class="fa fa-inbox" aria-hidden="true"></i>&nbsp;&nbsp;
+		<span class="w3-text-grey">{{ member.email }} </span><br>
+	{% endif %}
+
 {% endfor %}
+</li>

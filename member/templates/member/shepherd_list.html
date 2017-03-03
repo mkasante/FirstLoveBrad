@@ -6,53 +6,59 @@ Shepherd List
 
 {% block content %}
 
-<section class="mbr-section mbr-background mbr-after-navbar" id="testimonials4-10" style="padding-top: 120px; padding-bottom: 80px;">
-
-    <!-- Posts -->
-    <div class="w3-card-2 w3-margin">
-      <div class="w3-container w3-padding w3-grey">
-        <h4>Shepherds</h4>
-      </div>
-      <ul class="w3-ul w3-hoverable w3-white">
-        {% for shepherd in shepherds %}
-          <li class="w3-padding-16">
-
-            <span class="w3-large">
-              {% if user.is_superuser or shepherd.username == user.username %}
-                <strong><a href="{% url 'member:shepherd_info' shepherd.username %}" title="{{ shepherd }}">{{ shepherd.get_full_name.title }}</a></strong>
-                {% else %}
-                  {{ shepherd.get_full_name.title }}
-              {% endif %}
-
-            </span><br>
-            <i class="fa fa-user w3-text-teal"></i>&nbsp;&nbsp;&nbsp;
-            <span>User name:
-              {% if user.is_superuser or prefect.info.username == user.username %}
-                <a href="{% url 'member:shepherd_info' shepherd.username %}" title="{{ shepherd.username }}">{{ shepherd.username }}</a>
-              {% else %}
-                {{ shepherd.username }}
-              {% endif %}
-            </span><br>
-            <i class="fa fa-envelope w3-text-teal"></i>&nbsp;&nbsp;
-            {% if shepherd.email %}
-              <span>Email address: {{ shepherd.email.lower }} </span><br>
-            {% endif %}
-
-            {% if user.is_superuser or prefect.info.username == user.username %}
-              <i class="fa fa-users w3-text-teal"></i>&nbsp;&nbsp;
-              <span>Follow-up members count: {{ prefect.follow_up_count }} </span><br>
-            {% endif %}
-
-            {% if shepherd.last_login %}
-              <i class="fa fa-clock-o w3-text-teal"></i>&nbsp;&nbsp;
-              <span>Last logged in: {{ shepherd.last_login }} </span><br>
-            {% endif %}
+<section class="engine"><a rel="external" href="{% url 'member:index' %}">First Love Leeds</a></section><section class="mbr-section mbr-section-hero mbr-section-full mbr-after-navbar" id="header1-b" style="background-color: rgb(255, 255, 255);">
 
 
-        {% endfor %}
-        </li>
+     <div class="mbr-table-cell">
 
-      </ul>
+        <div class="container">
+            <div class="row">
+                <div class="mbr-section col-md-12">
+
+                    <!-- Posts -->
+                    <div class="w3-card-2 w3-margin">
+                      <div class="w3-container w3-padding w3-grey">
+                        <h4>Shepherds <span class="w3-tag">{{ shepherds.count }}</span></h4>
+                      </div>
+                      <ul class="w3-ul w3-hoverable w3-white">
+                        {% for shepherd in shepherds %}
+                          <li class="w3-padding-16">
+
+                            <span class="w3-large">
+                              {% if user.is_superuser or shepherd.username == user.username %}
+                                <strong><a href="{% url 'member:shepherd_info' shepherd.username %}" title="{{ shepherd }}">{{ shepherd.get_full_name.title }}</a></strong>
+                                {% else %}
+                                  {{ shepherd.get_full_name.title }}
+                              {% endif %}
+
+                            </span><br>
+                            <i class="fa fa-user w3-text-teal"></i>&nbsp;&nbsp;&nbsp;
+                            <span>User name:
+                              {% if user.is_superuser or shepherd.username == user.username %}
+                                <a href="{% url 'member:shepherd_info' shepherd.username %}" title="{{ shepherd.username }}">{{ shepherd.username }}</a>
+                              {% else %}
+                                {{ shepherd.username }}
+                              {% endif %}
+                            </span><br>
+                            <i class="fa fa-envelope w3-text-teal"></i>&nbsp;&nbsp;
+                            {% if shepherd.email %}
+                              <span>Email address: {{ shepherd.email.lower }} </span><br>
+                            {% endif %}
+
+                            {% if shepherd.last_login %}
+                              <i class="fa fa-clock-o w3-text-teal"></i>&nbsp;&nbsp;
+                              <span>Last logged in: {{ shepherd.last_login }} </span><br>
+                            {% endif %}
+
+
+                        {% endfor %}
+                        </li>
+
+                      </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </section>
 

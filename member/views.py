@@ -43,7 +43,7 @@ def member_info(request, name):
 @login_required
 def shepherd_list(request):
 	shepherds = User.objects.order_by('-last_login')
-
+	
 	context = {
 		'shepherds': shepherds
 	}

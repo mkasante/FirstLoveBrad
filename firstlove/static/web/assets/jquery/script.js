@@ -25,16 +25,16 @@ $(document).ready(function(){
 
 	function tt(text, suburl, id)
 	{
-		 $('#table-data tbody').text("");
-		 $('#table-data tbody').append(text);
-		 $('#data-count').text($("#table-data > tbody > tr").length);
+		var listdata = document.getElementById("list-data");
+		$(listdata).html(text);
+		$('#data-count').text(listdata.querySelectorAll("span a").length);
 	}
 
 	function loaddata(suburl, id){
 
 		$.ajax({
 			// type: "POST",
-			url: suburl + id, 
+			url: suburl + id,
 			success: function(result){
 				tt(result, suburl, id);
     		}
@@ -45,13 +45,12 @@ $(document).ready(function(){
 
 		$.ajax({
 			// type: "POST",
-			url: suburl + id, 
+			url: suburl + id,
 			success: function(result){
 				$('#anouncements').append(result);
     		}
     	});
 	}
-
 
 	if (window.location.pathname.endsWith("/member/all/")){
 		loaddata("../_group/", "ALL");
@@ -66,14 +65,14 @@ $(document).ready(function(){
 
 	if (window.location.pathname === "/"){
 		events = ["birthdays", "first-timers", "evangelism", "outreach"]
-		
+
 		for(var i = 0; i < events.length; i++){
 			loadinfo("welcome/_newsfeed/", events[i]);
 		};
 	}
 	else if (window.location.pathname === "/welcome/"){
 		events = ["birthdays", "first-timers", "evangelism", "outreach"]
-		
+
 		for(var i = 0; i < events.length; i++){
 			loadinfo("_newsfeed/", events[i]);
 		};
@@ -92,7 +91,7 @@ $(document).ready(function(){
 
 		$.ajax({
 			// type: "POST",
-			url: url, 
+			url: url,
 			success: function(result){
 				$('#anouncements').append(result);
     		}
@@ -100,23 +99,22 @@ $(document).ready(function(){
 	}
 
 	$('#myInput').keyup(function() {
-		var input, filter, table, tr, td, i;
-		input = document.getElementById("myInput");
-		filter = input.value.toUpperCase();
-		table = document.getElementById("table-data");
-		tr = table.getElementsByTagName("tr");
+		var input = document.getElementById("myInput");
+		var filter = input.value.toLowerCase();
+		var memberlist = document.getElementsByClassName("datalist");
+		for (var i=0; i < memberlist.length; i++)
 
-		for (i = 0; i < tr.length; i++) {
-			td = tr[i].getElementsByTagName("td")[0];
-			if (td) {
-				if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
-					tr[i].style.display = "";
-				} 
-				else {
-					tr[i].style.display = "none";
-				}
+		{
+			var name = memberlist[i].querySelector("span a").innerText.toLowerCase();
+
+			if (name.indexOf(filter) > -1){
+				memberlist[i].style.display = "";
+			}
+			else {
+				memberlist[i].style.display = "none";
 			}
 		}
-	});
 
+		$('#data-count').text($('#list-data li:visible').size());
+	});
 });

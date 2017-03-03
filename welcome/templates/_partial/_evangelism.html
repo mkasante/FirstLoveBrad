@@ -6,9 +6,9 @@
   <li>
 
 	{% if person.first_attended != None %}
-		{{ person.first_attended }} - 
+		{{ person.first_attended }} -
 	{% endif %}
-	
+
 	<a href="{% url 'member:member_info' person %}" title="last Updated on {{ person.last_modified }}">{{ person }}</a>
 	<span onclick="this.parentElement.style.display='none'"class="w3-closebtn w3-margin-right w3-medium">&times;</span>
   </li>

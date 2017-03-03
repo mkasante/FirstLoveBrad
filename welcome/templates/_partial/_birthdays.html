@@ -11,7 +11,7 @@
     {% for person in member_dob %}
     	<li>
 
-    	{% now 'd M Y' %} - 
+    	{% now 'd M Y' %} -
 
     	{% if person.2 > 1 %}
     		<a href="{% url 'member:member_info' person.0 %}" title="last Updated on {{ person.0.last_modified }}">{{ person.0 }}</a> will be {{ person.1 }} years in {{ person.2 }} days time
@@ -23,7 +23,7 @@
 
 
   	<span onclick="this.parentElement.style.display='none'"class="w3-closebtn w3-margin-right w3-medium">&times;</span>
-    	
+
     	</li>
 
     {% endfor %}
