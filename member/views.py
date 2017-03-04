@@ -80,7 +80,7 @@ def close_proximity_members(request, post_code, mode="walking"):
 		for i in range(len(closest)):
 			result.append([names[i], closest[i][0], closest[i][1], closest[i][2], closest[i][3]])
 
-		data = sorted(result, key=lambda x: x[1][3])[:30]
+		data = sorted(result, key=lambda x: x[4])[:30] 
 	except:
 		data = ""
 

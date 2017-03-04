@@ -5,7 +5,7 @@ Members
 {% endblock title %}
 
 {% block navbar %}
-      <li class="nav-item"><a class="nav-link link" href="#">MEMBERS</a></li>
+      <li class="nav-item"><a class="nav-link link" href="{% url 'member:all_members' %}">MEMBERS</a></li>
       <li class="nav-item nav-btn"><a class="nav-link btn btn-white btn-white-outline" href="{% url 'event:index' %}">EVENTS</a></li>
     <li class="nav-item nav-btn"><a class="nav-link btn btn-white btn-white-outline" href="{% url 'member:shepherd_list' %}">SHEPHERDS</a></li>
 
@@ -28,8 +28,7 @@ Members
             <div class="row">
                 <div class="mbr-section col-sm-12 col-md-12">
 
-                    <h1 class="mbr-section-title display-4 w3-text-black"><span id="data-count">{{ near_count }}</span> MEMBER(S) LIVES AROUND {{ post_code }}</h1>
-                    <h4 class="mbr-section-title w3-text-black">FILTER BY</h4>
+                    <h4 class="mbr-section-title w3-text-black">FIRST <span id="data-count">{{ near_count }}</span> MEMBER(S) LIVING AROUND {{ post_code }}</h4>
 
 
                     <div class="w3-card-4">
@@ -42,11 +41,15 @@ Members
 
                     <section class="mbr-section mbr-background mbr-after-navbar" id="testimonials4-10" style="padding-top: 5px; padding-bottom: 5px;">
 
+                        {% if close_members %}
+                            <h3>From {{ close_members.0.1 }} </h3>
+                        {% endif %}
+
                         <!-- Posts -->
                         <div class="w3-card-2 w3-margin">
+
                           <ul class="w3-ul w3-hoverable w3-white" id="list-data">
                             <!-- Members info goes here -->
-
                             {% for member in close_members %}
                               <li class="w3-padding-16 datalist">
 
@@ -55,7 +58,7 @@ Members
                             	<a href="{% url 'member:member_info' member.0.lower %}">{{ member.0 }}</a></span><br>
 
                         		<i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp;&nbsp;
-                        		<span class="w3-text-grey">From {{ member.1 }} to {{ member.2 }} </span><br>
+                        		<span class="w3-text-grey">to {{ member.2 }} </span><br>
 
                                 <i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp;&nbsp;
                                 <span class="w3-text-grey">takes {{ member.3 }}</span><br>
