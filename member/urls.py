@@ -1,7 +1,7 @@
 from django.conf.urls import url
 
 from member.views import index, member_info, all_members, shepherd_list, shepherd_info
-from member.views import _list_members_by_alphabet, _list_members_by_status, _list_members_by_gender
+from member.views import _list_members_by_alphabet, _list_members_by_status, _list_members_by_gender, close_proximity_members
 
 
 
@@ -27,6 +27,16 @@ urlpatterns = [
   ),
 
   url(
+    regex=r'^close_proximity_members/(?P<post_code>.{6,})/(?P<mode>.{6,})$',
+    view = close_proximity_members, name = 'close_proximity_members'
+  ),
+
+  url(
+    regex=r'^close_proximity_members/(?P<post_code>.{6,})/$',
+    view = close_proximity_members, name = 'close_proximity_members'
+  ),
+  
+  url(
     regex=r'^(?P<name>[^\`]+)/$',
     view = member_info, name = 'member_info'
   ),
@@ -46,6 +56,5 @@ urlpatterns = [
   url(
     regex=r'^_gender/(?P<gender>[\w]+)$',
     view = _list_members_by_gender, name = '_list_members_by_gender'
-  ),
-
+  )
 ]

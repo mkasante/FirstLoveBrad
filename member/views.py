@@ -2,9 +2,10 @@ from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from member.models import Member, Attendance, Gender
 from django.contrib.auth.models import User
+from django.db.models import Q
 
 import re
-
+from getlocation import getdata
 
 # Create your views here.
 @login_required
@@ -43,7 +44,7 @@ def member_info(request, name):
 @login_required
 def shepherd_list(request):
 	shepherds = User.objects.order_by('-last_login')
-	
+
 	context = {
 		'shepherds': shepherds
 	}
@@ -61,6 +62,30 @@ def shepherd_info(request, name):
 	}
 
 	return render (request, 'member/shepherd_info.html', context)
+
+@login_required
+def close_proximity_members(request, post_code, mode="walking"):
+	closest = []
+	members = Member.objects.exclude(Q(attendance_status__status__iexact="evangelism"),
+			Q(attendance_status__status__iexact="outreach")).filter(post_code__istartswith = post_code[0]).order_by('post_code', 'name')
+
+
+	post_codes = [x.post_code for x in members]
+	names = [x.name for x in members]
+
+	result = []
+	closest = getdata(post_code, post_codes, mode)
+	for i in range(len(closest)):
+		result.append([names[i], closest[i][0], closest[i][1], closest[i][2], closest[i][3]])
+
+	data = sorted(result, key=lambda x: x[1][3])[:30]
+	context = {
+		'close_members': data,
+		'mode': mode,
+		'near_count': len(data),
+		'post_code': post_code
+	}
+	return render (request, 'member/close_proximity_members.html', context)
 
 # Partial
 @login_required

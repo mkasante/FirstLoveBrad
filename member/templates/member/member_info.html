@@ -1,5 +1,7 @@
 {% extends '_partial/base.html' %}
 
+{% load first_love_custom %}
+
 {% block title %}
 {{ member.name }}
 {% endblock title %}
@@ -31,27 +33,60 @@
                     {% endif %}
 
                     <p class="w3-large w3-text-black"><strong>Gender: </strong>{{ member.gender }}</p>
-                    <p class="w3-large w3-text-black"><strong>Mobile Number: </strong>{{ member.mobile_no }}</p>
-                    <p class="w3-large w3-text-black"><strong>Email Address: </strong><span class="w3-text-blue">{{ member.email }}</span></p>
-                    <p class="w3-large w3-text-black"><strong>Date of Birth: </strong>{{ member.date_of_birth }}</p>
-                    <p class="w3-large w3-text-black"><strong>Address: </strong>{{ member.address|linebreaksbr }}</p>
-                    <p class="w3-large w3-text-black"><strong>Post Code: </strong>{{ member.post_code }}</p>
-                    <p class="w3-large w3-text-black"><strong>Academic Institution: </strong>{{ member.academic_institution }}</p>
-                    <p class="w3-large w3-text-black"><strong>Course Studying: </strong>{{ member.course }}</p>
+
+                    {% if member.mobile_no|length_is_gt:10 %}
+                        <p class="w3-large w3-text-black"><strong>Mobile Number: </strong>{{ member.mobile_no }}</p>
+                    {% endif %}
+
+                    {% if member.email|regex_validates:"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)" %}
+                        <p class="w3-large w3-text-black"><strong>Email Address: </strong><span class="w3-text-blue">{{ member.email }}</span></p>
+                    {% endif %}
+
+                    {% if member.dob != None %}
+                        <p class="w3-large w3-text-black"><strong>Date of Birth: </strong>{{ member.date_of_birth }}</p>
+                    {% endif %}
+
+                    {% if member.address|length_is_gt:5 %}
+                        <p class="w3-large w3-text-black"><strong>Address: </strong>{{ member.address|linebreaksbr }}</p>
+                    {% endif %}
+
+                    {% if member.post_code|length_is_gt:6 %}
+                        <p class="w3-large w3-text-black"><strong>Post Code: </strong>{{ member.post_code }}
+                            &nbsp;&nbsp;<a href="{% url 'member:close_proximity_members' member.post_code %}" class="w3-btn w3-small">Members who live nearby</a>
+                        </p>
+
+                    {% endif %}
+
+                    {% if member.academic_institution != None %}
+                        <p class="w3-large w3-text-black"><strong>Academic Institution: </strong>{{ member.academic_institution }}</p>
+                    {% endif %}
+
+                    {% if member.course|length_is_gt:1 %}
+                        <p class="w3-large w3-text-black"><strong>Course Studying: </strong>{{ member.course }}</p>
+                    {% endif %}
+
+                    {% if member.attendance_status.status|length_is_gt:3 %}
                     <p class="w3-large w3-text-black"><strong>
 
-                    {% if member.attendance_status.status == 'Evangelism' %}
-                        Evangelised On:
-                    {% elif member.attendance_status.status == 'Outreach' %}
-                        First Invited On:
-                    {% else %}
-                        First Attended On:
-                    {% endif %}
+                        {% if member.attendance_status.status == 'Evangelism' %}
+                            Evangelised On:
+                        {% elif member.attendance_status.status == 'Outreach' %}
+                            First Invited On:
+                        {% else %}
+                            First Attended On:
+                        {% endif %}
 
                     </strong>{{ member.first_attended }}</p>
                     <p class="w3-large w3-text-black"><strong>Attendance Status: </strong>{{ member.attendance_status }}</p>
-                    <p class="w3-large w3-text-black"><strong>Last Visited On: </strong>{{ member.last_visited }}</p>
-                    <p class="w3-large w3-text-black"><strong>Other Information: </strong>{{ member.extra_info|linebreaksbr }}</p>
+                    {% endif %}
+
+                    {% if member.last_visited != None %}
+                        <p class="w3-large w3-text-black"><strong>Last Visited On: </strong>{{ member.last_visited }}</p>
+                    {% endif %}
+
+                    {% if member.extra_info|length_is_gt:5 %}
+                        <p class="w3-large w3-text-black"><strong>Other Information: </strong>{{ member.extra_info|linebreaksbr }}</p>
+                    {% endif %}
 
                 </div>
             </div>
@@ -60,11 +95,11 @@
 
 </section>
 
-<section class="mbr-section mbr-section__container article" id="header3-d" style="background-color: rgb(255, 255, 255); padding-top: 5px; padding-bottom: 20px;">
+<section class="mbr-section mbr-section__container article" id="header3-d" style="background-color: rgb(255, 255, 255); padding-top: 0px; padding-bottom: 20px;">
     <div class="container">
         <div class="row">
            <div class="col-xs-12">
-              <h6 class="mbr-section-title display-6">Record last updated by <strong>{{ user }}</strong> on <strong>{{ member.last_modified }}</strong></h6>
+              <h6 class="mbr-section-title display-6">Record last updated by <strong>{{ user.get_full_name }}</strong> on <strong>{{ member.last_modified }}</strong></h6>
           </div>
         </div>
     </div>

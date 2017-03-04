@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib import admin
 from django.contrib.auth.models import User
+from getlocation import getdata
 
 # Create your models here.
 class Member(models.Model):
@@ -29,10 +30,10 @@ class Member(models.Model):
 class MemberAdmin(admin.ModelAdmin):
 	filter_by = ('name', 'mobile_no', 'email')
 	list_display = ('name', 'mobile_no', 'email')
-	list_filter = ['attendance_status', 'gender', 'shepherd']
+	list_filter = ['attendance_status', 'gender', 'shepherd', 'first_attended']
 	list_per_page = 50
 	order_by = ('name', 'mobile_no')
-	search_fields = ('name', 'mobile_no', 'email')
+	search_fields = ('name', 'mobile_no', 'email', 'post_code')
 
 
 class Attendance(models.Model):

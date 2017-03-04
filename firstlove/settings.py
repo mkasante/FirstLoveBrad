@@ -29,7 +29,7 @@ LOGIN_REDIRECT_URL = reverse_lazy('welcome:index')
 SECRET_KEY = '*q3979tq^dql6txf1y$y^dy5q9h-t6sxii+j*8#gr^k1yfxl(g'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
 DEBUG = False
 
 # ENVIRONMENT = "DEV"
@@ -49,10 +49,10 @@ INSTALLED_APPS = [
 	'django.contrib.messages',
 	'django.contrib.staticfiles',
 	'rest_framework',
-	'api',
 	'member',
+	'api',
 	'welcome',
-	'event'
+	'event',
 ]
 
 REST_FRAMEWORK = {
