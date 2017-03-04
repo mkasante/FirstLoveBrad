@@ -4,7 +4,7 @@ from member.models import Member, Attendance, Gender
 from django.contrib.auth.models import User
 from django.db.models import Q
 
-import re
+import re, operator
 from getlocation import getdata
 
 # Create your views here.
@@ -67,10 +67,9 @@ def shepherd_info(request, name):
 def close_proximity_members(request, post_code, mode="walking"):
 	closest = []
 	members = Member.objects.exclude(Q(attendance_status__status__iexact="evangelism"),
-			Q(attendance_status__status__iexact="outreach")).filter(post_code__istartswith = post_code[0]).order_by('post_code', 'name')
+			Q(attendance_status__status__iexact="outreach")).filter(post_code__istartswith = post_code[0])
 
-
-	post_codes = [x.post_code for x in members]
+	post_codes = [x.post_code for x in members if x.post_code]
 	names = [x.name for x in members]
 
 	result = []
@@ -80,7 +79,36 @@ def close_proximity_members(request, post_code, mode="walking"):
 		for i in range(len(closest)):
 			result.append([names[i], closest[i][0], closest[i][1], closest[i][2], closest[i][3]])
 
-		data = sorted(result, key=lambda x: x[4])[:30] 
+		data = sorted(result, key=operator.itemgetter(4))
+	except:
+		data = ""
+
+	context = {
+		'close_members': data,
+		'mode': mode,
+		'near_count': len(data),
+		'post_code': post_code
+	}
+	return render (request, 'member/close_proximity_members.html', context)
+
+@login_required
+def close_proximity_followup(request, shepherd, post_code, mode="walking"):
+	closest = []
+	members = Member.objects.exclude(Q(attendance_status__status__iexact="evangelism"),
+			Q(attendance_status__status__iexact="outreach")).filter(shepherd__username__iexact = shepherd)
+
+
+	post_codes = [x.post_code for x in members if x.post_code]
+	names = [x.name for x in members]
+
+	result = []
+
+	try:
+		closest = getdata(post_code, post_codes, mode)
+		for i in range(len(closest)):
+			result.append([names[i], closest[i][0], closest[i][1], closest[i][2], closest[i][3]])
+
+		data = sorted(result, key=operator.itemgetter(4))
 	except:
 		data = ""
 

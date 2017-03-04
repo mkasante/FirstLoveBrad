@@ -1,7 +1,7 @@
 from django.conf.urls import url
 
 from member.views import index, member_info, all_members, shepherd_list, shepherd_info
-from member.views import _list_members_by_alphabet, _list_members_by_status, _list_members_by_gender, close_proximity_members
+from member.views import _list_members_by_alphabet, _list_members_by_status, _list_members_by_gender, close_proximity_members, close_proximity_followup
 
 
 
@@ -27,15 +27,25 @@ urlpatterns = [
   ),
 
   url(
-    regex=r'^close_proximity_members/(?P<post_code>.{6,})/(?P<mode>.{6,})$',
+    regex=r'^close_proximity_followup/(?P<shepherd>[a-zA-Z]+)/(?P<post_code>[\w\s\d]{6,9})/(?P<mode>[a-zA-Z]+)$',
+    view = close_proximity_followup, name = 'close_proximity_followup'
+  ),
+
+  url(
+    regex=r'^close_proximity_followup/(?P<shepherd>[a-zA-Z]+)/(?P<post_code>[\w\s\d]{6,9})/$',
+    view = close_proximity_followup, name = 'close_proximity_followup'
+  ),
+
+  url(
+    regex=r'^close_proximity_members/(?P<post_code>[\w\s\d]{6,9})/(?P<mode>[a-zA-Z]+)$',
     view = close_proximity_members, name = 'close_proximity_members'
   ),
 
   url(
-    regex=r'^close_proximity_members/(?P<post_code>.{6,})/$',
+    regex=r'^close_proximity_members/(?P<post_code>[\w\s\d]{6,9})/$',
     view = close_proximity_members, name = 'close_proximity_members'
   ),
-  
+
   url(
     regex=r'^(?P<name>[^\`]+)/$',
     view = member_info, name = 'member_info'

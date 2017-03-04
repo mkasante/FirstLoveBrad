@@ -14,7 +14,9 @@ def getdata(origin, destination, mode="walking"):
 		distance = (data["rows"][0]["elements"][x]['distance']["text"])
 
 		if distance.endswith(" m"):
-			distance = str(float(distance.split(" m")[0]) * 0.001) + " km"
+			distance = float(distance.split(" m")[0]) * 0.001
+		else:
+			distance = float(distance.split(" km")[0])
 
 		result.append((origin_address, dest_address, duration, distance))
 

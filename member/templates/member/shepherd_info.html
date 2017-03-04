@@ -1,11 +1,13 @@
 {% extends '_partial/base.html' %}
 
+{% load first_love_custom %}
+
 {% block title %}
 {{ shepherd.get_full_name }} follow up members
 {% endblock title %}
 
 {% block navbar %}
-      <li class="nav-item"><a class="nav-link link" href="#">SHEPHERDS</a></li>
+      <li class="nav-item"><a class="nav-link link" href="{% url 'member:shepherd_list' %}">SHEPHERDS</a></li>
     <li class="nav-item nav-btn"><a class="nav-link btn btn-white btn-white-outline" href="{% url 'member:all_members' %}">MEMBERS</a></li>
       <li class="nav-item nav-btn"><a class="nav-link btn btn-white btn-white-outline" href="{% url 'event:index' %}">EVENTS</a></li>
 
@@ -47,6 +49,11 @@
                             {% if member.mobile_no|slugify != "" %}
                                 <br><i class="fa fa-phone" aria-hidden="true"></i>&nbsp;&nbsp;
                                 <span class="w3-text-grey">{{ member.mobile_no }} </span><br>
+                            {% endif %}
+
+                            {% if member.post_code|length_is_gt:5 %}
+                                <a href="{% url 'member:close_proximity_followup' member.shepherd member.post_code %}" class="w3-button ">follow up members living around {{ member.post_code }}</a>
+
                             {% endif %}
 
                         {% endfor %}

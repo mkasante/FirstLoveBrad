@@ -27,10 +27,7 @@
             <div class="row">
                 <div class="mbr-section col-md-12">
 
-                    <h1 class="mbr-section-title display-4 w3-text-black text-uppercase w3-center">{{ member.name }}</h1>
-                    {% if member.shepherd.username.lower != "firstloveleeds" %}
-                        <p class="mbr-section-subtitle display-4 w3-text-black w3-center w3-text-grey"><strong>Shepherd:</strong> <a href="{% url 'member:shepherd_info' member.shepherd.username.lower %}"><span class="w3-text-grey"> {{ member.shepherd.get_full_name.title }}</span></a></p><br>
-                    {% endif %}
+                    <h3 class="display-4 w3-text-black text-uppercase w3-center">{{ member.name }}</h3>
 
                     <p class="w3-large w3-text-black"><strong>Gender: </strong>{{ member.gender }}</p>
 
@@ -50,11 +47,10 @@
                         <p class="w3-large w3-text-black"><strong>Address: </strong>{{ member.address|linebreaksbr }}</p>
                     {% endif %}
 
-                    {% if member.post_code|length_is_gt:6 %}
+                    {% if member.post_code|length_is_gt:5 %}
                         <p class="w3-large w3-text-black"><strong>Post Code: </strong>{{ member.post_code }}
                             &nbsp;&nbsp;<a href="{% url 'member:close_proximity_members' member.post_code %}" class="w3-btn w3-small">Members who live nearby</a>
                         </p>
-
                     {% endif %}
 
                     {% if member.academic_institution != None %}
@@ -82,6 +78,10 @@
 
                     {% if member.last_visited != None %}
                         <p class="w3-large w3-text-black"><strong>Last Visited On: </strong>{{ member.last_visited }}</p>
+                    {% endif %}
+
+                    {% if member.shepherd.username.lower != "firstloveleeds" %}
+                        <p class="w3-large w3-text-black"><strong>Shepherd:</strong> <a href="{% url 'member:shepherd_info' member.shepherd.username.lower %}"><span class="w3-text-grey"> {{ member.shepherd.get_full_name.title }}</p>
                     {% endif %}
 
                     {% if member.extra_info|length_is_gt:5 %}
