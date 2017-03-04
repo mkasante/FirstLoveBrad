@@ -18,8 +18,8 @@ Members
 {% block content %}
 
 
-
-<section class="engine"><a rel="external" href="{% url 'member:index' %}">free bootstrap site maker software</a></section><section class="mbr-section mbr-section-hero mbr-section-full mbr-after-navbar" id="header1-b" style="background-color: rgb(255, 255, 255);">
+{% if close_members != "" %}
+<section class="engine"><a rel="external" href="{% url 'member:index' %}">Welcome to First Love Leeds homepage</a></section><section class="mbr-section mbr-section-hero mbr-section-full mbr-after-navbar" id="header1-b" style="background-color: rgb(255, 255, 255);">
 
 
     <div class="mbr-table-cell">
@@ -75,5 +75,28 @@ Members
     </div>
 
 </section>
+{% else %}
 
+
+<section class="mbr-section mbr-section-hero mbr-section-full" id="header5-6" style="background-color: rgb(253, 253, 253);">
+
+
+    <div class="mbr-table-cell">
+
+        <div class="container">
+            <div class="row">
+                <div class="mbr-section col-md-12">
+
+                    <h1 class="mbr-section-title display-1" style="color:black;">Data could not be retrieved</h1>
+                    <p class="mbr-section-lead lead w3-padding" style="color:grey;">Please go back to <a href="{% url 'member:all_members' %}">members list</a></p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</section>
+
+{% endif %}
 {% endblock content %}
