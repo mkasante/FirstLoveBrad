@@ -67,7 +67,9 @@ def shepherd_info(request, name):
 def close_proximity_members(request, post_code, mode="walking"):
 	closest = []
 	members = Member.objects.exclude(Q(attendance_status__status__iexact="evangelism"),
-			Q(attendance_status__status__iexact="outreach")).filter(post_code__istartswith = post_code[0])
+			Q(attendance_status__status__iexact="outreach"),
+			Q(attendance_status__status__iexact="relocated"))
+			.filter(post_code__istartswith = post_code[0])
 
 	post_codes = [x.post_code for x in members if x.post_code]
 	names = [x.name for x in members]
@@ -95,7 +97,9 @@ def close_proximity_members(request, post_code, mode="walking"):
 def close_proximity_followup(request, shepherd, post_code, mode="walking"):
 	closest = []
 	members = Member.objects.exclude(Q(attendance_status__status__iexact="evangelism"),
-			Q(attendance_status__status__iexact="outreach")).filter(shepherd__username__iexact = shepherd)
+			Q(attendance_status__status__iexact="outreach"),
+			Q(attendance_status__status__iexact="relocated"))
+			.filter(shepherd__username__iexact = shepherd)
 
 
 	post_codes = [x.post_code for x in members if x.post_code]
