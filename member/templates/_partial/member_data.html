@@ -1,3 +1,5 @@
+{% load first_love_custom %}
+
 {% for member in members %}
   <li class="w3-padding-16 datalist">
 
@@ -15,7 +17,7 @@
 		<br><i class="fa fa-phone" aria-hidden="true"></i>&nbsp;&nbsp;
 		<span class="w3-text-grey">{{ member.mobile_no }} </span>
 	{% endif %}
-	{% if member.email|slugify != "" %}
+	{% if member.email|regex_validates:"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-\.]+$)" %}
 		<br><i class="fa fa-inbox" aria-hidden="true"></i>&nbsp;&nbsp;
 		<span class="w3-text-grey">{{ member.email }} </span><br>
 	{% endif %}
