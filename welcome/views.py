@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.core import serializers
 
+from django.db.models import Q
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 
@@ -25,7 +26,7 @@ def index(request):
 @login_required
 def _get_birthdays(request):
 	now = datetime.datetime.now()
-	members = Member.objects.filter(date_of_birth__lte = now).order_by('date_of_birth')
+	members = Member.objects.filter(date_of_birth__month = now.month)
 
 	member_dob = []
 	if len(members) > 0:
@@ -35,7 +36,7 @@ def _get_birthdays(request):
 			dob_day = x.date_of_birth.day
 			dob_year = x.date_of_birth.year
 
-			if (dob_month == now.month) and (dob_day >= now.day):
+			if dob_day >= now.day:
 				remaining_day = dob_day - now.day 
 				age = now.year - dob_year
 
@@ -52,7 +53,7 @@ def _get_birthdays(request):
 def _get_firsttimers(request):
 	now = datetime.datetime.now()
 	last30days = now - datetime.timedelta(days = 60)
-	first_timers = Member.objects.filter(attendance_status__status = "First Timer", first_attended__gte = last30days).order_by('-first_attended')[:15]
+	first_timers = Member.objects.filter(attendance_status__status = "First Timer", first_attended__gte = last30days).order_by('-first_attended')[:20]
 
 	context = {
 		'first_timers': first_timers
@@ -65,7 +66,7 @@ def _get_firsttimers(request):
 def _get_evangelismlist(request):
 	now = datetime.datetime.now()
 	last30days = now - datetime.timedelta(days = 60)
-	evangelism = Member.objects.filter(attendance_status__status = "Evangelism", last_modified__gte = last30days).order_by('-last_modified')[:15]
+	evangelism = Member.objects.filter(attendance_status__status = "Evangelism", last_modified__gte = last30days).order_by('-last_modified')[:20]
 
 	context = {
 		'evangelism': evangelism
