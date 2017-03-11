@@ -10,7 +10,7 @@ from django.template import RequestContext
 from member.models import Member, Attendance, AcademicInstitution
 from event.models import Event, EventType
 
-import datetime, re, os, requests
+import datetime, re, os, requests, operator
 
 
 
@@ -42,6 +42,7 @@ def _get_birthdays(request):
 
 				member_dob.append((x, age, remaining_day))
 
+	member_dob = sorted(member_dob, key=operator.itemgetter(2))
 
 	context = {
 		'member_dob': member_dob
