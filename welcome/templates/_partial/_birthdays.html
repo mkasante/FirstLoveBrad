@@ -2,7 +2,7 @@
 <ul class="w3-ul w3-border w3-card-4 w3-hoverable">
   <li class="w3-grey"><h2>Upcoming Birthdays</h2></li>
 
-  {% if member_dob.length < 1 %}
+  {% if not member_dob %}
 
     <li>No birthdays for the rest of this month</li>
 

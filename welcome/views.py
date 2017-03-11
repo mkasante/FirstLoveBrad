@@ -22,7 +22,6 @@ def index(request):
 	return render (request, 'newsfeed.html', context)
 
 
-# 
 @login_required
 def _get_birthdays(request):
 	now = datetime.datetime.now()
