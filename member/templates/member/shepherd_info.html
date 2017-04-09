@@ -47,7 +47,7 @@
                                 {% else %} w3-text-green
                                 {% endif %}" aria-hidden="true"  title="{{ member.attendance_status.status }}"></i>&nbsp;&nbsp;
 
-                              <a href="{% url 'member:member_info' member.name.lower %}">{{ member.name.title }}</a></span>
+                              <a href="{% url 'member:member_info' member.name.lower %}">{{ member.name.title }}</a></span><br>
                             {% if member.mobile_no|slugify != "" %}
                                 <br><i class="fa fa-phone" aria-hidden="true"></i>&nbsp;&nbsp;
                                 <span class="w3-text-grey">{{ member.mobile_no }} </span><br>
