@@ -81,7 +81,7 @@
                     {% endif %}
 
                     {% if member.shepherd.username.lower != "firstloveleeds" %}
-                        <p class="w3-large w3-text-black"><strong>Shepherd:</strong> <a href="{% url 'member:shepherd_info' member.shepherd.username.lower %}"><span class="w3-text-grey"> {{ member.shepherd.get_full_name.title }}</p>
+                        <p class="w3-large w3-text-black"><strong>Shepherd:</strong> <a href="{% url 'member:shepherd_info' member.shepherd.username.lower %}"><span class="w3-text-grey"> {{ member.shepherd.get_full_name.title }}</span></a></p>
                     {% endif %}
 
                     {% if member.extra_info|length_is_gt:5 %}
