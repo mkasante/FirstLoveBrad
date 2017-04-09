@@ -49,7 +49,7 @@
 
                               <a href="{% url 'member:member_info' member.name.lower %}">{{ member.name.title }}</a></span><br>
                             {% if member.mobile_no|slugify != "" %}
-                                <br><i class="fa fa-phone" aria-hidden="true"></i>&nbsp;&nbsp;
+                                <i class="fa fa-phone" aria-hidden="true"></i>&nbsp;&nbsp;
                                 <span class="w3-text-grey">{{ member.mobile_no }} </span><br>
                             {% endif %}
                             On the "{{ member.attendance_status.status }}" list.<br>
