@@ -24,7 +24,7 @@ class EventAdmin(admin.ModelAdmin):
 	list_filter = ['event']
 	list_per_page = 50
 	order_by = ('event', 'attendance_count')
-	search_fields = ('event', 'venue')
+	search_fields = ('event__name', 'venue')
 
 
 class EventType(models.Model):
