@@ -1,0 +1,125 @@
+{% extends '_partial/base.html' %}
+
+{% block title %}
+Members
+{% endblock title %}
+
+{% block navbar %}
+      <li class="nav-item"><a class="nav-link link" href="#">MEMBERS</a></li>
+      <li class="nav-item nav-btn"><a class="nav-link btn btn-white btn-white-outline" href="{% url 'event:index' %}">EVENTS</a></li>
+    <li class="nav-item nav-btn"><a class="nav-link btn btn-white btn-white-outline" href="{% url 'member:shepherd_list' %}">SHEPHERDS</a></li>
+
+  <li class="nav-item nav-btn">
+    <a class="nav-link btn btn-primary" href="{% url 'logout' %}">LOG OUT</a>
+  </li>
+{% endblock navbar %}
+
+
+{% block content %}
+
+
+
+<section class="mbr-section" id="form1-4" style="background-color: rgb(255, 255, 255); padding-top: 120px; padding-bottom: 120px;">
+    
+    <div class="mbr-section mbr-section__container mbr-section__container--middle">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 text-xs-center">
+                    <h3 class="mbr-section-title display-2">FIRST TIMER SIGN UP</h3>
+                    <small class="mbr-section-subtitle w3-small">Required fields are denoted with *</small>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mbr-section mbr-section-nopadding">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-lg-10 col-lg-offset-1" data-form-type="formoid">
+
+
+                    <div data-form-alert="true">
+                        <div hidden="" data-form-alert-success="true" class="alert alert-form alert-success text-xs-center">Thanks for signing up</div>
+                    </div>
+
+
+                    <form method="post" action="{% url 'member:signup_firsttimer' %}" data-form-title="SIGN UP">
+                                        {% csrf_token %}
+
+                        <div class="row row-sm-offset">
+                            <div class="col-xs-12 col-md-12">
+                                <div class="form-group">
+                                    <div class="form-control-label">
+                                        <label for="id_username" >Full name: *</label>
+                                    </div>
+                                    <input id="id_username" maxlength="254" name="name" type="text" required>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 col-md-6">
+                                <div class="form-group">
+                                    <div class="form-control-label">
+                                        <label for="id_username" >Mobile number: *</label>
+                                    </div>
+                                    <input id="id_username" maxlength="50" name="mobile_no" type="text" title="Please enter a valid mobile number" required pattern="[\d\s\-\(\)]{10,20}">
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 col-md-6">
+                                <div class="form-group">
+                                    <div class="form-control-label">
+                                        <label for="id_username" >Email address:</label>
+                                    </div>
+                                    <input id="id_username" maxlength="50" name="email" type="email">
+                                </div>
+                            </div>
+                            
+                            <div class="col-xs-12 col-md-6">
+                                <div class="form-group">
+                                    <div class="form-control-label">
+                                        <label for="id_username" >Gender: *</label>
+                                    </div>
+                                    <select name="gender" id="id_username" required>
+                                        <option value="1">Male</option>
+                                        <option value="2">Female</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 col-md-6">
+                                <div class="form-group">
+                                    <div class="form-control-label">
+                                        <label for="id_username" >Date of birth: *</label>
+                                    </div>
+                                    <input id="id_username" maxlength="50" name="date_of_birth" type="date" min="1970-01-01" required>
+                                </div>
+                            </div> 
+
+                            <div class="col-xs-12 col-md-12">
+                                <div class="form-group">
+                                    <div class="form-control-label">
+                                        <label for="id_username" >Address: *</label>
+                                    </div>
+                                    <textarea rows="4" id="id_username" name="address" required></textarea>
+                                </div>
+                            </div> 
+
+                            <div class="col-xs-12 col-md-12">
+                                <div class="form-group">
+                                    <div class="form-control-label">
+                                        <label for="id_username" >Post code: </label>
+                                    </div>
+                                    <input id="id_username" maxlength="10" name="post_code" type="text">
+                                </div>
+                            </div> 
+                        </div>
+
+                        <div><button type="submit" class="btn btn-primary" value="signup">SUBMIT</button></div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock content %}

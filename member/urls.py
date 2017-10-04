@@ -1,7 +1,7 @@
 from django.conf.urls import url
 
 from member.views import index, member_info, all_members, shepherd_list, shepherd_info
-from member.views import _list_members_by_alphabet, _list_members_by_status, _list_members_by_gender, close_proximity_members, close_proximity_followup
+from member.views import _list_members_by_alphabet, _list_members_by_status, _list_members_by_gender, close_proximity_members, close_proximity_followup, signup_firsttimer
 
 
 
@@ -24,6 +24,11 @@ urlpatterns = [
   url(
     regex=r'^shepherd/(?P<name>[\w\d\s_\-\.]+)/$',
     view = shepherd_info, name = 'shepherd_info'
+  ),
+
+  url(
+    regex=r'^signup/firsttimer$',
+    view = signup_firsttimer, name = 'signup_firsttimer'
   ),
 
   url(
