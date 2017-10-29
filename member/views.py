@@ -192,8 +192,11 @@ def _list_members_by_gender(request, gender):
 
 @login_required
 def signup_firsttimer(request):
-    context = {}
-
+    last5years = datetime.datetime.now() - datetime.timedelta(days=1825) 
+    context = {
+        "last5years": str(last5years).split(" ")[0]
+    }
+    print(last5years)
     if request.method == 'POST':
         post_data = request.POST.dict()
 
@@ -201,6 +204,7 @@ def signup_firsttimer(request):
         attendance = Attendance.objects.get(status__iexact="first timer")
         shepherd = User.objects.first()
 
+        extra_info = "Invited by %s. %s" % (post_data["who_invited_you"], post_data["visiting_status"])
         member = Member.objects.create(
             name=_(post_data["name"]),
             gender=gender,
@@ -211,7 +215,8 @@ def signup_firsttimer(request):
             post_code=_(post_data["post_code"]),
             first_attended=datetime.datetime.now(),
             attendance_status_id=attendance.id,
-            shepherd_id=shepherd.id
+            shepherd_id=shepherd.id,
+            extra_info=extra_info
         )
 
         return HttpResponseRedirect(reverse('member:all_members'))

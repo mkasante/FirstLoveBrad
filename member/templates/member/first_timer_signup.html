@@ -67,7 +67,7 @@ Members
                             <div class="col-xs-12 col-md-6">
                                 <div class="form-group">
                                     <div class="form-control-label">
-                                        <label for="id_username" >Email address:</label>
+                                        <label for="email">Email address:</label>
                                     </div>
                                     <input id="id_username" maxlength="50" name="email" type="email">
                                 </div>
@@ -76,7 +76,7 @@ Members
                             <div class="col-xs-12 col-md-6">
                                 <div class="form-group">
                                     <div class="form-control-label">
-                                        <label for="id_username" >Gender: *</label>
+                                        <label for="gender">Gender: *</label>
                                     </div>
                                     <select name="gender" id="id_username" required>
                                         <option value="1">Male</option>
@@ -88,16 +88,16 @@ Members
                             <div class="col-xs-12 col-md-6">
                                 <div class="form-group">
                                     <div class="form-control-label">
-                                        <label for="id_username" >Date of birth: *</label>
+                                        <label for="date_of_birth" >Date of birth: *</label>
                                     </div>
-                                    <input id="id_username" maxlength="50" name="date_of_birth" type="date" min="1970-01-01" required>
+                                    <input id="id_username" maxlength="50" name="date_of_birth" type="date" min="1970-01-01" max="{{ last5years }}" required>
                                 </div>
                             </div> 
 
                             <div class="col-xs-12 col-md-12">
                                 <div class="form-group">
                                     <div class="form-control-label">
-                                        <label for="id_username" >Address: *</label>
+                                        <label for="address" >Address: *</label>
                                     </div>
                                     <textarea rows="4" id="id_username" name="address" required></textarea>
                                 </div>
@@ -106,11 +106,33 @@ Members
                             <div class="col-xs-12 col-md-12">
                                 <div class="form-group">
                                     <div class="form-control-label">
-                                        <label for="id_username" >Post code: </label>
+                                        <label for="post_code">Post code: </label>
                                     </div>
                                     <input id="id_username" maxlength="10" name="post_code" type="text">
                                 </div>
                             </div> 
+                        
+                            <div class="col-xs-12 col-md-6">
+                                <div class="form-group">
+                                    <div class="form-control-label">
+                                        <label for="id_username" >Who invited you: *</label>
+                                    </div>
+                                    <input id="id_username" maxlength="50" name="who_invited_you" type="text" required>
+                                </div>
+                            </div> 
+
+                            <div class="col-xs-12 col-md-6">
+                                <div class="form-group">
+                                    <div class="form-control-label">
+                                        <label for="id_username">We would like you to be part of us, what's your stance: *</label>
+                                    </div>
+                                    <select name="visiting_status" id="id_username" required>
+                                        <option value="I am just visiting">Just visiting</option>
+                                        <option value="I would like to join a group in church">Would like to join a group</option>
+                                    </select>
+                                </div>
+                            </div>
+
                         </div>
 
                         <div><button type="submit" class="btn btn-primary" value="signup">SUBMIT</button></div>
