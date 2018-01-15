@@ -27,12 +27,8 @@ Events
             <div class="row">
                 <div class="mbr-section col-md-12">
 
-                    <h1 class="mbr-section-title display-4 w3-text-black"><span id="data-count"></span> ACTIVITIES RECORDED</h1>
-
-                    <br><div id="chartContainer" style="height: 500px; width: 100%;"></div><br>
-
+                    <h1 class="mbr-section-title display-4 w3-text-black"><span id="data-count"></span> ACTIVITIES RECORDED</h1><br>
                     <h4 class="mbr-section-title w3-text-black">FILTER BY</h4>
-
 
                     <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
                         <div class="panel panel-default w3-padding-left">
@@ -122,33 +118,6 @@ Events
     </div>
 
 </section>
-
-<script src="http://canvasjs.com/assets/script/canvasjs.min.js"></script>
-<script type="text/javascript">
-
-window.onload = function () {
-	var chart = new CanvasJS.Chart("chartContainer", {
-		title:{
-			text: "Events"              
-		},
-        axisX:{      
-            labelAngle: -90
-        },
-		data: [              
-		{
-			// Change type to "doughnut", "line", "splineArea", etc.
-			type: "column",
-			dataPoints: [
-                {% for x in events|slice:":10" %}
-				    { label: "{{ x.date }}",  y: {{ x.attendance_count }}  },
-                {% endfor %}
-			]
-		}
-		    ]
-	});
-	chart.render();
-}
-</script>
 
 {% endblock content %}
 
