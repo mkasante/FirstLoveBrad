@@ -1,4 +1,4 @@
-{% extends '_partial/base.html' %} {% block title %} News Feed {% endblock title %} {% block navbar %}
+{% extends '_partial/base.html' %} {% block title %} News Feed {% endblock title %} {% block navbar %} {% load org_info %}
 <li class="nav-item w3-hide-medium w3-hide-large"><a class="nav-link link" href="#">NEWS FEED</a></li>
 <li class="nav-item nav-btn"><a class="nav-link btn btn-white btn-white-outline" href="{% url 'member:all_members' %}">MEMBERS</a></li>
 <li class="nav-item nav-btn"><a class="nav-link btn btn-white btn-white-outline" href="{% url 'event:index' %}">EVENTS</a></li>
