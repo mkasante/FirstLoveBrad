@@ -11,17 +11,23 @@ def getdata(origin, destination, mode="walking"):
     data = r.json()
     
     for x in range(len(destination)):
-        if data["rows"][0]["elements"][x]["status"] == "OK":
-            origin_address = str(data["origin_addresses"][0])
-            dest_address = str(data["destination_addresses"][x])
-            duration = (data["rows"][0]["elements"][x]['duration']["text"])
-            distance = (data["rows"][0]["elements"][x]['distance']["text"])
+        origin_address = str(data["origin_addresses"][0])
+        dest_address = str(data["destination_addresses"][x])
+
+        elements = data["rows"][0]["elements"][x]
+
+        if dest_address != "":
+            duration = elements['duration']["text"]
+            distance = elements['distance']["text"]
             
             if distance.endswith(" m"):
                 distance = float(distance.split(" m")[0]) * 0.001
             else:
                 distance = float(distance.split(" km")[0])
-                
-            result.append((origin_address, dest_address, duration, distance))
+
+        else:
+            duration = distance = "unknown"
+
+        result.append((origin_address, dest_address, duration, distance))
 
     return result
