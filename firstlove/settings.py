@@ -68,7 +68,7 @@ MIDDLEWARE_CLASSES = [
 	'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'firstlove.urls'
+ROOT_URLCONF = 'urls'
 
 TEMPLATES = [
 	{
