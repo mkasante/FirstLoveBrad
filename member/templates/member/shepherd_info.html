@@ -1,24 +1,15 @@
-{% extends '_partial/base.html' %}
+{% extends '_partial/base.html' %} {% load first_love_custom %} {% block title %} {{ shepherd.get_full_name }} follow up members {% endblock title %} {% block navbar %}
+<li class="nav-item"><a class="nav-link link" href="{% url 'member:shepherd_list' %}">SHEPHERDS</a></li>
+<li class="nav-item nav-btn"><a class="nav-link btn btn-white btn-white-outline" href="{% url 'member:all_members' %}">MEMBERS</a></li>
+<li class="nav-item nav-btn"><a class="nav-link btn btn-white btn-white-outline" href="{% url 'event:index' %}">EVENTS</a></li>
 
-{% load first_love_custom %}
-
-{% block title %}
-{{ shepherd.get_full_name }} follow up members
-{% endblock title %}
-
-{% block navbar %}
-      <li class="nav-item"><a class="nav-link link" href="{% url 'member:shepherd_list' %}">SHEPHERDS</a></li>
-    <li class="nav-item nav-btn"><a class="nav-link btn btn-white btn-white-outline" href="{% url 'member:all_members' %}">MEMBERS</a></li>
-      <li class="nav-item nav-btn"><a class="nav-link btn btn-white btn-white-outline" href="{% url 'event:index' %}">EVENTS</a></li>
-
-  <li class="nav-item nav-btn">
+<li class="nav-item nav-btn">
     <a class="nav-link btn btn-primary" href="{% url 'logout' %}">LOG OUT</a>
-  </li>
-{% endblock navbar %}
+</li>
+{% endblock navbar %} {% block content %}
 
-{% block content %}
-
-<section class="engine"><a rel="external" href="{% url 'member:index' %}">First Love Leeds</a></section><section class="mbr-section mbr-section-hero mbr-section-full mbr-after-navbar" id="header1-b" style="background-color: rgb(255, 255, 255);">
+<section class="engine"><a rel="external" href="{% url 'member:index' %}">{% user_info 'name' %}</a></section>
+<section class="mbr-section mbr-section-hero mbr-section-full mbr-after-navbar" id="header1-b" style="background-color: rgb(255, 255, 255);">
 
 
     <div class="mbr-table-cell">
@@ -29,16 +20,16 @@
 
                     <!-- Posts -->
                     <div class="w3-card-2 w3-margin">
-                      <div class="w3-container w3-padding w3-grey">
-                        <h4>{{ shepherd.get_full_name }} follow up members <span class="w3-tag">{{ members.count }}</span></h4>
-                      </div>
+                        <div class="w3-container w3-padding w3-grey">
+                            <h4>{{ shepherd.get_full_name }} follow up members <span class="w3-tag">{{ members.count }}</span></h4>
+                        </div>
 
 
-                      <ul class="w3-ul w3-hoverable w3-white" id="list-data">
-                        {% for member in members %}
-                          <li class="w3-padding-16">
+                        <ul class="w3-ul w3-hoverable w3-white" id="list-data">
+                            {% for member in members %}
+                            <li class="w3-padding-16">
 
-                            <span class="w3-large">
+                                <span class="w3-large">
                                 <i class="fa fa-user
                                 {% if member.attendance_status.status.lower in "outreach, evangelism" %} w3-text-red
                                 {% elif member.attendance_status.status.lower in "rare new member, rare old member" %} w3-text-yellow
@@ -47,21 +38,13 @@
                                 {% else %} w3-text-green
                                 {% endif %}" aria-hidden="true"  title="{{ member.attendance_status.status }}"></i>&nbsp;&nbsp;
 
-                              <a href="{% url 'member:member_info' member.name.lower %}">{{ member.name.title }}</a></span><br>
-                            {% if member.mobile_no|slugify != "" %}
+                              <a href="{% url 'member:member_info' member.name.lower %}">{{ member.name.title }}</a></span><br> {% if member.mobile_no|slugify != "" %}
                                 <i class="fa fa-phone" aria-hidden="true"></i>&nbsp;&nbsp;
-                                <span class="w3-text-grey">{{ member.mobile_no }} </span><br>
-                            {% endif %}
-                            On the "{{ member.attendance_status.status }}" list.<br>
-                            {% if member.post_code|length_is_gt:5 %}
-                                <a href="{% url 'member:close_proximity_followup' member.shepherd member.post_code %}" class="w3-button ">follow up members living around {{ member.post_code }}</a>
+                                <span class="w3-text-grey">{{ member.mobile_no }} </span><br> {% endif %} On the "{{ member.attendance_status.status }}" list.<br> {% if member.post_code|length_is_gt:5 %}
+                                <a href="{% url 'member:close_proximity_followup' member.shepherd member.post_code %}" class="w3-button ">follow up members living around {{ member.post_code }}</a> {% endif %} {% endfor %}
+                            </li>
 
-                            {% endif %}
-
-                        {% endfor %}
-                        </li>
-
-                      </ul>
+                        </ul>
                     </div>
                 </div>
             </div>

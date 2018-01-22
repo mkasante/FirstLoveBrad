@@ -1,25 +1,16 @@
-{% extends '_partial/base.html' %}
+{% extends '_partial/base.html' %} {% block title %} News Feed {% endblock title %} {% block navbar %}
+<li class="nav-item w3-hide-medium w3-hide-large"><a class="nav-link link" href="#">NEWS FEED</a></li>
+<li class="nav-item nav-btn"><a class="nav-link btn btn-white btn-white-outline" href="{% url 'member:all_members' %}">MEMBERS</a></li>
+<li class="nav-item nav-btn"><a class="nav-link btn btn-white btn-white-outline" href="{% url 'event:index' %}">EVENTS</a></li>
+<li class="nav-item nav-btn"><a class="nav-link btn btn-white btn-white-outline" href="{% url 'member:shepherd_list' %}">SHEPHERDS</a></li>
 
-{% block title %}
-News Feed
-{% endblock title %}
-
-
-{% block navbar %}
-      <li class="nav-item w3-hide-medium w3-hide-large"><a class="nav-link link" href="#">NEWS FEED</a></li>
-      <li class="nav-item nav-btn"><a class="nav-link btn btn-white btn-white-outline" href="{% url 'member:all_members' %}">MEMBERS</a></li>
-      <li class="nav-item nav-btn"><a class="nav-link btn btn-white btn-white-outline" href="{% url 'event:index' %}">EVENTS</a></li>
-    <li class="nav-item nav-btn"><a class="nav-link btn btn-white btn-white-outline" href="{% url 'member:shepherd_list' %}">SHEPHERDS</a></li>
-
-  <li class="nav-item nav-btn">
+<li class="nav-item nav-btn">
     <a class="nav-link btn btn-primary" href="{% url 'logout' %}">LOG OUT</a>
-  </li>
-{% endblock navbar %}
+</li>
+{% endblock navbar %} {% block content %}
 
-
-{% block content %}
-
-<section class="engine"><a rel="external" href="{% url 'member:index' %}">First Love Leeds</a></section><section class="mbr-section mbr-section-hero mbr-section-full mbr-after-navbar" id="header1-b" style="background-color: rgb(255, 255, 255);">
+<section class="engine"><a rel="external" href="{% url 'member:index' %}">{% user_info 'name' %}</a></section>
+<section class="mbr-section mbr-section-hero mbr-section-full mbr-after-navbar" id="header1-b" style="background-color: rgb(255, 255, 255);">
 
 
     <div class="mbr-table-cell">

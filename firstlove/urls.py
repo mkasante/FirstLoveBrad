@@ -8,8 +8,8 @@ import os
 admin.autodiscover()
 BASE_DIR = os.path.dirname((__file__))
 
-admin.site.site_header = 'First Love Leeds'
-admin.site.site_title = 'First Love Leeds'
+admin.site.site_header = 'First Love Church'
+admin.site.site_title = 'First Love Church'
 admin.site.index_css = os.path.join(BASE_DIR, "static/admin", "css/dashboard.css")
 
 urlpatterns = [

@@ -1,3 +1,3 @@
 # FirstLoveLeeds
 
-Personal homepage for First love leeds. 
+Personal homepage for First Love Church. 

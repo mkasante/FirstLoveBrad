@@ -1,27 +1,18 @@
-{% extends '_partial/base.html' %}
+{% extends '_partial/base.html' %} {% load first_love_custom %} {% block title %} {{ member.name }} {% endblock title %} {% block navbar %}
+<li class="nav-item"><a class="nav-link link" href="#">MEMBERS</a></li>
+<li class="nav-item nav-btn"><a class="nav-link btn btn-white btn-white-outline" href="{% url 'event:index' %}">EVENTS</a></li>
+<li class="nav-item nav-btn"><a class="nav-link btn btn-white btn-white-outline" href="{% url 'member:shepherd_list' %}">SHEPHERDS</a></li>
 
-{% load first_love_custom %}
-
-{% block title %}
-{{ member.name }}
-{% endblock title %}
-
-{% block navbar %}
-      <li class="nav-item"><a class="nav-link link" href="#">MEMBERS</a></li>
-      <li class="nav-item nav-btn"><a class="nav-link btn btn-white btn-white-outline" href="{% url 'event:index' %}">EVENTS</a></li>
-    <li class="nav-item nav-btn"><a class="nav-link btn btn-white btn-white-outline" href="{% url 'member:shepherd_list' %}">SHEPHERDS</a></li>
-
-  <li class="nav-item nav-btn">
+<li class="nav-item nav-btn">
     <a class="nav-link btn btn-primary" href="{% url 'logout' %}">LOG OUT</a>
-  </li>
-{% endblock navbar %}
+</li>
+{% endblock navbar %} {% block content %}
 
-{% block content %}
+<section class="engine"><a rel="external" href="{% url 'welcome:index' %}">{% user_info 'name' %}</a></section>
+<section class="mbr-section mbr-section-hero mbr-section-full mbr-after-navbar" id="header1-b" style="background-color: rgb(255, 255, 255);">
 
-<section class="engine"><a rel="external" href="{% url 'welcome:index' %}">First Love Leeds</a></section><section class="mbr-section mbr-section-hero mbr-section-full mbr-after-navbar" id="header1-b" style="background-color: rgb(255, 255, 255);">
 
-
-       <div class="mbr-table-cell">
+    <div class="mbr-table-cell">
 
         <div class="container">
             <div class="row">
@@ -32,36 +23,22 @@
                     <p class="w3-large w3-text-black"><strong>Gender: </strong>{{ member.gender }}</p>
 
                     {% if member.mobile_no|length_is_gt:10 %}
-                        <p class="w3-large w3-text-black"><strong>Mobile Number: </strong>{{ member.mobile_no }}</p>
-                    {% endif %}
-
-                    {% if member.email|regex_validates:"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-\.]+$)" %}
-                        <p class="w3-large w3-text-black"><strong>Email Address: </strong><span class="w3-text-blue">{{ member.email }}</span></p>
-                    {% endif %}
-
-                    {% if member.date_of_birth != None %}
-                        <p class="w3-large w3-text-black"><strong>Date of Birth: </strong>{{ member.date_of_birth }}</p>
-                    {% endif %}
-
-                    {% if member.address|length_is_gt:5 %}
-                        <p class="w3-large w3-text-black"><strong>Address: </strong>{{ member.address|linebreaksbr }}</p>
-                    {% endif %}
-
-                    {% if member.post_code|length_is_gt:5 %}
-                        <p class="w3-large w3-text-black"><strong>Post Code: </strong>{{ member.post_code }}
-                            &nbsp;&nbsp;<a href="{% url 'member:close_proximity_members' member.post_code %}" class="w3-btn w3-small">Members who live nearby</a>
-                        </p>
-                    {% endif %}
-
-                    {% if member.academic_institution != None %}
-                        <p class="w3-large w3-text-black"><strong>Academic Institution: </strong>{{ member.academic_institution }}</p>
-                    {% endif %}
-
-                    {% if member.course|length_is_gt:1 %}
-                        <p class="w3-large w3-text-black"><strong>Course Studying: </strong>{{ member.course }}</p>
-                    {% endif %}
-
-                    {% if member.attendance_status.status|length_is_gt:3 %}
+                    <p class="w3-large w3-text-black"><strong>Mobile Number: </strong>{{ member.mobile_no }}</p>
+                    {% endif %} {% if member.email|regex_validates:"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-\.]+$)" %}
+                    <p class="w3-large w3-text-black"><strong>Email Address: </strong><span class="w3-text-blue">{{ member.email }}</span></p>
+                    {% endif %} {% if member.date_of_birth != None %}
+                    <p class="w3-large w3-text-black"><strong>Date of Birth: </strong>{{ member.date_of_birth }}</p>
+                    {% endif %} {% if member.address|length_is_gt:5 %}
+                    <p class="w3-large w3-text-black"><strong>Address: </strong>{{ member.address|linebreaksbr }}</p>
+                    {% endif %} {% if member.post_code|length_is_gt:5 %}
+                    <p class="w3-large w3-text-black"><strong>Post Code: </strong>{{ member.post_code }} &nbsp;&nbsp;
+                        <a href="{% url 'member:close_proximity_members' member.post_code %}" class="w3-btn w3-small">Members who live nearby</a>
+                    </p>
+                    {% endif %} {% if member.academic_institution != None %}
+                    <p class="w3-large w3-text-black"><strong>Academic Institution: </strong>{{ member.academic_institution }}</p>
+                    {% endif %} {% if member.course|length_is_gt:1 %}
+                    <p class="w3-large w3-text-black"><strong>Course Studying: </strong>{{ member.course }}</p>
+                    {% endif %} {% if member.attendance_status.status|length_is_gt:3 %}
                     <p class="w3-large w3-text-black"><strong>
 
                         {% if member.attendance_status.status == 'Evangelism' %}
@@ -74,18 +51,12 @@
 
                     </strong>{{ member.first_attended }}</p>
                     <p class="w3-large w3-text-black"><strong>Attendance Status: </strong>{{ member.attendance_status }}</p>
-                    {% endif %}
-
-                    {% if member.last_visited != None %}
-                        <p class="w3-large w3-text-black"><strong>Last Visited On: </strong>{{ member.last_visited }}</p>
-                    {% endif %}
-
-                    {% if member.shepherd.username.lower != "firstloveleeds" %}
-                        <p class="w3-large w3-text-black"><strong>Shepherd:</strong> <a href="{% url 'member:shepherd_info' member.shepherd.username.lower %}"><span class="w3-text-grey"> {{ member.shepherd.get_full_name.title }}</span></a></p>
-                    {% endif %}
-
-                    {% if member.extra_info|length_is_gt:5 %}
-                        <p class="w3-large w3-text-black"><strong>Other Information: </strong>{{ member.extra_info|linebreaksbr }}</p>
+                    {% endif %} {% if member.last_visited != None %}
+                    <p class="w3-large w3-text-black"><strong>Last Visited On: </strong>{{ member.last_visited }}</p>
+                    {% endif %} {% if member.shepherd.username.lower != "firstloveleeds" %}
+                    <p class="w3-large w3-text-black"><strong>Shepherd:</strong> <a href="{% url 'member:shepherd_info' member.shepherd.username.lower %}"><span class="w3-text-grey"> {{ member.shepherd.get_full_name.title }}</span></a></p>
+                    {% endif %} {% if member.extra_info|length_is_gt:5 %}
+                    <p class="w3-large w3-text-black"><strong>Other Information: </strong>{{ member.extra_info|linebreaksbr }}</p>
                     {% endif %}
 
                 </div>
@@ -98,9 +69,9 @@
 <section class="mbr-section mbr-section__container article" id="header3-d" style="background-color: rgb(255, 255, 255); padding-top: 0px; padding-bottom: 20px;">
     <div class="container">
         <div class="row">
-           <div class="col-xs-12">
-              <h6 class="mbr-section-title display-6">Record last updated by <strong>{{ user.get_full_name }}</strong> on <strong>{{ member.last_modified }}</strong></h6>
-          </div>
+            <div class="col-xs-12">
+                <h6 class="mbr-section-title display-6">Record last updated by <strong>{{ user.get_full_name }}</strong> on <strong>{{ member.last_modified }}</strong></h6>
+            </div>
         </div>
     </div>
 </section>
