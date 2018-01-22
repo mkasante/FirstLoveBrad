@@ -5,150 +5,153 @@
 {% load staticfiles %}
 
 <head>
-  <!-- Site made with Mobirise Website Builder v3.8.8,  -->
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="generator" content="Mobirise v3.8.8, mobirise.com">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="shortcut icon" href="{% static 'images/fl-leeds-128x128-52.jpg' %}" type="image/x-icon">
-  <meta name="description" content="">
+    <!-- Site made with Mobirise Website Builder v3.8.8,  -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="generator" content="Mobirise v3.8.8, mobirise.com">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="{% static 'images/fl-leeds-128x128-52.jpg' %}" type="image/x-icon">
+    <meta name="description" content="">
 
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic&amp;subset=latin">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i">
-  <link rel="stylesheet" href="{% static 'bootstrap-material-design-font/css/material.css' %}">
-  <link rel="stylesheet" href="{% static 'tether/tether.min.css' %}">
-  <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
-  <link rel="stylesheet" href="{% static 'animate.css/animate.min.css' %}">
-  <link rel="stylesheet" href="{% static 'dropdown/css/style.css' %}">
-  <link rel="stylesheet" href="{% static 'theme/css/style.css' %}">
-  <link rel="stylesheet" href="{% static 'theme/css/font-awesome.min.css' %}">
-  <link rel="stylesheet" href="{% static 'w3-css/w3.css' %}">
-  <link rel="stylesheet" href="{% static 'mobirise/css/mbr-additional.css' %}" type="text/css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic&amp;subset=latin">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i">
+    <link rel="stylesheet" href="{% static 'bootstrap-material-design-font/css/material.css' %}">
+    <link rel="stylesheet" href="{% static 'tether/tether.min.css' %}">
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'animate.css/animate.min.css' %}">
+    <link rel="stylesheet" href="{% static 'dropdown/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'theme/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'theme/css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'w3-css/w3.css' %}">
+    <link rel="stylesheet" href="{% static 'mobirise/css/mbr-additional.css' %}" type="text/css">
 
-  <title>
-  {% block title %} {% endblock title %} - First Love Leeds
-  </title>
+    <title>
+        {% block title %} {% endblock title %} - First Love Leeds
+    </title>
 
 </head>
+
 <body>
-<section id="ext_menu-7">
+    <section id="ext_menu-7">
 
-    <nav class="navbar navbar-dropdown navbar-fixed-top col-sm-12">
-        <div class="container">
+        <nav class="navbar navbar-dropdown navbar-fixed-top col-sm-12">
+            <div class="container">
 
-            <div class="mbr-table">
-                <div class="mbr-table-cell">
+                <div class="mbr-table">
+                    <div class="mbr-table-cell">
 
 
-                    <div class="navbar-brand">
-                        <a href="{% url 'member:index' %}" class="navbar-logo"><img src="{% static 'images/fl-leeds-128x128-52.jpg' %}" alt="First love church leeds" title="First love church leeds"></a>
-                        <a class="navbar-caption" href="{% url 'welcome:index' %}">FIRST LOVE LEEDS</a>
+                        <div class="navbar-brand">
+                            <a href="{% url 'member:index' %}" class="navbar-logo"><img src="{% static 'images/fl-leeds-128x128-52.jpg' %}" alt="First love church leeds" title="First love church leeds"></a>
+                            <a class="navbar-caption" href="{% url 'welcome:index' %}">FIRST LOVE LEEDS</a>
+                        </div>
+
                     </div>
+                    <div class="mbr-table-cell">
 
-                </div>
-                <div class="mbr-table-cell">
-
-                    <button class="navbar-toggler pull-xs-right hidden-md-up" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar">
+                        <button class="navbar-toggler pull-xs-right hidden-md-up" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar">
                         <div class="hamburger-icon"></div>
                     </button>
 
-                    <ul class="nav-dropdown collapse pull-xs-right nav navbar-nav navbar-toggleable-sm" id="exCollapsingNavbar">
-                    {% if user.is_authenticated %}
+                        <ul class="nav-dropdown collapse pull-xs-right nav navbar-nav navbar-toggleable-sm" id="exCollapsingNavbar">
+                            {% if user.is_authenticated %} {% block navbar %}
+                            <li class="nav-item"><a class="nav-link link" href="{% url 'member:all_members' %}">MEMBERS</a></li>
+                            <li class="nav-item nav-btn"><a class="nav-link btn btn-white btn-white-outline" href="{% url 'event:index' %}">EVENTS</a></li>
+                            <li class="nav-item nav-btn"><a class="nav-link btn btn-white btn-white-outline" href="{% url 'member:shepherd_list' %}">SHEPHERDS</a></li>
 
-                    {% block navbar %}
-                          <li class="nav-item"><a class="nav-link link" href="{% url 'member:all_members' %}">MEMBERS</a></li>
-                          <li class="nav-item nav-btn"><a class="nav-link btn btn-white btn-white-outline" href="{% url 'event:index' %}">EVENTS</a></li>
-                        <li class="nav-item nav-btn"><a class="nav-link btn btn-white btn-white-outline" href="{% url 'member:shepherd_list' %}">SHEPHERDS</a></li>
+                            <li class="nav-item nav-btn">
+                                <a class="nav-link btn btn-primary" href="{% url 'logout' %}">LOG OUT</a>
+                            </li>
+                            {% endblock navbar %} {% endif %}
 
-                      <li class="nav-item nav-btn">
-                        <a class="nav-link btn btn-primary" href="{% url 'logout' %}">LOG OUT</a>
-                      </li>
-                    {% endblock navbar %}
-
-                    {% endif %}
-
-                    </ul>
-                    <button hidden="" class="navbar-toggler navbar-close" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar">
+                        </ul>
+                        <button hidden="" class="navbar-toggler navbar-close" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar">
                         <div class="close-icon"></div>
                     </button>
 
+                    </div>
                 </div>
-            </div>
 
+            </div>
+        </nav>
+
+    </section>
+
+
+
+    {% block content %}{% endblock content %}
+
+
+
+    <section class="mbr-section mbr-section-md-padding mbr-footer footer1" id="contacts1-j" style="background-color: rgb(46, 46, 46); padding-top: 90px; padding-bottom: 90px;">
+
+        <div class="container">
+            <div class="row">
+                <div class="mbr-footer-content col-xs-12 col-md-3">
+                    <div>
+                        <a href="#"><img src="{% static 'images/fl-leeds.jpg' %}" alt="First Love Leeds Logo" title="First Love Leeds "></a>
+                    </div>
+                </div>
+                <div class="mbr-footer-content col-xs-12 col-md-3">
+                    <p><strong>Address</strong><br>
+                        <i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp;&nbsp;First Love Leeds<br> United Kingdom</p>
+                </div>
+                <div class="mbr-footer-content col-xs-12 col-md-3">
+                    <p><strong>Contacts</strong><br>
+                        <i class="fa fa-inbox" aria-hidden="true"></i>&nbsp;&nbsp;firstlovecs.lbu@gmail.com<br>
+                        <i class="fa fa-phone" aria-hidden="true"></i>&nbsp;&nbsp;+44 (0) 795 5394 000<br>
+                        <i class="fa fa-facebook-square" aria-hidden="true"></i>&nbsp;&nbsp;<a class="text-primary" href="https://www.facebook.com/FirstLoveChurchUK">Facebook</a><br>
+                        <i class="fa fa-instagram" aria-hidden="true"></i>&nbsp;&nbsp;<a class="text-primary" href="https://www.instagram.com/firstloveleeds">Instagram</a></p>
+                </div>
+                <div class="mbr-footer-content col-xs-12 col-md-3">
+                    <p><strong>Links</strong><br> {% if user.is_authenticated %}
+                        <i class="fa fa-code" aria-hidden="true"></i>&nbsp;&nbsp;<a class="text-primary" href="{% url 'api:index' %}">API</a><br>
+                        <i class="fa fa-user" aria-hidden="true"></i>&nbsp;&nbsp;<a class="text-primary" href="{% url 'admin:index' %}">Admin</a><br>{% endif %}
+                        <i class="fa fa-external-link" aria-hidden="true"></i>&nbsp;&nbsp;<a class="text-primary" href="http://daghewardmills.org">Dag Heward Mills.org</a><br>
+                        <i class="fa fa-book" aria-hidden="true"></i>&nbsp;&nbsp;<a class="text-primary" href="https://www.daghewardmillsbooks.org">Books</a><br>
+                        <i class="fa fa-youtube-play" aria-hidden="true"></i>&nbsp;&nbsp;<a class="text-primary" href="http://www.healingjesus.tv/">Healing Jesus TV</a><br>
+                        <i class="fa fa-podcast" aria-hidden="true"></i>&nbsp;&nbsp;<a class="text-primary" href="https://www.podbean.com/podcast-detail/sb6je-3831b/First+Love+Church+UK">Podcast</a></p><br>
+                </div>
+
+            </div>
         </div>
-    </nav>
-
-</section>
+    </section>
 
 
-
-{% block content %}{% endblock content %}
-
-
-
-<section class="mbr-section mbr-section-md-padding mbr-footer footer1" id="contacts1-j" style="background-color: rgb(46, 46, 46); padding-top: 90px; padding-bottom: 90px;">
-
-    <div class="container">
-        <div class="row">
-            <div class="mbr-footer-content col-xs-12 col-md-3">
-                <div><a href="#"><img src="{% static 'images/fl-leeds.jpg' %}" alt="First Love Leeds Logo" title="First Love Leeds "></a></div>
-            </div>
-            <div class="mbr-footer-content col-xs-12 col-md-3">
-                <p><strong>Address</strong><br>
-<i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp;&nbsp;First Love Leeds<br>
-United Kingdom</p>
-            </div>
-            <div class="mbr-footer-content col-xs-12 col-md-3">
-                <p><strong>Contacts</strong><br>
-<i class="fa fa-inbox" aria-hidden="true"></i>&nbsp;&nbsp;firstlovecs.lbu@gmail.com<br>
-<i class="fa fa-phone" aria-hidden="true"></i>&nbsp;&nbsp;+44 (0) 795 5394 000<br>
-<i class="fa fa-facebook-square" aria-hidden="true"></i>&nbsp;&nbsp;<a class="text-primary" href="https://www.facebook.com/FirstLoveChurchUK">Facebook</a><br>
-<i class="fa fa-instagram" aria-hidden="true"></i>&nbsp;&nbsp;<a class="text-primary" href="https://www.instagram.com/firstloveleeds">Instagram</a></p>
-            </div>
-            <div class="mbr-footer-content col-xs-12 col-md-3">
-                <p><strong>Links</strong><br>
-{% if user.is_authenticated %}
-  <i class="fa fa-code" aria-hidden="true"></i>&nbsp;&nbsp;<a class="text-primary" href="{% url 'api:index' %}">API</a><br>
-{% endif %}
-<i class="fa fa-external-link" aria-hidden="true"></i>&nbsp;&nbsp;<a class="text-primary" href="http://daghewardmills.org">Dag Heward Mills.org</a><br>
-<i class="fa fa-book" aria-hidden="true"></i>&nbsp;&nbsp;<a class="text-primary" href="https://www.daghewardmillsbooks.org">Books</a><br>
-<i class="fa fa-youtube-play" aria-hidden="true"></i>&nbsp;&nbsp;<a class="text-primary" href="http://www.healingjesus.tv/">Healing Jesus TV</a><br>
-<i class="fa fa-podcast" aria-hidden="true"></i>&nbsp;&nbsp;<a class="text-primary" href="https://www.podbean.com/podcast-detail/sb6je-3831b/First+Love+Church+UK">Podcast</a></p><br>
-            </div>
-
-        </div>
-    </div>
-</section>
-
-
-  <input name="animation" type="hidden">
-   <div id="scrollToTop" class="scrollToTop mbr-arrow-up"><a style="text-align: center;"><i class="mbr-arrow-up-icon"></i></a></div>
+    <input name="animation" type="hidden">
+    <div id="scrollToTop" class="scrollToTop mbr-arrow-up"><a style="text-align: center;"><i class="mbr-arrow-up-icon"></i></a></div>
 
 </body>
 
-  <script src="{% static 'web/assets/jquery/jquery.min.js' %}"></script>
-  <script src="{% static 'tether/tether.min.js' %}"></script>
-  <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
-  <script src="{% static 'smooth-scroll/SmoothScroll.js' %}"></script>
-  <script src="{% static 'viewportChecker/jquery.viewportchecker.js' %}"></script>
-  <script src="{% static 'dropdown/js/script.min.js' %}"></script>
-  <script src="{% static 'touchSwipe/jquery.touchSwipe.min.js' %}"></script>
-  <script src="{% static 'theme/js/script.js' %}"></script>
+<script src="{% static 'web/assets/jquery/jquery.min.js' %}"></script>
+<script src="{% static 'tether/tether.min.js' %}"></script>
+<script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'smooth-scroll/SmoothScroll.js' %}"></script>
+<script src="{% static 'viewportChecker/jquery.viewportchecker.js' %}"></script>
+<script src="{% static 'dropdown/js/script.min.js' %}"></script>
+<script src="{% static 'touchSwipe/jquery.touchSwipe.min.js' %}"></script>
+<script src="{% static 'theme/js/script.js' %}"></script>
 
-  {% if user.is_authenticated %}
-    <script src="{% static 'web/assets/jquery/script.js' %}"></script>
-    <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+{% if user.is_authenticated %}
+<script>
+    (function(i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function() {
+            (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
 
     ga('create', 'UA-79898910-2', 'auto');
     ga('send', 'pageview');
-
-  </script>
+</script>
 {% endif %}
+
 </html>
 
 {% endspaceless %}
