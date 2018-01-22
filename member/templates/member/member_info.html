@@ -1,4 +1,4 @@
-{% extends '_partial/base.html' %} {% load first_love_custom %} {% block title %} {{ member.name }} {% endblock title %} {% block navbar %}
+{% extends '_partial/base.html' %} {% load first_love_custom %} {% load org_info %} {% block title %} {{ member.name }} {% endblock title %} {% block navbar %}
 <li class="nav-item"><a class="nav-link link" href="#">MEMBERS</a></li>
 <li class="nav-item nav-btn"><a class="nav-link btn btn-white btn-white-outline" href="{% url 'event:index' %}">EVENTS</a></li>
 <li class="nav-item nav-btn"><a class="nav-link btn btn-white btn-white-outline" href="{% url 'member:shepherd_list' %}">SHEPHERDS</a></li>
