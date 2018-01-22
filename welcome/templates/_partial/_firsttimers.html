@@ -1,19 +1,21 @@
 <div class="w3-padding-32">
-<ul class="w3-ul w3-border w3-card-4 w3-hoverable w3-text-black">
-  <li class="w3-green"><h2>First Timers</h2></li>
+    <ul class="w3-ul w3-border w3-card-4 w3-hoverable w3-text-black">
+        <li class="w3-green">
+            <h2>First Timers</h2>
+        </li>
 
-  {% for person in first_timers %}
-  <li>
+        {% if not first_timers %}
+        <li>No records found</li>
+        {% else %} {% for person in first_timers %}
+        <li>
 
-	{% if person.first_attended != None %}
-		{{ person.first_attended }} - 
-	{% endif %}
-	
-	<a href="{% url 'member:member_info' person %}" title="last Updated on {{ person.last_modified }}">{{ person }}</a>
-	<span onclick="this.parentElement.style.display='none'"class="w3-closebtn w3-margin-right w3-medium">&times;</span>
-	
-  </li>
+            {% if person.first_attended != None %} {{ person.first_attended }} - {% endif %}
 
-  {% endfor %}
-</ul>
+            <a href="{% url 'member:member_info' person %}" title="last Updated on {{ person.last_modified }}">{{ person }}</a>
+            <span onclick="this.parentElement.style.display='none'" class="w3-closebtn w3-margin-right w3-medium">&times;</span>
+
+        </li>
+
+        {% endfor %} {% endif %}
+    </ul>
 </div>

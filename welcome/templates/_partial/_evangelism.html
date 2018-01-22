@@ -1,18 +1,20 @@
 <div class="w3-padding-32">
-<ul class="w3-ul w3-border w3-card-4 w3-hoverable w3-text-black">
-  <li class="w3-teal"><h2>Evangelism List</h2></li>
+    <ul class="w3-ul w3-border w3-card-4 w3-hoverable w3-text-black">
+        <li class="w3-teal">
+            <h2>Evangelism List</h2>
+        </li>
 
-  {% for person in evangelism %}
-  <li>
+        {% if not evangelism %}
+        <li>No records found</li>
+        {% else %} {% for person in evangelism %}
+        <li>
 
-	{% if person.first_attended != None %}
-		{{ person.first_attended }} -
-	{% endif %}
+            {% if person.first_attended != None %} {{ person.first_attended }} - {% endif %}
 
-	<a href="{% url 'member:member_info' person %}" title="last Updated on {{ person.last_modified }}">{{ person }}</a>
-	<span onclick="this.parentElement.style.display='none'"class="w3-closebtn w3-margin-right w3-medium">&times;</span>
-  </li>
+            <a href="{% url 'member:member_info' person %}" title="last Updated on {{ person.last_modified }}">{{ person }}</a>
+            <span onclick="this.parentElement.style.display='none'" class="w3-closebtn w3-margin-right w3-medium">&times;</span>
+        </li>
 
-  {% endfor %}
-</ul>
+        {% endfor %} {% endif %}
+    </ul>
 </div>
