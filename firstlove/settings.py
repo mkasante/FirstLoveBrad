@@ -107,7 +107,7 @@ if ENVIRONMENT == "TEST":
 
 
 elif ENVIRONMENT == "LIVE":
-	DATABASES['default'] = dj_database_url.parse(os.environ),
+	DATABASES['default'] = dj_database_url.parse(os.environ.get("DATABASE_URL"),
 		conn_max_age=600)
 
 else:
@@ -149,5 +149,3 @@ STATICFILES_DIRS = [
 
 STATIC_ROOT = os.path.join(BASE_DIR, "templates")
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
-print(os.environ.get("HOME"))
