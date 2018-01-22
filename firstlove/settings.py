@@ -107,8 +107,7 @@ if ENVIRONMENT == "TEST":
 
 
 elif ENVIRONMENT == "LIVE":
-	DATABASES['default'] = dj_database_url.parse(
-		'postgres://qlstfeeakxvtzv:tqy3FW8WQki0VXm2awRJjmyNSD@ec2-54-243-204-195.compute-1.amazonaws.com:5432/d2o1hbb87kgq8k',
+	DATABASES['default'] = dj_database_url.parse(os.environ),
 		conn_max_age=600)
 
 else:
@@ -150,3 +149,5 @@ STATICFILES_DIRS = [
 
 STATIC_ROOT = os.path.join(BASE_DIR, "templates")
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+print(os.environ.get("HOME"))
