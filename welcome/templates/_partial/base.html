@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 
-{% load staticfiles %}
+{% load staticfiles %} {% load org_info %}
 
 <head>
     <!-- Site made with Mobirise Website Builder v3.8.8,  -->
@@ -10,7 +10,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="generator" content="Mobirise v3.8.8, mobirise.com">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" href="{% static 'images/fl-leeds-128x128-52.jpg' %}" type="image/x-icon">
+    <link rel="shortcut icon" href="{% user_info 'logo' %}" type="image/x-icon">
     <meta name="description" content="">
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic&amp;subset=latin">
@@ -27,7 +27,7 @@
     <link rel="stylesheet" href="{% static 'mobirise/css/mbr-additional.css' %}" type="text/css">
 
     <title>
-        {% block title %} {% endblock title %} - First Love Leeds
+        {% block title %} {% endblock title %} - {% user_info 'name' %}
     </title>
 
 </head>
@@ -43,8 +43,8 @@
 
 
                         <div class="navbar-brand">
-                            <a href="{% url 'member:index' %}" class="navbar-logo"><img src="{% static 'images/fl-leeds-128x128-52.jpg' %}" alt="First love church leeds" title="First love church leeds"></a>
-                            <a class="navbar-caption" href="{% url 'welcome:index' %}">FIRST LOVE LEEDS</a>
+                            <a href="{% url 'member:index' %}" class="navbar-logo"><img src="{% user_info 'logo' %}" alt="{% user_info 'name' %}" title="{% user_info 'name' %} church"></a>
+                            <a class="navbar-caption" href="{% url 'welcome:index' %}"><span style="text-transform:uppercase">{% user_info 'name' %}</span></a>
                         </div>
 
                     </div>
@@ -90,19 +90,19 @@
             <div class="row">
                 <div class="mbr-footer-content col-xs-12 col-md-3">
                     <div>
-                        <a href="#"><img src="{% static 'images/fl-leeds.jpg' %}" alt="First Love Leeds Logo" title="First Love Leeds "></a>
+                        <a href="#"><img src="{% user_info 'logo' %}" alt="{% user_info 'name' %} Logo" title="{% user_info 'name' %} "></a>
                     </div>
                 </div>
                 <div class="mbr-footer-content col-xs-12 col-md-3">
                     <p><strong>Address</strong><br>
-                        <i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp;&nbsp;First Love Leeds<br> United Kingdom</p>
+                        <i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp;&nbsp;{% user_info 'name' %}<br> {% user_info 'country' %}</p>
                 </div>
                 <div class="mbr-footer-content col-xs-12 col-md-3">
                     <p><strong>Contacts</strong><br>
-                        <i class="fa fa-inbox" aria-hidden="true"></i>&nbsp;&nbsp;firstlovecs.lbu@gmail.com<br>
+                        <i class="fa fa-inbox" aria-hidden="true"></i>&nbsp;&nbsp;{% user_info 'email' %}<br>
                         <i class="fa fa-phone" aria-hidden="true"></i>&nbsp;&nbsp;+44 (0) 795 5394 000<br>
                         <i class="fa fa-facebook-square" aria-hidden="true"></i>&nbsp;&nbsp;<a class="text-primary" href="https://www.facebook.com/FirstLoveChurchUK">Facebook</a><br>
-                        <i class="fa fa-instagram" aria-hidden="true"></i>&nbsp;&nbsp;<a class="text-primary" href="https://www.instagram.com/firstloveleeds">Instagram</a></p>
+                        <i class="fa fa-instagram" aria-hidden="true"></i>&nbsp;&nbsp;<a class="text-primary" href="{% user_info 'instagram' %}">Instagram</a></p>
                 </div>
                 <div class="mbr-footer-content col-xs-12 col-md-3">
                     <p><strong>Links</strong><br> {% if user.is_authenticated %}

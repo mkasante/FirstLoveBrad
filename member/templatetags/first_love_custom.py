@@ -1,6 +1,8 @@
 from django import template
 import re
 
+from welcome.models import Organization
+
 register = template.Library()
 
 @register.filter(name='length_is_gt', is_safe=False)
