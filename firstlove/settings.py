@@ -107,7 +107,7 @@ if ENVIRONMENT == "TEST":
 
 
 elif ENVIRONMENT == "LIVE":
-	DATABASES['default'] = dj_database_url.parse("postgres://migjfexgywhylz:f8c3d92bfc645bb61d48c5a6db00e56428aa7a2227445e4d66aaf2373a15705c@ec2-54-217-245-9.eu-west-1.compute.amazonaws.com:5432/da6g8jrri94bgg",
+	DATABASES['default'] = dj_database_url.parse(os.environ.get("DATABASE_URL"),
 		conn_max_age=600)
 
 else:
