@@ -3,7 +3,7 @@ requests==2.11.1
 six==1.10.0
 virtualenv==15.0.3
 django-toolbelt
-djangorestframework
+djangorestframework==3.6.2
 django-filter
 markdown
 dj_database_url
