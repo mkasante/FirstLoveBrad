@@ -7,7 +7,7 @@ from django.core.urlresolvers import reverse
 import datetime
 import re
 import operator
-from member.getlocation import getdata
+from firstlove.helpers.getlocation import getdata
 
 # Create your views here.
 
@@ -196,7 +196,6 @@ def signup_firsttimer(request):
     context = {
         "last5years": str(last5years).split(" ")[0]
     }
-    print(last5years)
     if request.method == 'POST':
         post_data = request.POST.dict()
 

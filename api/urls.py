@@ -5,7 +5,7 @@ from rest_framework import routers
 from django.conf.urls import url, include
 
 from api.views import __attendance_api, __member_api, __academic_institution_api, __event_api, __event_type_api, __gender_api
-from api.views import __attendance_csv, __member_csv, __academic_institution_csv, __event_csv, __gender_csv, __download_excel
+from api.views import __attendance_csv, __member_csv, __academic_institution_csv, __event_csv, __gender_csv, download_as_excel
 
 router = routers.SimpleRouter()
 router.register(r'member', MemberViewSet, 'member')
@@ -131,7 +131,7 @@ urlpatterns = [
 
   url(
     regex=r'^model/firstlove.xlsx$',
-    view = __download_excel,
-    name = '__download_excel'
+    view = download_as_excel,
+    name = 'download_as_excel'
   ),
 ]

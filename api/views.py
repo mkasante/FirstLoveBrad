@@ -1,15 +1,25 @@
-from api.serializers import EventSerializer, EventTypeSerializer, GenderSerializer
-from api.serializers import MemberSerializer, AttendanceSerializer, AcademicInstitutionSerializer
+import datetime
+import os
+import re
+from firstlove.helpers import file_manager
+
+import requests
 from django.contrib.auth.decorators import login_required
 from django.core import serializers
 from django.http import HttpResponse
 from django.shortcuts import render
-from event.models import Event, EventType, EventAdmin, EventTypeAdmin
-from member.models import Member, Attendance, AcademicInstitution, Gender
-from member.models import MemberAdmin, AttendanceAdmin, AcademicInstitutionAdmin, GenderAdmin
 from rest_framework import viewsets
 from xlsxwriter.workbook import Workbook
-import datetime, re, os, requests, csv
+
+from api.serializers import (AcademicInstitutionSerializer,
+                             AttendanceSerializer, EventSerializer,
+                             EventTypeSerializer, GenderSerializer,
+                             MemberSerializer)
+from event.admin import EventAdmin, EventTypeAdmin
+from event.models import Event, EventType
+from member.admin import (AcademicInstitutionAdmin, AttendanceAdmin,
+                          GenderAdmin, MemberAdmin)
+from member.models import AcademicInstitution, Attendance, Gender, Member
 
 try:
 	import cStringIO as StringIO
@@ -113,52 +123,25 @@ def serialize_api(appname, model):
 	data = serializers.serialize('json', models)
 	return data
 
-
-def download_csv(request, queryset):
-	if not request.user.is_staff:
-		raise PermissionDenied
-
-	opts = queryset.model._meta
-	model = queryset.model
-	response = HttpResponse(content_type='text/csv')
-
-	# force download.
-	response['Content-Disposition'] = 'attachment;filename=export.csv'
-	# the csv writer
-	writer = csv.writer(response)
-	field_names = [field.name for field in opts.fields if field.name != "id"]
-	field_headers = [x.title().replace("_", " ") for x in field_names ]
-
-	# Write a first row with header information
-	writer.writerow(field_headers)
-
-
-	for obj in queryset:
-		writer.writerow([getattr(obj, field) for field in field_names if field != "id"])
-
-	return response
-
-
-
 # # To CSV
 @login_required
 def __member_csv(request):
 	members = Member.objects.order_by('name')
-	data = download_csv(request, members)
+	data = file_manager.download_as_csv(request, members, "members")
 
 	return HttpResponse (data, content_type='text/csv')
 
 @login_required
 def __gender_csv(request):
 	gender = Gender.objects.order_by('gender')
-	data = download_csv(request, gender)
+	data = file_manager.download_as_csv(request, gender, "gender")
 
 	return HttpResponse (data, content_type='text/csv')
 
 @login_required
 def __attendance_csv(request):
 	attendance = Attendance.objects.order_by('status')
-	data = download_csv(request, attendance)
+	data = file_manager.download_as_csv(request, attendance, "attendance_status")
 
 	return HttpResponse (data, content_type='text/csv')
 
@@ -166,7 +149,7 @@ def __attendance_csv(request):
 @login_required
 def __event_csv(request):
 	events = Event.objects.order_by('-date')
-	data = download_csv(request, events)
+	data = file_manager.download_as_csv(request, events, "event")
 
 	return HttpResponse (data, content_type='text/csv')
 
@@ -174,7 +157,7 @@ def __event_csv(request):
 @login_required
 def __academic_institution_csv(request):
 	academic_institutions = AcademicInstitution.objects.order_by('name')
-	data = download_csv(request, academic_institutions)
+	data = file_manager.download_as_csv(request, academic_institutions, "academic_institutions")
 
 	return HttpResponse (data, content_type='text/csv')
 
@@ -195,8 +178,8 @@ def get_model_data(queryset):
 
 
 
-def __download_excel(request):
-
+def download_as_excel(request):
+    
 	# create a workbook in memory
 	output = StringIO.StringIO()
 

@@ -16,9 +16,3 @@ class Organization(models.Model):
 
     class Meta:
         ordering = ["-id"]
-
-class OrganizationAdmin(admin.ModelAdmin):
-    filter_by = ('name', 'email', 'instagram')
-    list_display = ('name', 'email', 'instagram')
-    list_per_page = 50
-    order_by = ('-id', 'name')

@@ -26,14 +26,6 @@ class Member(models.Model):
     class Meta:
         ordering = ["name"]
 
-class MemberAdmin(admin.ModelAdmin):
-    filter_by = ('name', 'mobile_no', 'email')
-    list_display = ('name', 'mobile_no', 'email')
-    list_filter = ['attendance_status', 'gender', 'shepherd', 'first_attended']
-    list_per_page = 50
-    order_by = ('name', 'mobile_no')
-    search_fields = ('name', 'mobile_no', 'email', 'post_code')
-
 
 class Attendance(models.Model):
     status = models.CharField(max_length=200, unique=True, null=True)
@@ -45,12 +37,6 @@ class Attendance(models.Model):
         ordering = ["status"]
         verbose_name_plural = "Attendance"
 
-class AttendanceAdmin(admin.ModelAdmin):
-    filter_by = ['status']
-    list_filter = ['status']
-    list_per_page = 50
-    order_by = ['status']
-
 
 class AcademicInstitution(models.Model):
     name = models.CharField(max_length=200, unique=True, null=True)
@@ -61,11 +47,6 @@ class AcademicInstitution(models.Model):
     class Meta:
         ordering = ["name"]
 
-class AcademicInstitutionAdmin(admin.ModelAdmin):
-    filter_by = ['name']
-    list_filter = ['name']
-    list_per_page = 50
-    order_by = ['name']
 
 class Gender(models.Model):
     gender = models.CharField(max_length=200, unique=True, null=True)
@@ -76,9 +57,3 @@ class Gender(models.Model):
     class Meta:
         ordering = ["gender"]
         verbose_name_plural = "Gender"
-
-class GenderAdmin(admin.ModelAdmin):
-    filter_by = ['gender']
-    list_filter = ['gender']
-    list_per_page = 50
-    order_by = ['gender']
