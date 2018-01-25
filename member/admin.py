@@ -16,7 +16,7 @@ class MemberAdmin(admin.ModelAdmin):
     list_per_page = 50
     order_by = ('name', 'mobile_no')
     search_fields = ('name', 'mobile_no', 'email', 'post_code')
-    actions = [admin_actions.export_to_csv]
+    actions = [admin_actions.export_to_csv, admin_actions.assign_members_to_self]
 
 class AttendanceAdmin(admin.ModelAdmin):
     filter_by = ['status']
