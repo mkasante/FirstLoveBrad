@@ -9,6 +9,7 @@ class Organization(models.Model):
     instagram = models.CharField(max_length=50, blank=True, null=True)
     logo = models.CharField(max_length=1000, blank=True, help_text="Link to image to use e.g. instagram logo url")
     country = models.CharField(max_length=100, blank=True)
+    mobile_no = models.CharField(max_length=100, blank=True, verbose_name="Mobile number")
 
 
     def __str__(self):
