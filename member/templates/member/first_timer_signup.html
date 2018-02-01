@@ -1,26 +1,17 @@
-{% extends '_partial/base.html' %}
+{% extends '_partial/base.html' %} {% block title %} Members {% endblock title %} {% block navbar %}
+<li class="nav-item"><a class="nav-link link" href="#">MEMBERS</a></li>
+<li class="nav-item nav-btn"><a class="nav-link btn btn-white btn-white-outline" href="{% url 'event:index' %}">EVENTS</a></li>
+<li class="nav-item nav-btn"><a class="nav-link btn btn-white btn-white-outline" href="{% url 'member:shepherd_list' %}">SHEPHERDS</a></li>
 
-{% block title %}
-Members
-{% endblock title %}
-
-{% block navbar %}
-      <li class="nav-item"><a class="nav-link link" href="#">MEMBERS</a></li>
-      <li class="nav-item nav-btn"><a class="nav-link btn btn-white btn-white-outline" href="{% url 'event:index' %}">EVENTS</a></li>
-    <li class="nav-item nav-btn"><a class="nav-link btn btn-white btn-white-outline" href="{% url 'member:shepherd_list' %}">SHEPHERDS</a></li>
-
-  <li class="nav-item nav-btn">
+<li class="nav-item nav-btn">
     <a class="nav-link btn btn-primary" href="{% url 'logout' %}">LOG OUT</a>
-  </li>
-{% endblock navbar %}
-
-
-{% block content %}
+</li>
+{% endblock navbar %} {% block content %}
 
 
 
 <section class="mbr-section" id="form1-4" style="background-color: rgb(255, 255, 255); padding-top: 120px; padding-bottom: 120px;">
-    
+
     <div class="mbr-section mbr-section__container mbr-section__container--middle">
         <div class="container">
             <div class="row">
@@ -43,13 +34,13 @@ Members
 
 
                     <form method="post" action="{% url 'member:signup_firsttimer' %}" data-form-title="SIGN UP">
-                                        {% csrf_token %}
+                        {% csrf_token %}
 
                         <div class="row row-sm-offset">
                             <div class="col-xs-12 col-md-12">
                                 <div class="form-group">
                                     <div class="form-control-label">
-                                        <label for="id_username" >Full name: *</label>
+                                        <label for="id_username">Full name: *</label>
                                     </div>
                                     <input id="id_username" maxlength="254" name="name" type="text" required>
                                 </div>
@@ -58,7 +49,7 @@ Members
                             <div class="col-xs-12 col-md-6">
                                 <div class="form-group">
                                     <div class="form-control-label">
-                                        <label for="id_username" >Mobile number: *</label>
+                                        <label for="id_username">Mobile number: *</label>
                                     </div>
                                     <input id="id_username" maxlength="50" name="mobile_no" type="text" title="Please enter a valid mobile number" required pattern="[\d\s\-\(\)]{10,20}">
                                 </div>
@@ -72,7 +63,7 @@ Members
                                     <input id="id_username" maxlength="50" name="email" type="email">
                                 </div>
                             </div>
-                            
+
                             <div class="col-xs-12 col-md-6">
                                 <div class="form-group">
                                     <div class="form-control-label">
@@ -88,38 +79,38 @@ Members
                             <div class="col-xs-12 col-md-6">
                                 <div class="form-group">
                                     <div class="form-control-label">
-                                        <label for="date_of_birth" >Date of birth: *</label>
+                                        <label for="date_of_birth">Date of birth: *</label>
                                     </div>
                                     <input id="id_username" maxlength="50" name="date_of_birth" type="date" min="1970-01-01" max="{{ last5years }}" required>
                                 </div>
-                            </div> 
+                            </div>
 
                             <div class="col-xs-12 col-md-12">
                                 <div class="form-group">
                                     <div class="form-control-label">
-                                        <label for="address" >Address: *</label>
+                                        <label for="address">Address: *</label>
                                     </div>
                                     <textarea rows="4" id="id_username" name="address" required></textarea>
                                 </div>
-                            </div> 
+                            </div>
 
                             <div class="col-xs-12 col-md-12">
                                 <div class="form-group">
                                     <div class="form-control-label">
-                                        <label for="post_code">Post code: </label>
+                                        <label for="post_code">Post code: *</label>
                                     </div>
-                                    <input id="id_username" maxlength="10" name="post_code" type="text">
+                                    <input id="id_username" maxlength="10" name="post_code" type="text" required pattern="[\w\s\d]{5,9}" title="Please enter a valid post code">
                                 </div>
-                            </div> 
-                        
+                            </div>
+
                             <div class="col-xs-12 col-md-6">
                                 <div class="form-group">
                                     <div class="form-control-label">
-                                        <label for="id_username" >Who invited you: *</label>
+                                        <label for="id_username">Who invited you: *</label>
                                     </div>
                                     <input id="id_username" maxlength="50" name="who_invited_you" type="text" required>
                                 </div>
-                            </div> 
+                            </div>
 
                             <div class="col-xs-12 col-md-6">
                                 <div class="form-group">
